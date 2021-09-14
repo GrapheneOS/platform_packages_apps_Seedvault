@@ -58,7 +58,6 @@ android_app {
     manifest: "app/src/main/AndroidManifest.xml",
 
     platform_apis: true,
-    system_ext_specific: true,
     certificate: "platform",
     privileged: true,
     required: [
@@ -74,7 +73,6 @@ android_app {
 
 prebuilt_etc {
     name: "com.stevesoltys.backup_allowlist",
-    system_ext_specific: true,
     sub_dir: "sysconfig",
     src: "allowlist_com.stevesoltys.seedvault.xml",
     filename_from_src: true,
@@ -82,7 +80,6 @@ prebuilt_etc {
 
 prebuilt_etc {
     name: "com.stevesoltys.backup_default-permissions",
-    system_ext_specific: true,
     sub_dir: "default-permissions",
     src: "default-permissions_com.stevesoltys.seedvault.xml",
     filename_from_src: true,
@@ -90,7 +87,6 @@ prebuilt_etc {
 
 prebuilt_etc {
     name: "com.stevesoltys.backup_privapp_allowlist",
-    system_ext_specific: true,
     sub_dir: "permissions",
     src: "permissions/com.stevesoltys.seedvault.xml",
     filename_from_src: true,
