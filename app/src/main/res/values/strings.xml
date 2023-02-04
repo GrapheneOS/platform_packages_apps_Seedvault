@@ -154,6 +154,7 @@
     <string name="recovery_code_recreated">New recovery code has been created successfully. Exiting…</string>
     <string name="recovery_code_auth_title">Re-enter your screen lock</string>
     <string name="recovery_code_auth_description">Enter your device credentials to continue</string>
+    <string name="recovery_code_no_auth_error">Device isn\'t secured\nMake sure to set up a screen lock</string>
 
     <!-- Notification -->
     <string name="notification_channel_title">Backup notification</string>
