@@ -166,8 +166,9 @@ class RecoveryCodeInputFragment : Fragment() {
                 // if we have a lock-screen secret, we can ask for it before storing the code
                 storeNewCodeAfterAuth(input)
             } else {
-                // user doesn't seem to care about security, store key without auth
-                viewModel.storeNewCode(input)
+                // don't allow backups unless device is properly secured
+                Toast.makeText(context, R.string.recovery_code_no_auth_error, LENGTH_LONG).show()
+                return
             }
         } else {
             viewModel.verifyExistingCode(input)
