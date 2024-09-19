@@ -91,6 +91,6 @@ prebuilt_etc {
     name: "com.stevesoltys.backup_privapp_allowlist",
     system_ext_specific: true,
     sub_dir: "permissions",
-    src: "permissions_com.stevesoltys.seedvault.xml",
+    src: "permissions/com.stevesoltys.seedvault.xml",
     filename_from_src: true,
 }
