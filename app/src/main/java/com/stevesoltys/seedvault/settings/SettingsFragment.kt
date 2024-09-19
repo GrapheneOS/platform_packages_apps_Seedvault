@@ -213,13 +213,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 .commit()
             true
         }
-        R.id.action_about -> {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment, AboutDialogFragment())
-                .addToBackStack(AboutDialogFragment.TAG)
-                .commit()
-            true
-        }
         else -> false
     }
 
