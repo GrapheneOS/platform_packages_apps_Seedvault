@@ -22,9 +22,4 @@
         android:title="@string/settings_expert_title"
         app:showAsAction="never" />
 
-    <item
-        android:id="@+id/action_about"
-        android:title="@string/about_title"
-        app:showAsAction="never" />
-
 </menu>
