@@ -12,8 +12,8 @@ import com.stevesoltys.seedvault.header.MAX_SEGMENT_LENGTH
 import com.stevesoltys.seedvault.header.MAX_VERSION_HEADER_SIZE
 import com.stevesoltys.seedvault.header.SegmentHeader
 import com.stevesoltys.seedvault.header.VersionHeader
-import org.calyxos.backup.storage.crypto.StreamCrypto
-import org.calyxos.backup.storage.crypto.StreamCrypto.deriveStreamKey
+import app.grapheneos.backup.storage.crypto.StreamCrypto
+import app.grapheneos.backup.storage.crypto.StreamCrypto.deriveStreamKey
 import java.io.EOFException
 import java.io.IOException
 import java.io.InputStream

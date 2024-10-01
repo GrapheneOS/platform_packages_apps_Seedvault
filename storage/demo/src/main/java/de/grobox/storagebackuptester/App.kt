@@ -12,8 +12,8 @@ import android.util.Log
 import de.grobox.storagebackuptester.crypto.KeyManager
 import de.grobox.storagebackuptester.plugin.TestSafBackend
 import de.grobox.storagebackuptester.settings.SettingsManager
-import org.calyxos.backup.storage.api.StorageBackup
-import org.calyxos.backup.storage.ui.restore.FileSelectionManager
+import app.grapheneos.backup.storage.api.StorageBackup
+import app.grapheneos.backup.storage.ui.restore.FileSelectionManager
 
 class App : Application() {
 

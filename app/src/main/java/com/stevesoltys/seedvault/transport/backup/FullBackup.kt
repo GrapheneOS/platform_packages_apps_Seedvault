@@ -20,7 +20,7 @@ import com.stevesoltys.seedvault.backend.BackendManager
 import com.stevesoltys.seedvault.backend.isOutOfSpace
 import com.stevesoltys.seedvault.settings.SettingsManager
 import com.stevesoltys.seedvault.ui.notification.BackupNotificationManager
-import org.calyxos.seedvault.core.backends.LegacyAppBackupFile
+import app.grapheneos.seedvault.core.backends.LegacyAppBackupFile
 import java.io.Closeable
 import java.io.EOFException
 import java.io.IOException

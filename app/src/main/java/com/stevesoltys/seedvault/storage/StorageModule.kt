@@ -7,7 +7,7 @@ package com.stevesoltys.seedvault.storage
 
 import com.stevesoltys.seedvault.crypto.KeyManager
 import com.stevesoltys.seedvault.backend.BackendManager
-import org.calyxos.backup.storage.api.StorageBackup
+import app.grapheneos.backup.storage.api.StorageBackup
 import org.koin.dsl.module
 
 val storageModule = module {

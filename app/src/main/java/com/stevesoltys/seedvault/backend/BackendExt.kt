@@ -7,8 +7,8 @@ package com.stevesoltys.seedvault.backend
 
 import android.util.Log
 import at.bitfire.dav4jvm.exception.HttpException
-import org.calyxos.seedvault.core.backends.Backend
-import org.calyxos.seedvault.core.backends.LegacyAppBackupFile
+import app.grapheneos.seedvault.core.backends.Backend
+import app.grapheneos.seedvault.core.backends.LegacyAppBackupFile
 import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream

@@ -31,7 +31,7 @@ import com.stevesoltys.seedvault.settings.SettingsManager
 import com.stevesoltys.seedvault.transport.D2D_TRANSPORT_FLAGS
 import com.stevesoltys.seedvault.transport.DEFAULT_TRANSPORT_FLAGS
 import com.stevesoltys.seedvault.ui.notification.BackupNotificationManager
-import org.calyxos.seedvault.core.backends.Backend
+import app.grapheneos.seedvault.core.backends.Backend
 import java.io.IOException
 
 /**

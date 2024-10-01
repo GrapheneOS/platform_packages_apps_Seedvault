@@ -13,7 +13,7 @@ plugins {
 }
 
 android {
-    namespace = "org.calyxos.backup.storage"
+    namespace = "app.grapheneos.backup.storage"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {

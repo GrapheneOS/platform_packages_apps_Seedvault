@@ -23,7 +23,7 @@ import com.stevesoltys.seedvault.ui.notification.BackupNotificationManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.calyxos.backup.storage.api.StorageBackup
+import app.grapheneos.backup.storage.api.StorageBackup
 import java.io.IOException
 
 internal const val WORD_NUM = 12

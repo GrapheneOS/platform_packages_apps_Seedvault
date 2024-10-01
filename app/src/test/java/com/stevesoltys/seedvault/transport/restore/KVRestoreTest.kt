@@ -28,7 +28,7 @@ import io.mockk.mockkStatic
 import io.mockk.verify
 import io.mockk.verifyAll
 import kotlinx.coroutines.runBlocking
-import org.calyxos.seedvault.core.backends.Backend
+import app.grapheneos.seedvault.core.backends.Backend
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.io.ByteArrayInputStream

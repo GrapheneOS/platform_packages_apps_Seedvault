@@ -20,7 +20,7 @@ import com.stevesoltys.seedvault.transport.backup.isStopped
 import com.stevesoltys.seedvault.ui.notification.BackupNotificationManager
 import com.stevesoltys.seedvault.ui.notification.getAppName
 import kotlinx.coroutines.delay
-import org.calyxos.seedvault.core.backends.LegacyAppBackupFile
+import app.grapheneos.seedvault.core.backends.LegacyAppBackupFile
 import java.io.IOException
 
 internal class ApkBackupManager(

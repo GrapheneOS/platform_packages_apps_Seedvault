@@ -21,7 +21,7 @@ import com.stevesoltys.seedvault.header.VERSION
 import com.stevesoltys.seedvault.transport.backup.PackageService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.calyxos.backup.storage.crypto.StreamCrypto.toByteArray
+import app.grapheneos.backup.storage.crypto.StreamCrypto.toByteArray
 import java.io.File
 import java.io.IOException
 import java.io.InputStream

@@ -25,7 +25,7 @@ import com.stevesoltys.seedvault.backend.BackendManager
 import com.stevesoltys.seedvault.transport.backup.KVDb
 import com.stevesoltys.seedvault.transport.backup.KvDbManager
 import libcore.io.IoUtils.closeQuietly
-import org.calyxos.seedvault.core.backends.LegacyAppBackupFile
+import app.grapheneos.seedvault.core.backends.LegacyAppBackupFile
 import java.io.IOException
 import java.security.GeneralSecurityException
 import java.util.zip.GZIPInputStream

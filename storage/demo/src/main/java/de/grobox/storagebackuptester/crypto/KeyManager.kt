@@ -14,7 +14,7 @@ import java.security.KeyStore
 import javax.crypto.SecretKey
 import javax.crypto.spec.SecretKeySpec
 
-object KeyManager: org.calyxos.seedvault.core.crypto.KeyManager {
+object KeyManager: app.grapheneos.seedvault.core.crypto.KeyManager {
 
     private const val KEY_SIZE = 256
     internal const val KEY_SIZE_BYTES = KEY_SIZE / 8

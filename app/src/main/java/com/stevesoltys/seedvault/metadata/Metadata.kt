@@ -10,7 +10,7 @@ import android.os.Build
 import com.stevesoltys.seedvault.crypto.TYPE_METADATA
 import com.stevesoltys.seedvault.header.VERSION
 import com.stevesoltys.seedvault.metadata.PackageState.UNKNOWN_ERROR
-import org.calyxos.backup.storage.crypto.StreamCrypto.toByteArray
+import app.grapheneos.backup.storage.crypto.StreamCrypto.toByteArray
 import java.nio.ByteBuffer
 
 typealias PackageMetadataMap = HashMap<String, PackageMetadata>

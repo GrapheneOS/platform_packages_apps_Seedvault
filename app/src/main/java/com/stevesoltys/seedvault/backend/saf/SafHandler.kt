@@ -20,8 +20,8 @@ import com.stevesoltys.seedvault.isMassStorage
 import com.stevesoltys.seedvault.settings.FlashDrive
 import com.stevesoltys.seedvault.settings.SettingsManager
 import com.stevesoltys.seedvault.ui.storage.StorageOption
-import org.calyxos.seedvault.core.backends.BackendFactory
-import org.calyxos.seedvault.core.backends.saf.SafProperties
+import app.grapheneos.seedvault.core.backends.BackendFactory
+import app.grapheneos.seedvault.core.backends.saf.SafProperties
 import java.io.IOException
 
 private const val TAG = "SafHandler"
