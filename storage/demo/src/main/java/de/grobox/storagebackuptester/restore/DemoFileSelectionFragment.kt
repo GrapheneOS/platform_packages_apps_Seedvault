@@ -14,8 +14,8 @@ import androidx.fragment.app.activityViewModels
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import de.grobox.storagebackuptester.MainViewModel
 import de.grobox.storagebackuptester.R
-import org.calyxos.backup.storage.ui.restore.FileSelectionFragment
-import org.calyxos.backup.storage.ui.restore.FilesItem
+import app.grapheneos.backup.storage.ui.restore.FileSelectionFragment
+import app.grapheneos.backup.storage.ui.restore.FilesItem
 
 class DemoFileSelectionFragment : FileSelectionFragment() {
 

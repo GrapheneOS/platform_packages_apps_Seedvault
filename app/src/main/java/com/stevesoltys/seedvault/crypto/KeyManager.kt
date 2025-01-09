@@ -24,7 +24,7 @@ internal const val KEY_ALIAS_MAIN = "com.stevesoltys.seedvault.main"
 private const val KEY_ALGORITHM_BACKUP = "AES"
 private const val KEY_ALGORITHM_MAIN = "HmacSHA256"
 
-interface KeyManager : org.calyxos.seedvault.core.crypto.KeyManager {
+interface KeyManager : app.grapheneos.seedvault.core.crypto.KeyManager {
     /**
      * Store a new backup key derived from the given [seed].
      *

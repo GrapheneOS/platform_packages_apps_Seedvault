@@ -13,11 +13,11 @@ import com.stevesoltys.seedvault.permitDiskReads
 import com.stevesoltys.seedvault.repo.BlobCache
 import com.stevesoltys.seedvault.settings.SettingsManager
 import com.stevesoltys.seedvault.settings.StoragePluginType
-import org.calyxos.seedvault.core.backends.Backend
-import org.calyxos.seedvault.core.backends.BackendFactory
-import org.calyxos.seedvault.core.backends.BackendProperties
-import org.calyxos.seedvault.core.backends.IBackendManager
-import org.calyxos.seedvault.core.backends.saf.SafBackend
+import app.grapheneos.seedvault.core.backends.Backend
+import app.grapheneos.seedvault.core.backends.BackendFactory
+import app.grapheneos.seedvault.core.backends.BackendProperties
+import app.grapheneos.seedvault.core.backends.IBackendManager
+import app.grapheneos.seedvault.core.backends.saf.SafBackend
 
 class BackendManager(
     private val context: Context,

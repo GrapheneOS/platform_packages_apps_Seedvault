@@ -14,8 +14,8 @@ import android.widget.Button
 import androidx.fragment.app.activityViewModels
 import de.grobox.storagebackuptester.MainViewModel
 import de.grobox.storagebackuptester.R
-import org.calyxos.backup.storage.api.SnapshotItem
-import org.calyxos.backup.storage.ui.restore.SnapshotFragment
+import app.grapheneos.backup.storage.api.SnapshotItem
+import app.grapheneos.backup.storage.ui.restore.SnapshotFragment
 
 class DemoSnapshotFragment : SnapshotFragment() {
 

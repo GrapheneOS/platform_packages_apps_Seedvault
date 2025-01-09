@@ -28,8 +28,8 @@ import com.stevesoltys.seedvault.proto.Snapshot.Blob
 import com.stevesoltys.seedvault.transport.backup.PackageService
 import com.stevesoltys.seedvault.transport.backup.isSystemApp
 import io.github.oshai.kotlinlogging.KotlinLogging
-import org.calyxos.seedvault.core.backends.AppBackupFileType
-import org.calyxos.seedvault.core.toHexString
+import app.grapheneos.seedvault.core.backends.AppBackupFileType
+import app.grapheneos.seedvault.core.toHexString
 import java.util.concurrent.ConcurrentHashMap
 
 /**

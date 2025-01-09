@@ -18,7 +18,7 @@ import com.stevesoltys.seedvault.transport.backup.PackageService
 import com.stevesoltys.seedvault.transport.backup.isStopped
 import com.stevesoltys.seedvault.ui.notification.BackupNotificationManager
 import com.stevesoltys.seedvault.ui.notification.getAppName
-import org.calyxos.seedvault.core.backends.isOutOfSpace
+import app.grapheneos.seedvault.core.backends.isOutOfSpace
 import java.io.IOException
 
 internal class ApkBackupManager(

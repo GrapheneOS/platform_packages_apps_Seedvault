@@ -10,7 +10,7 @@ import android.view.View
 import androidx.appcompat.widget.Toolbar
 import com.stevesoltys.seedvault.R
 import com.stevesoltys.seedvault.settings.SettingsViewModel
-import org.calyxos.backup.storage.ui.backup.BackupContentFragment
+import app.grapheneos.backup.storage.ui.backup.BackupContentFragment
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

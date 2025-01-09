@@ -30,7 +30,7 @@ import com.stevesoltys.seedvault.restore.RestoreActivity
 import com.stevesoltys.seedvault.settings.BackupPermission.BackupAllowed
 import com.stevesoltys.seedvault.ui.notification.BackupNotificationManager
 import com.stevesoltys.seedvault.ui.toRelativeTime
-import org.calyxos.seedvault.core.backends.BackendProperties
+import app.grapheneos.seedvault.core.backends.BackendProperties
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import java.util.concurrent.TimeUnit

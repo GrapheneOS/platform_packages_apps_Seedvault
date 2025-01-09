@@ -15,9 +15,9 @@ import com.stevesoltys.seedvault.MemoryLogger
 import com.stevesoltys.seedvault.proto.Snapshot
 import com.stevesoltys.seedvault.proto.Snapshot.Blob
 import io.github.oshai.kotlinlogging.KotlinLogging
-import org.calyxos.seedvault.core.backends.FileInfo
-import org.calyxos.seedvault.core.toByteArrayFromHex
-import org.calyxos.seedvault.core.toHexString
+import app.grapheneos.seedvault.core.backends.FileInfo
+import app.grapheneos.seedvault.core.toByteArrayFromHex
+import app.grapheneos.seedvault.core.toHexString
 import java.io.FileNotFoundException
 import java.io.IOException
 

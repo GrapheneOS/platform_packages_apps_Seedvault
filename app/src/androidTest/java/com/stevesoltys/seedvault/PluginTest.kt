@@ -17,8 +17,8 @@ import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import org.calyxos.seedvault.core.backends.LegacyAppBackupFile
-import org.calyxos.seedvault.core.backends.saf.SafBackend
+import app.grapheneos.seedvault.core.backends.LegacyAppBackupFile
+import app.grapheneos.seedvault.core.backends.saf.SafBackend
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull

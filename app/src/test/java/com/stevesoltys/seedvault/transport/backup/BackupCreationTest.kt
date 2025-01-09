@@ -29,9 +29,9 @@ import io.mockk.just
 import io.mockk.mockk
 import io.mockk.slot
 import kotlinx.coroutines.runBlocking
-import org.calyxos.seedvault.core.backends.AppBackupFileType
-import org.calyxos.seedvault.core.backends.Backend
-import org.calyxos.seedvault.core.toHexString
+import app.grapheneos.seedvault.core.backends.AppBackupFileType
+import app.grapheneos.seedvault.core.backends.Backend
+import app.grapheneos.seedvault.core.toHexString
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith

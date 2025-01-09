@@ -47,7 +47,7 @@ instrumentation_tests_task:
 
     adb shell mkdir -p /system/priv-app/ContactsBackup;
     adb push contactsbackup/build/outputs/apk/release/contactsbackup-release.apk /system/priv-app/ContactsBackup/contactsbackup.apk;
-    adb push contactsbackup/default-permissions_org.calyxos.backup.contacts.xml /system/etc/default-permissions/default-permissions_org.calyxos.backup.contacts.xml;
+    adb push contactsbackup/default-permissions_app.grapheneos.backup.contacts.xml /system/etc/default-permissions/default-permissions_app.grapheneos.backup.contacts.xml;
 
     adb shell bmgr enable true;
     adb reboot;

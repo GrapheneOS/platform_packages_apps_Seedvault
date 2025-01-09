@@ -12,8 +12,8 @@ import android.view.ViewGroup
 import android.view.ViewStub
 import android.widget.Button
 import com.stevesoltys.seedvault.R
-import org.calyxos.backup.storage.ui.restore.FileSelectionFragment
-import org.calyxos.backup.storage.ui.restore.FilesItem
+import app.grapheneos.backup.storage.ui.restore.FileSelectionFragment
+import app.grapheneos.backup.storage.ui.restore.FilesItem
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 internal class FilesSelectionFragment : FileSelectionFragment() {

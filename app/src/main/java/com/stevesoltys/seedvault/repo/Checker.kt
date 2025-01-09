@@ -18,9 +18,9 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
-import org.calyxos.seedvault.core.backends.AppBackupFileType
-import org.calyxos.seedvault.core.backends.TopLevelFolder
-import org.calyxos.seedvault.core.toHexString
+import app.grapheneos.seedvault.core.backends.AppBackupFileType
+import app.grapheneos.seedvault.core.backends.TopLevelFolder
+import app.grapheneos.seedvault.core.toHexString
 import java.security.DigestInputStream
 import java.security.GeneralSecurityException
 import java.security.MessageDigest

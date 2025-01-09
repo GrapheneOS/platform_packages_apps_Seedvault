@@ -18,8 +18,8 @@ import com.stevesoltys.seedvault.repo.Padding.getPadTo
 import okio.Buffer
 import okio.buffer
 import okio.sink
-import org.calyxos.seedvault.chunker.Chunk
-import org.calyxos.seedvault.core.backends.AppBackupFileType
+import app.grapheneos.seedvault.chunker.Chunk
+import app.grapheneos.seedvault.core.backends.AppBackupFileType
 import java.io.IOException
 import java.nio.ByteBuffer
 

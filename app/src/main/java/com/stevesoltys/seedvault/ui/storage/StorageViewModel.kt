@@ -22,10 +22,10 @@ import com.stevesoltys.seedvault.ui.MutableLiveEvent
 import com.stevesoltys.seedvault.ui.storage.StorageOption.SafOption
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.calyxos.seedvault.core.backends.Backend
-import org.calyxos.seedvault.core.backends.saf.SafProperties
-import org.calyxos.seedvault.core.backends.webdav.WebDavConfig
-import org.calyxos.seedvault.core.backends.webdav.WebDavProperties
+import app.grapheneos.seedvault.core.backends.Backend
+import app.grapheneos.seedvault.core.backends.saf.SafProperties
+import app.grapheneos.seedvault.core.backends.webdav.WebDavConfig
+import app.grapheneos.seedvault.core.backends.webdav.WebDavProperties
 
 internal abstract class StorageViewModel(
     private val app: Application,

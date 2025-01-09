@@ -9,11 +9,11 @@ plugins {
 }
 
 android {
-    namespace = "org.calyxos.backup.contacts"
+    namespace = "app.grapheneos.backup.contacts"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "org.calyxos.backup.contacts"
+        applicationId = "app.grapheneos.backup.contacts"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
 

@@ -5,7 +5,7 @@
   -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="org.calyxos.backup.contacts"
+    package="app.grapheneos.backup.contacts"
     android:versionCode="35050020"
     android:versionName="15-5.2">
     <!--
