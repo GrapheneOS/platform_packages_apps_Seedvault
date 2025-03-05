@@ -57,8 +57,6 @@ public abstract class SnapshotFragment : Fragment(), SnapshotClickListener {
                 }
 
                 is SnapshotResult.Error -> {
-                    val color = resources.getColor(R.color.design_default_color_error, null)
-                    emptyStateView.setTextColor(color)
                     emptyStateView.setText(R.string.snapshots_error)
                     emptyStateView.visibility = VISIBLE
                 }
