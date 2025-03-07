@@ -16,6 +16,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.color.MaterialColors.getColor
 import org.calyxos.backup.storage.R
 import org.calyxos.backup.storage.api.SnapshotItem
 import org.calyxos.backup.storage.api.SnapshotResult
@@ -57,7 +58,8 @@ public abstract class SnapshotFragment : Fragment(), SnapshotClickListener {
                 }
 
                 is SnapshotResult.Error -> {
-                    val color = resources.getColor(R.color.design_default_color_error, null)
+                    val color =
+                        getColor(emptyStateView, com.google.android.material.R.attr.colorError)
                     emptyStateView.setTextColor(color)
                     emptyStateView.setText(R.string.snapshots_error)
                     emptyStateView.visibility = VISIBLE
