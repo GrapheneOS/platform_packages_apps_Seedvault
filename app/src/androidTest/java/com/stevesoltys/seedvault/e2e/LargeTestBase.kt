@@ -191,7 +191,7 @@ internal interface LargeTestBase : KoinComponent {
 
                 } else {
                     createNewFolderButton.clickAndWaitForNewWindow()
-                    textBox.text = folderName
+                    textBox.setText(folderName)
                     okButton.clickAndWaitForNewWindow()
                 }
 

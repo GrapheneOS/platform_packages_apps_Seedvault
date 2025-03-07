@@ -185,29 +185,27 @@ dependencies {
 
     // anything less than 'implementation' fails tests run with gradlew
     testImplementation(aospLibs)
-    testImplementation("androidx.test.ext:junit:1.1.5")
-    testImplementation("org.slf4j:slf4j-simple:2.0.3")
-    testImplementation("org.robolectric:robolectric:4.12.2")
-    testImplementation("org.hamcrest:hamcrest:2.2")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:${libs.versions.junit5.get()}")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:${libs.versions.junit5.get()}")
-    testImplementation("io.mockk:mockk:${libs.versions.mockk.get()}")
-    testImplementation(
-        "org.jetbrains.kotlinx:kotlinx-coroutines-test:${libs.versions.coroutines.get()}"
-    )
-    testImplementation("app.cash.turbine:turbine:1.0.0")
-    testImplementation("org.bitcoinj:bitcoinj-core:0.16.2")
-    testImplementation("com.github.luben:zstd-jni:1.5.6-5")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${libs.versions.junit5.get()}")
-    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:${libs.versions.junit5.get()}")
+    testImplementation(libs.androidx.junit)
+    testImplementation(libs.slf4j.simple)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.hamcrest)
+    testImplementation(libs.junit.jupiter.api)
+    testImplementation(libs.junit.jupiter.params)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.turbine)
+    testImplementation(libs.bitcoinj.core)
+    testImplementation(libs.zstd.jni)
+    testRuntimeOnly(libs.junit.jupiter.engine)
+    testRuntimeOnly(libs.junit.vintage.engine)
 
     androidTestImplementation(aospLibs)
     androidTestImplementation(kotlin("test"))
-    androidTestImplementation("androidx.test:runner:1.4.0")
-    androidTestImplementation("androidx.test:rules:1.4.0")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("io.mockk:mockk-android:1.13.8")
-    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
+    androidTestImplementation(libs.androidx.runner)
+    androidTestImplementation(libs.androidx.rules)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.mockk.android)
+    androidTestImplementation(libs.androidx.uiautomator)
 }
 
 gradle.projectsEvaluated {
