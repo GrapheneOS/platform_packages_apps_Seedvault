@@ -61,13 +61,11 @@ dependencies {
     implementation(aospDeps)
 
     testImplementation(libs.kotlin.stdlib.jdk8)
-    testImplementation("junit:junit:${libs.versions.junit4.get()}")
-    testImplementation("io.mockk:mockk:${libs.versions.mockk.get()}")
+    testImplementation(libs.junit4)
+    testImplementation(libs.mockk)
 
     androidTestImplementation(libs.kotlin.stdlib.jdk8)
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation(
-        "androidx.test.espresso:espresso-core:${libs.versions.espresso.get()}"
-    )
-    androidTestImplementation("io.mockk:mockk-android:${libs.versions.mockk.get()}")
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.mockk.android)
 }
