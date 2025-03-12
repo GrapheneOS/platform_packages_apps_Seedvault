@@ -27,10 +27,10 @@ internal class FilesSelectionFragment : FileSelectionFragment() {
         savedInstanceState: Bundle?,
     ): View {
         val v = super.onCreateView(inflater, container, savedInstanceState)
-        val topStub: ViewStub = v.requireViewById(R.id.topStub)
+        val topStub: ViewStub = v.requireViewById(org.calyxos.backup.storage.R.id.topStub)
         topStub.layoutResource = R.layout.header_files_selection
         topStub.inflate()
-        val bottomStub: ViewStub = v.requireViewById(R.id.bottomStub)
+        val bottomStub: ViewStub = v.requireViewById(org.calyxos.backup.storage.R.id.bottomStub)
         bottomStub.layoutResource = R.layout.footer_files_selection
         button = bottomStub.inflate() as Button
         button.setOnClickListener {

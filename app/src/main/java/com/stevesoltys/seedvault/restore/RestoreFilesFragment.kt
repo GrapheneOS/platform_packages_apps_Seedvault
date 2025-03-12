@@ -29,11 +29,11 @@ internal class RestoreFilesFragment : SnapshotFragment() {
     ): View {
         val v = super.onCreateView(inflater, container, savedInstanceState)
 
-        val topStub: ViewStub = v.requireViewById(R.id.topStub)
+        val topStub: ViewStub = v.requireViewById(org.calyxos.backup.storage.R.id.topStub)
         topStub.layoutResource = R.layout.header_snapshots
         topStub.inflate()
 
-        val bottomStub: ViewStub = v.requireViewById(R.id.bottomStub)
+        val bottomStub: ViewStub = v.requireViewById(org.calyxos.backup.storage.R.id.bottomStub)
         bottomStub.layoutResource = R.layout.footer_snapshots
         val footer = bottomStub.inflate()
         val skipView: TextView = footer.requireViewById(R.id.skipView)

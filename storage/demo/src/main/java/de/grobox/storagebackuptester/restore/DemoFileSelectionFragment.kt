@@ -28,11 +28,11 @@ class DemoFileSelectionFragment : FileSelectionFragment() {
         savedInstanceState: Bundle?,
     ): View {
         val v = super.onCreateView(inflater, container, savedInstanceState)
-        val topStub: ViewStub = v.findViewById(R.id.topStub)
+        val topStub: ViewStub = v.findViewById(org.calyxos.backup.storage.R.id.topStub)
         topStub.layoutResource = R.layout.header_file_select
         topStub.inflate()
 
-        val bottomStub: ViewStub = v.findViewById(R.id.bottomStub)
+        val bottomStub: ViewStub = v.findViewById(org.calyxos.backup.storage.R.id.bottomStub)
         bottomStub.layoutResource = R.layout.footer_files
         val footer = bottomStub.inflate() as ExtendedFloatingActionButton
         fab = footer
