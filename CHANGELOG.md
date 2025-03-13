@@ -1,4 +1,7 @@
-## 15.5.3 - 2025-02-14
+## 15-5.4 - 2025-03-13
+* Added support and updated dependencies for 15 QPR2
+
+## 15-5.3 - 2025-02-14
 * Added support for user CA certificates
 * Fixed issue where many Go server implementations of WebDAV did not work with the WebDAV client in Seedvault
 * Bumped the app data quota from 1GB to 3GB
