@@ -80,7 +80,9 @@ internal class RestoreCoordinator(
     suspend fun getAvailableBackups(): RestorableBackupResult {
         Log.i(TAG, "getAvailableBackups")
         val fileHandles = try {
-            backend.getAvailableBackupFileHandles()
+            backend.getAvailableBackupFileHandles().filter {
+                it is AppBackupFileType.Snapshot || it is LegacyAppBackupFile.Metadata
+            }
         } catch (e: Exception) {
             Log.e(TAG, "Error getting available backups.", e)
             return RestorableBackupResult.ErrorResult(e)

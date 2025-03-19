@@ -62,6 +62,10 @@ public interface Backend {
      */
     public val providerPackageName: String?
 
+    /**
+     * Returns [AppBackupFileType.Snapshot], [LegacyAppBackupFile.Metadata]
+     * and [FileBackupFileType.Snapshot].
+     */
     public suspend fun getAvailableBackupFileHandles(): List<FileHandle> {
         // v1 get all restore set tokens in root folder that have a metadata file
         // v2 get all snapshots in all repository folders
@@ -70,6 +74,7 @@ public interface Backend {
                 null,
                 AppBackupFileType.Snapshot::class,
                 LegacyAppBackupFile.Metadata::class,
+                FileBackupFileType.Snapshot::class,
             ) { fileInfo ->
                 add(fileInfo.fileHandle)
             }

@@ -73,12 +73,12 @@ internal class WebDavHandler(
     }
 
     /**
-     * Searches if there's really an app backup available in the given storage location.
+     * Searches if there's really a backup available in the given storage location.
      * Returns true if at least one was found and false otherwise.
      */
     @WorkerThread
     @Throws(IOException::class)
-    suspend fun hasAppBackup(backend: Backend): Boolean {
+    suspend fun hasBackup(backend: Backend): Boolean {
         return backend.getAvailableBackupFileHandles().isNotEmpty()
     }
 

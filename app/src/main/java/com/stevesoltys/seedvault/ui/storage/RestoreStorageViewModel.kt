@@ -35,7 +35,7 @@ internal class RestoreStorageViewModel(
     override fun onSafUriSet(safProperties: SafProperties) {
         viewModelScope.launch(Dispatchers.IO) {
             val hasBackup = try {
-                safHandler.hasAppBackup(safProperties)
+                safHandler.hasBackup(safProperties)
             } catch (e: Exception) {
                 Log.e(TAG, "Error reading URI: ${safProperties.uri}", e)
                 val errorMsg = app.getString(R.string.restore_set_error) + "\n\n$e"
@@ -60,7 +60,7 @@ internal class RestoreStorageViewModel(
     override fun onWebDavConfigSet(properties: WebDavProperties, backend: Backend) {
         viewModelScope.launch(Dispatchers.IO) {
             val hasBackup = try {
-                webdavHandler.hasAppBackup(backend)
+                webdavHandler.hasBackup(backend)
             } catch (e: Exception) {
                 Log.e(TAG, "Error reading: ${properties.config.url}", e)
                 val errorMsg = app.getString(R.string.restore_set_error) + "\n\n$e"
