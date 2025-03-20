@@ -11,7 +11,6 @@ import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -46,9 +45,6 @@ class RestoreSetFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // decryption will fail when the device is locked, so keep the screen on to prevent locking
-        requireActivity().window.addFlags(FLAG_KEEP_SCREEN_ON)
 
         viewModel.restoreSetResults.observe(viewLifecycleOwner) { result ->
             onRestoreResultsLoaded(result)
