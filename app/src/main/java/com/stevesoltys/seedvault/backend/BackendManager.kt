@@ -102,6 +102,21 @@ class BackendManager(
     }
 
     /**
+     * Clears the storage plugins and current [BackendProperties].
+     *
+     * IMPORTANT: Do no call this while current plugins are being used,
+     *            e.g. while backup/restore operation is still running.
+     */
+    @WorkerThread
+    @Synchronized
+    fun removePlugins() {
+        settingsManager.clearStorageBackend()
+        mBackend = null
+        mBackendProperties = null
+        blobCache.clearLocalCache()
+    }
+
+    /**
      * Check if we are able to do backups now by examining possible pre-conditions
      * such as plugged-in flash drive or internet access.
      *
