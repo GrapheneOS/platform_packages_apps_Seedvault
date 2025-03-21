@@ -14,8 +14,8 @@ import android.widget.Button
 import androidx.fragment.app.activityViewModels
 import de.grobox.storagebackuptester.MainViewModel
 import de.grobox.storagebackuptester.R
-import org.calyxos.backup.storage.api.SnapshotItem
-import org.calyxos.backup.storage.ui.restore.SnapshotFragment
+import app.grapheneos.backup.storage.api.SnapshotItem
+import app.grapheneos.backup.storage.ui.restore.SnapshotFragment
 
 class DemoSnapshotFragment : SnapshotFragment() {
 
@@ -27,7 +27,7 @@ class DemoSnapshotFragment : SnapshotFragment() {
         savedInstanceState: Bundle?,
     ): View {
         val v = super.onCreateView(inflater, container, savedInstanceState)
-        val bottomStub: ViewStub = v.findViewById(org.calyxos.backup.storage.R.id.bottomStub)
+        val bottomStub: ViewStub = v.findViewById(app.grapheneos.backup.storage.R.id.bottomStub)
         bottomStub.layoutResource = R.layout.footer_snapshot
         val footer = bottomStub.inflate()
         footer.findViewById<Button>(R.id.button).setOnClickListener {

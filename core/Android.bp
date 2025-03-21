@@ -14,7 +14,7 @@ android_library {
         "src/main/res",
     ],
     exclude_srcs: [
-        "src/main/java/org/calyxos/seedvault/core/backends/BackendTest.kt",
+        "src/main/java/app.grapheneos/seedvault/core/backends/BackendTest.kt",
     ],
     static_libs: [
         "androidx.core_core-ktx",
