@@ -138,7 +138,7 @@ internal class BackupNotificationManager(private val context: Context) {
     /**
      * Call after [onApkBackup] or [onAppsNotBackedUp] were called.
      */
-    fun onApkBackupDone() {
+    fun cancelBackupNotification() {
         nm.cancel(NOTIFICATION_ID_OBSERVER)
     }
 

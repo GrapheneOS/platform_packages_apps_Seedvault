@@ -187,6 +187,12 @@
             android:exported="false"
             android:label="BackupJobService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+        <!-- Does app backup finalization as a foreground service -->
+        <service
+            android:name=".transport.backup.FinalizeBackupService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync"
+            android:label="FinalizeBackupService" />
         <!-- Does app restore as a foreground service -->
         <service
             android:name=".restore.RestoreService"

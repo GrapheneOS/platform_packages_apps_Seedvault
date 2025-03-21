@@ -163,6 +163,7 @@
     <string name="notification_success_channel_title">Success notification</string>
     <string name="notification_title">Backup running</string>
     <string name="notification_init_text">Preparing existing backup data for reuse…</string>
+    <string name="notification_finalizing_text">Finalizing backup…</string>
     <string name="notification_apk_text">Backing up APK of %s</string>
     <string name="notification_apk_not_backed_up">Saving list of apps we can not back up.</string>
     <string name="notification_backup_already_running">Backup already in progress</string>

@@ -53,7 +53,7 @@ internal class ApkBackupManager(
                 backUpApks()
             }
         } finally {
-            nm.onApkBackupDone()
+            nm.cancelBackupNotification()
         }
     }
 
