@@ -119,9 +119,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         backupStorage = findPreference("backup_storage")!!
         backupStorage.onPreferenceChangeListener = OnPreferenceChangeListener { _, newValue ->
             val disable = !(newValue as Boolean)
-            // TODO this should really get moved out off the UI layer
             if (disable) {
-                viewModel.cancelFilesBackup()
+                viewModel.unscheduleFileBackup()
                 return@OnPreferenceChangeListener true
             }
             onEnablingStorageBackup()
@@ -159,7 +158,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         viewModel.lastBackupTime.observe(viewLifecycleOwner) { time ->
             setAppBackupStatusSummary(time)
         }
-        viewModel.appBackupWorkInfo.observe(viewLifecycleOwner) { workInfo ->
+        viewModel.backupWorkInfo.observe(viewLifecycleOwner) { workInfo ->
             setAppBackupSchedulingSummary(workInfo)
         }
 
@@ -176,7 +175,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setBackupLocationSummary()
         setAutoRestoreState()
         setAppBackupStatusSummary(viewModel.lastBackupTime.value)
-        setAppBackupSchedulingSummary(viewModel.appBackupWorkInfo.value)
+        setAppBackupSchedulingSummary(viewModel.backupWorkInfo.value)
     }
 
     override fun onResume() {
@@ -340,7 +339,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                         LENGTH_LONG
                     ).show()
                 }
-                viewModel.scheduleFilesBackup()
+                viewModel.scheduleBackups()
                 backupStorage.isChecked = true
                 dialog.dismiss()
             }

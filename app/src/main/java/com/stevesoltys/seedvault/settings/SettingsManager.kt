@@ -10,6 +10,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.hardware.usb.UsbDevice
 import android.net.Uri
 import androidx.annotation.UiThread
+import androidx.core.content.edit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.preference.PreferenceManager
@@ -55,6 +56,7 @@ private const val PREF_KEY_BACKUP_APP_BLACKLIST = "backupAppBlacklist"
 
 private const val PREF_KEY_BACKUP_STORAGE = "backup_storage"
 internal const val PREF_KEY_LAST_BACKUP = "lastBackup"
+internal const val PREF_KEY_MIGRATION_UNIFIED_SCHEDULING = "migrationUnifiedScheduling"
 
 class SettingsManager(private val context: Context) {
 
@@ -235,7 +237,7 @@ class SettingsManager(private val context: Context) {
         }
     }
 
-    fun isStorageBackupEnabled() = prefs.getBoolean(PREF_KEY_BACKUP_STORAGE, false)
+    fun isFileBackupEnabled() = prefs.getBoolean(PREF_KEY_BACKUP_STORAGE, false)
 
     @UiThread
     fun onAppBackupStatusChanged(status: AppStatus) {
@@ -253,6 +255,19 @@ class SettingsManager(private val context: Context) {
      */
     val isFirstStart get() = prefs.getString(PREF_KEY_STORAGE_PLUGIN, null) == null
 
+    /**
+     * Runs the given migration [block], if the migration was not yet performed.
+     */
+    fun migrateToUnifiedScheduling(block: () -> Unit) {
+        val migrated = prefs.getBoolean(PREF_KEY_MIGRATION_UNIFIED_SCHEDULING, false)
+        if (!migrated) {
+            try {
+                block()
+            } finally {
+                prefs.edit { putBoolean(PREF_KEY_MIGRATION_UNIFIED_SCHEDULING, true) }
+            }
+        }
+    }
 }
 
 data class FlashDrive(

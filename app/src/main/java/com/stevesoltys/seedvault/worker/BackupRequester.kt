@@ -8,15 +8,11 @@ package com.stevesoltys.seedvault.worker
 import android.app.backup.BackupManager
 import android.app.backup.IBackupManager
 import android.content.Context
-import android.content.Intent
 import android.os.RemoteException
 import android.util.Log
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
-import androidx.core.content.ContextCompat.startForegroundService
 import com.stevesoltys.seedvault.settings.SettingsManager
-import com.stevesoltys.seedvault.storage.StorageBackupService
-import com.stevesoltys.seedvault.storage.StorageBackupService.Companion.EXTRA_START_APP_BACKUP
 import com.stevesoltys.seedvault.transport.backup.BackupTransportMonitor
 import com.stevesoltys.seedvault.transport.backup.PackageService
 import com.stevesoltys.seedvault.ui.notification.BackupNotificationManager
@@ -38,6 +34,7 @@ internal const val NUM_PACKAGES_PER_TRANSACTION = 100
 internal class BackupRequester(
     context: Context,
     private val backupManager: IBackupManager,
+    private val settingsManager: SettingsManager,
     private val monitor: BackupTransportMonitor,
     val packageService: PackageService,
 ) : KoinComponent {
@@ -50,25 +47,27 @@ internal class BackupRequester(
             backupManager: IBackupManager,
             reschedule: Boolean = false,
         ) {
-            val appBackupEnabled = backupManager.isBackupEnabled
-            // TODO eventually, we could think about running files and app backup simultaneously
-            if (settingsManager.isStorageBackupEnabled()) {
-                val i = Intent(context, StorageBackupService::class.java)
-                // this starts an app backup afterwards
-                i.putExtra(EXTRA_START_APP_BACKUP, appBackupEnabled)
-                Log.i(TAG, "Starting foreground service for file backup...")
-                Log.i(TAG, "  appBackupEnabled = $appBackupEnabled")
-                startForegroundService(context, i)
-            } else if (appBackupEnabled) {
-                Log.i(TAG, "File backup disabled, starting only AppBackupWorker...")
-                AppBackupWorker.scheduleNow(context, reschedule)
+            if (settingsManager.isFileBackupEnabled()) {
+                // This launches file backup first,
+                // because the app backup worker only kicks off the backup and finishes early.
+                Log.i(TAG, "Starting FileBackupWorker...")
+                FileBackupWorker.scheduleNow(context, reschedule)
+            } else if (backupManager.isBackupEnabled) {
+                Log.i(TAG, "Starting AppBackupWorker...")
+                AppBackupWorker.scheduleNow(context)
             } else {
                 Log.d(TAG, "Neither files nor app backup enabled, do nothing.")
             }
         }
     }
 
-    val isBackupEnabled: Boolean get() = backupManager.isBackupEnabled
+    /**
+     * Returns true if either app or file backup is enabled.
+     */
+    val isBackupEnabled: Boolean get() = isAppBackupEnabled || isFileBackupEnabled
+
+    val isAppBackupEnabled: Boolean get() = backupManager.isBackupEnabled
+    val isFileBackupEnabled: Boolean get() = settingsManager.isFileBackupEnabled()
 
     private val packages by lazy { packageService.eligiblePackages }
     private val observer by lazy {

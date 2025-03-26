@@ -12,11 +12,11 @@ import android.provider.Settings.Secure.BACKUP_SCHEDULING_ENABLED
 import android.util.Log
 import androidx.work.WorkInfo.State.RUNNING
 import androidx.work.WorkManager
-import com.stevesoltys.seedvault.storage.StorageBackupService
 import com.stevesoltys.seedvault.transport.ConfigurableBackupTransportService
 import com.stevesoltys.seedvault.worker.AppBackupPruneWorker
-import com.stevesoltys.seedvault.worker.AppBackupWorker.Companion.UNIQUE_WORK_NAME
+import com.stevesoltys.seedvault.worker.AppBackupWorker
 import com.stevesoltys.seedvault.worker.AppCheckerWorker
+import com.stevesoltys.seedvault.worker.FileBackupWorker
 import com.stevesoltys.seedvault.worker.FileCheckerWorker
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -32,16 +32,17 @@ class BackupStateManager(
 
     val isBackupRunning: Flow<Boolean> = combine(
         flow = ConfigurableBackupTransportService.isRunning,
-        flow2 = StorageBackupService.isRunning,
-        flow3 = workManager.getWorkInfosForUniqueWorkFlow(UNIQUE_WORK_NAME),
-    ) { appBackupRunning, filesBackupRunning, workInfo1 ->
-        val workInfoState1 = workInfo1.getOrNull(0)?.state
+        flow2 = workManager.getWorkInfosForUniqueWorkFlow(AppBackupWorker.UNIQUE_WORK_NAME),
+        flow3 = workManager.getWorkInfosForUniqueWorkFlow(FileBackupWorker.UNIQUE_WORK_NAME),
+    ) { appBackupRunning, appBackupWorkInfos, fileBackupWorkInfos ->
+        val appBackupState = appBackupWorkInfos.getOrNull(0)?.state
+        val fileBackupState = fileBackupWorkInfos.getOrNull(0)?.state
         Log.i(
             TAG, "B - appBackupRunning: $appBackupRunning, " +
-                "filesBackupRunning: $filesBackupRunning, " +
-                "appBackupWorker: ${workInfoState1?.name}"
+                "filesBackupRunning: ${fileBackupState?.name}, " +
+                "appBackupWorker: ${appBackupState?.name}"
         )
-        appBackupRunning || filesBackupRunning || workInfoState1 == RUNNING
+        appBackupRunning || fileBackupState == RUNNING || appBackupState == RUNNING
     }
 
     val isCheckOrPruneRunning: Flow<Boolean> = combine(

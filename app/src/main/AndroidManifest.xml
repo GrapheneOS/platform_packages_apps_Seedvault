@@ -182,12 +182,6 @@
             android:name="androidx.work.impl.foreground.SystemForegroundService"
             android:foregroundServiceType="dataSync"
             tools:node="merge" />
-        <!-- Used to start actual BackupService depending on scheduling criteria -->
-        <service
-            android:name=".storage.StorageBackupJobService"
-            android:exported="false"
-            android:label="BackupJobService"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
         <!-- Does app backup finalization as a foreground service -->
         <service
             android:name=".transport.backup.FinalizeBackupService"
@@ -203,12 +197,6 @@
             android:exported="false"
             android:foregroundServiceType="dataSync"
             android:label="RestoreService" />
-        <!-- Does the actual file backup work as a foreground service -->
-        <service
-            android:name=".storage.StorageBackupService"
-            android:exported="false"
-            android:foregroundServiceType="dataSync"
-            android:label="BackupService" />
         <!-- Does file restore as a foreground service -->
         <service
             android:name=".storage.StorageRestoreService"

@@ -16,11 +16,11 @@ import org.calyxos.backup.storage.R
 import org.calyxos.backup.storage.api.BackupObserver
 import org.calyxos.backup.storage.api.StorageBackup
 import org.calyxos.backup.storage.ui.NOTIFICATION_ID_BACKUP
-import org.calyxos.backup.storage.ui.NOTIFICATION_ID_PRUNE
 import org.calyxos.backup.storage.ui.Notifications
 
 private const val TAG = "BackupService"
 
+@Deprecated("Use BackupWorker instead")
 public abstract class BackupService : Service() {
 
     private val n by lazy { Notifications(applicationContext) }
@@ -39,7 +39,7 @@ public abstract class BackupService : Service() {
             if (success) {
                 // only prune old backups when backup run was successful
                 startForeground(
-                    NOTIFICATION_ID_PRUNE,
+                    NOTIFICATION_ID_BACKUP,
                     n.getPruneNotification(R.string.notification_prune),
                     FOREGROUND_SERVICE_TYPE_MANIFEST,
                 )

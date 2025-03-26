@@ -7,33 +7,28 @@ package com.stevesoltys.seedvault.worker
 
 import android.content.Context
 import android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
-import android.text.format.DateUtils.formatElapsedTime
 import android.util.Log
-import androidx.work.BackoffPolicy
-import androidx.work.Constraints
 import androidx.work.CoroutineWorker
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE
 import androidx.work.ExistingWorkPolicy.REPLACE
 import androidx.work.ForegroundInfo
-import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST
-import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import com.stevesoltys.seedvault.BackupStateManager
 import com.stevesoltys.seedvault.R
 import com.stevesoltys.seedvault.backend.BackendManager
 import com.stevesoltys.seedvault.repo.AppBackupManager
-import com.stevesoltys.seedvault.settings.SettingsManager
 import com.stevesoltys.seedvault.ui.notification.BackupNotificationManager
 import com.stevesoltys.seedvault.ui.notification.NOTIFICATION_ID_OBSERVER
 import kotlinx.coroutines.flow.first
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import java.util.concurrent.TimeUnit
 
+/**
+ * Backup worker that does the preliminaries for app backup
+ * and then hands over to the system for the actual backup.
+ */
 class AppBackupWorker(
     appContext: Context,
     workerParams: WorkerParameters,
@@ -42,69 +37,20 @@ class AppBackupWorker(
     companion object {
         private val TAG = AppBackupWorker::class.simpleName
         internal const val UNIQUE_WORK_NAME = "com.stevesoltys.seedvault.APP_BACKUP"
-        private const val TAG_RESCHEDULE = "com.stevesoltys.seedvault.TAG_RESCHEDULE"
         private const val MIN_FREE_SPACE = 1024 * 1024 * 500 // 500 MB
 
-        /**
-         * (Re-)schedules the [AppBackupWorker].
-         *
-         * @param existingWorkPolicy usually you want to use [ExistingPeriodicWorkPolicy.UPDATE]
-         * only if you are sure that work is still scheduled
-         * and you don't want to mess with the scheduling time.
-         * In most other cases, you want to use [ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE],
-         * because it ensures work gets schedules, even if it wasn't scheduled before.
-         * It will however reset the scheduling time.
-         */
-        fun schedule(
-            context: Context,
-            settingsManager: SettingsManager,
-            existingWorkPolicy: ExistingPeriodicWorkPolicy,
-        ) {
-            val logFrequency = formatElapsedTime(settingsManager.backupFrequencyInMillis / 1000)
-            Log.i(TAG, "Scheduling in $logFrequency...")
-            val constraints = Constraints.Builder().apply {
-                if (!settingsManager.useMeteredNetwork) {
-                    Log.i(TAG, "  only on unmetered networks")
-                    setRequiredNetworkType(NetworkType.UNMETERED)
-                }
-                if (settingsManager.backupOnlyWhenCharging) {
-                    Log.i(TAG, "  only when the device is charging")
-                    setRequiresCharging(true)
-                }
-            }.build()
-            val workRequest = PeriodicWorkRequestBuilder<AppBackupWorker>(
-                repeatInterval = settingsManager.backupFrequencyInMillis,
-                repeatIntervalTimeUnit = TimeUnit.MILLISECONDS,
-                flexTimeInterval = 2,
-                flexTimeIntervalUnit = TimeUnit.HOURS,
-            ).setConstraints(constraints)
-                .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 5, TimeUnit.MINUTES)
-                .build()
-            val workManager = WorkManager.getInstance(context)
-            Log.i(TAG, "  workRequest: ${workRequest.id}")
-            workManager.enqueueUniquePeriodicWork(UNIQUE_WORK_NAME, existingWorkPolicy, workRequest)
-        }
-
-        fun scheduleNow(context: Context, reschedule: Boolean) {
+        fun scheduleNow(context: Context) {
             val workRequest = OneTimeWorkRequestBuilder<AppBackupWorker>()
                 .setExpedited(RUN_AS_NON_EXPEDITED_WORK_REQUEST)
-                .apply { if (reschedule) addTag(TAG_RESCHEDULE) }
                 .build()
             val workManager = WorkManager.getInstance(context)
             Log.i(TAG, "Asking to do app backup now...")
             workManager.enqueueUniqueWork(UNIQUE_WORK_NAME, REPLACE, workRequest)
         }
-
-        fun unschedule(context: Context) {
-            Log.i(TAG, "Unscheduling app backup...")
-            val workManager = WorkManager.getInstance(context)
-            workManager.cancelUniqueWork(UNIQUE_WORK_NAME)
-        }
     }
 
     private val backupStateManager: BackupStateManager by inject()
     private val backupRequester: BackupRequester by inject()
-    private val settingsManager: SettingsManager by inject()
     private val apkBackupManager: ApkBackupManager by inject()
     private val appBackupManager: AppBackupManager by inject()
     private val backendManager: BackendManager by inject()
@@ -121,32 +67,21 @@ class AppBackupWorker(
         } catch (e: Exception) {
             Log.e(TAG, "Error while running setForeground: ", e)
         }
-        return try {
-            if (isStopped || !backendManager.canDoBackupNow()) {
-                Result.retry()
-            } else {
-                val freeSpace = backendManager.getFreeSpace()
-                Log.i(TAG, "freeSpace: $freeSpace")
-                if (freeSpace != null && freeSpace < MIN_FREE_SPACE) {
-                    nm.onInsufficientSpaceError()
-                    return Result.failure()
-                }
-                val result = doBackup()
-                // show error notification if backup wasn't successful
-                if (result != Result.success()) {
-                    nm.onBackupError(meteredNetwork = !backendManager.canDoBackupNow())
-                }
-                // only allow retrying if rescheduling is allowed
-                if (tags.contains(TAG_RESCHEDULE)) return result
-                else Result.success()
+        return if (isStopped || !backendManager.canDoBackupNow()) {
+            Result.retry()
+        } else {
+            val freeSpace = backendManager.getFreeSpace()
+            Log.i(TAG, "freeSpace: $freeSpace")
+            if (freeSpace != null && freeSpace < MIN_FREE_SPACE) {
+                nm.onInsufficientSpaceError()
+                return Result.failure()
             }
-        } finally {
-            // schedule next backup, because the old one gets lost
-            // when scheduling a OneTimeWorkRequest with the same unique name via scheduleNow()
-            if (tags.contains(TAG_RESCHEDULE) && backupRequester.isBackupEnabled) {
-                // needs to use CANCEL_AND_REENQUEUE otherwise it doesn't get scheduled
-                schedule(applicationContext, settingsManager, CANCEL_AND_REENQUEUE)
+            val result = doBackup()
+            // show error notification if backup wasn't successful
+            if (result != Result.success()) {
+                nm.onBackupError(meteredNetwork = !backendManager.canDoBackupNow())
             }
+            return result
         }
     }
 

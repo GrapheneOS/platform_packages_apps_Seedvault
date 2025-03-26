@@ -45,7 +45,7 @@
     <string name="settings_backup_app_check_summary">Ensure that backup is working for restore</string>
     <string name="settings_backup_exclude_apps">Exclude apps</string>
     <string name="settings_backup_now">Backup now</string>
-    <string name="settings_category_storage">Storage backup (beta)</string>
+    <string name="settings_category_storage">File backup (beta)</string>
     <string name="settings_backup_storage_title">Backup my files</string>
     <string name="settings_backup_files_title">Included files and folders</string>
     <string name="settings_backup_files_summary">None</string>
