@@ -9,6 +9,7 @@ import android.app.backup.BackupProgress
 import android.app.backup.BackupTransport.AGENT_ERROR
 import android.app.backup.IBackupObserver
 import android.content.Context
+import android.content.Intent
 import android.content.pm.ApplicationInfo.FLAG_SYSTEM
 import android.content.pm.PackageManager.NameNotFoundException
 import android.os.Looper
@@ -25,6 +26,7 @@ import com.stevesoltys.seedvault.metadata.PackageState.NOT_ALLOWED
 import com.stevesoltys.seedvault.repo.AppBackupManager
 import com.stevesoltys.seedvault.repo.hexFromProto
 import com.stevesoltys.seedvault.settings.SettingsManager
+import com.stevesoltys.seedvault.transport.backup.FinalizeBackupService
 import com.stevesoltys.seedvault.transport.backup.PackageService
 import com.stevesoltys.seedvault.worker.AppBackupPruneWorker
 import com.stevesoltys.seedvault.worker.BackupRequester
@@ -115,7 +117,7 @@ internal class NotificationBackupObserver(
             // this should only ever happen for system apps, as we use only d2d now
             if (target in launchableSystemApps) {
                 val packageInfo = context.packageManager.getPackageInfo(target, 0)
-                 metadataManager.onPackageBackupError(packageInfo, NOT_ALLOWED)
+                metadataManager.onPackageBackupError(packageInfo, NOT_ALLOWED)
             }
         }
 
@@ -161,32 +163,23 @@ internal class NotificationBackupObserver(
             //  since the rest of packages from the failed chunk won't get backed up.
             //  So we either re-include those packages somehow (may fail again in a loop!)
             //  or we simply fail the entire backup which may cause more failures for users :(
-            var success = status == 0
-            val total = try {
-                packageService.allUserPackages.size
-            } catch (e: Exception) {
-                Log.e(TAG, "Error getting number of all user packages: ", e)
-                requestedPackages
-            }
-            val snapshot = runBlocking {
-                check(!Looper.getMainLooper().isCurrentThread)
-                Log.d(TAG, "Finalizing backup...")
-                val snapshot = appBackupManager.afterBackupFinished(success)
-                success = snapshot != null
-                snapshot
-            }
-            val size = if (snapshot != null) { // TODO for later: count size of APKs separately
-                val chunkIds = snapshot.appsMap.values.flatMap { it.chunkIdsList }
-                chunkIds.sumOf {
-                    snapshot.blobsMap[it.hexFromProto()]?.uncompressedLength?.toLong() ?: 0L
+            val success = status == 0
+            val i = Intent(context, FinalizeBackupService::class.java)
+            try {
+                // Starting a foreground service, because the system may freeze/kill us otherwise
+                // before we are done here, because the TransportService gets destroyed now
+                // and the wakelock the system holds for us gets released. See #866 for more info.
+                context.startService(i)
+                // finalize backup only when success is true
+                val error = !success || !finalizeBackup()
+                if (error) {
+                    runBlocking {
+                        appBackupManager.afterBackupFinished(false)
+                    }
+                    nm.onBackupError()
                 }
-            } else 0L
-            if (success) {
-                nm.onBackupSuccess(numPackagesToReport, total, size)
-                // prune old backups
-                AppBackupPruneWorker.scheduleNow(context)
-            } else {
-                nm.onBackupError()
+            } finally {
+                context.stopService(i)
             }
         }
     }
@@ -207,6 +200,38 @@ internal class NotificationBackupObserver(
         }
         Log.i(TAG, "$numPackages/$requestedPackages - $appName ($packageName)")
         nm.onBackupUpdate(name, numPackages, requestedPackages)
+    }
+
+    /**
+     * Returns true, if finalizing was successful.
+     */
+    private fun finalizeBackup(): Boolean {
+        // finalize and save snapshot
+        val snapshot = runBlocking {
+            check(!Looper.getMainLooper().isCurrentThread) // off UiThread
+            Log.d(TAG, "Finalizing backup...")
+            appBackupManager.afterBackupFinished(true)
+        }
+        // abort on error
+        if (snapshot == null) return false
+
+        // get info about backup
+        val total = try {
+            packageService.allUserPackages.size
+        } catch (e: Exception) {
+            Log.e(TAG, "Error getting number of all user packages: ", e)
+            requestedPackages
+        }
+        val size = snapshot.appsMap.values.flatMap {
+            it.chunkIdsList // TODO for later: count size of APKs separately
+        }.sumOf {
+            snapshot.blobsMap[it.hexFromProto()]?.uncompressedLength?.toLong() ?: 0L
+        }
+        // show notification
+        nm.onBackupSuccess(numPackagesToReport, total, size)
+        // prune old backups
+        AppBackupPruneWorker.scheduleNow(context)
+        return true
     }
 
     private fun getAppName(packageId: String): CharSequence = getAppName(context, packageId)

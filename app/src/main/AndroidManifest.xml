@@ -78,6 +78,7 @@
 
     <!-- Used for periodic storage backups -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
 
     <!-- Permission used to open settings -->
     <permission
@@ -187,6 +188,15 @@
             android:exported="false"
             android:label="BackupJobService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+        <!-- Does app backup finalization as a foreground service -->
+        <service
+            android:name=".transport.backup.FinalizeBackupService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse"
+            android:label="FinalizeBackupService">
+            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Look, finalizing the backup is super important. We had the system kill our dataSync service, so what else should we do?"/>
+        </service>
         <!-- Does app restore as a foreground service -->
         <service
             android:name=".restore.RestoreService"

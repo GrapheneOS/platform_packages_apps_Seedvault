@@ -81,7 +81,7 @@ internal class ApkBackupManagerTest : TransportTest() {
         every { metadataManager.onPackageDoesNotGetBackedUp(packageInfo, NOT_ALLOWED) } just Runs
 
         every { settingsManager.backupApks() } returns false
-        every { nm.onApkBackupDone() } just Runs
+        every { nm.cancelBackupNotification() } just Runs
 
         apkBackupManager.backup()
 
@@ -107,7 +107,7 @@ internal class ApkBackupManagerTest : TransportTest() {
         every { metadataManager.onPackageDoesNotGetBackedUp(packageInfo, NOT_ALLOWED) } just Runs
 
         every { settingsManager.backupApks() } returns false
-        every { nm.onApkBackupDone() } just Runs
+        every { nm.cancelBackupNotification() } just Runs
 
         apkBackupManager.backup()
 
@@ -141,7 +141,7 @@ internal class ApkBackupManagerTest : TransportTest() {
         every { metadataManager.onPackageDoesNotGetBackedUp(packageInfo, WAS_STOPPED) } just Runs
 
         every { settingsManager.backupApks() } returns false
-        every { nm.onApkBackupDone() } just Runs
+        every { nm.cancelBackupNotification() } just Runs
 
         apkBackupManager.backup()
 
@@ -167,7 +167,7 @@ internal class ApkBackupManagerTest : TransportTest() {
         every { packageMetadata.state } returns NOT_ALLOWED
 
         every { settingsManager.backupApks() } returns false
-        every { nm.onApkBackupDone() } just Runs
+        every { nm.cancelBackupNotification() } just Runs
 
         apkBackupManager.backup()
 
@@ -186,7 +186,7 @@ internal class ApkBackupManagerTest : TransportTest() {
         expectUploadIcons()
 
         every { settingsManager.backupApks() } returns false
-        every { nm.onApkBackupDone() } just Runs
+        every { nm.cancelBackupNotification() } just Runs
 
         apkBackupManager.backup()
 
@@ -227,7 +227,7 @@ internal class ApkBackupManagerTest : TransportTest() {
         // was backed up, get new packageMetadata
         coEvery { apkBackup.backupApkIfNecessary(notAllowedPackages[1], snapshot) } just Runs
 
-        every { nm.onApkBackupDone() } just Runs
+        every { nm.cancelBackupNotification() } just Runs
 
         apkBackupManager.backup()
 
@@ -248,7 +248,7 @@ internal class ApkBackupManagerTest : TransportTest() {
         every { settingsManager.backupApks() } returns true
         every { packageService.allUserPackages } returns packages
         every { backendManager.canDoBackupNow() } returns false
-        every { nm.onApkBackupDone() } just Runs
+        every { nm.cancelBackupNotification() } just Runs
 
         assertThrows<IllegalStateException> { apkBackupManager.backup() }
         Unit
@@ -265,7 +265,7 @@ internal class ApkBackupManagerTest : TransportTest() {
         every { settingsManager.backupApks() } returns true
         every { packageService.allUserPackages } returns packages
         every { backendManager.canDoBackupNow() } returns true andThen false
-        every { nm.onApkBackupDone() } just Runs
+        every { nm.cancelBackupNotification() } just Runs
 
         assertThrows<IllegalStateException> { apkBackupManager.backup() }
         Unit
@@ -290,7 +290,7 @@ internal class ApkBackupManagerTest : TransportTest() {
 
         every { settingsManager.backupApks() } returns false
 
-        every { nm.onApkBackupDone() } just Runs
+        every { nm.cancelBackupNotification() } just Runs
 
         apkBackupManager.backup()
 
