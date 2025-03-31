@@ -191,6 +191,8 @@ public class StorageBackup(
             if (checkRunning.get() || !backupRunning.compareAndSet(false, true)) {
                 Log.w(TAG, "Backup or check already running, not starting a new one")
                 return@withContext false
+            } else {
+                Log.i(TAG, "Backup started, running set.")
             }
             try {
                 backup.runBackup(backupObserver)

@@ -361,6 +361,12 @@ public class WebDavBackend(
             return true
         } else if (e is EOFException && e.message?.contains("\\n not found") == true) {
             return true
+        } else if (e is IOException && e.cause is EOFException &&
+            e.cause?.message?.contains("\\n not found") == true
+        ) {
+            return true
+        } else if (e is IOException && e.message?.contains("unexpected end of stream") == true) {
+            return true
         }
         return false
     }
