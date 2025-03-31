@@ -13,6 +13,7 @@ val workerModule = module {
         BackupRequester(
             context = androidContext(),
             backupManager = get(),
+            settingsManager = get(),
             monitor = get(),
             packageService = get(),
         )

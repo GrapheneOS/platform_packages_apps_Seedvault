@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit
 private const val BACKUP_JOB_ID = 0
 private const val TAG = "BackupJobService"
 
+@Deprecated("Use something with WorkManager instead")
 public abstract class BackupJobService(private val serviceClass: Class<out Service>) :
     JobService() {
 
@@ -57,6 +58,7 @@ public abstract class BackupJobService(private val serviceClass: Class<out Servi
         public fun cancelJob(context: Context) {
             val jobScheduler: JobScheduler = context.getSystemService(JobScheduler::class.java)
             jobScheduler.cancel(BACKUP_JOB_ID)
+            Log.i(TAG, "Cancelled file backup")
         }
     }
 

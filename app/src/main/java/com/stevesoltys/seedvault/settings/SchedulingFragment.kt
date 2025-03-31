@@ -82,9 +82,9 @@ class SchedulingFragment : PreferenceFragmentCompat(),
     // before prefs were saved
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         when (key) {
-            PREF_KEY_SCHED_FREQ -> viewModel.scheduleAppBackup(CANCEL_AND_REENQUEUE)
-            PREF_KEY_SCHED_METERED -> viewModel.scheduleAppBackup(UPDATE)
-            PREF_KEY_SCHED_CHARGING -> viewModel.scheduleAppBackup(UPDATE)
+            PREF_KEY_SCHED_FREQ -> viewModel.scheduleBackups(CANCEL_AND_REENQUEUE)
+            PREF_KEY_SCHED_METERED -> viewModel.scheduleBackups(UPDATE)
+            PREF_KEY_SCHED_CHARGING -> viewModel.scheduleBackups(UPDATE)
         }
     }
 

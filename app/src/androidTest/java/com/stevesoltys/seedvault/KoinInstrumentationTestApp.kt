@@ -65,8 +65,17 @@ class KoinInstrumentationTestApp : App() {
             }
 
             viewModel {
-                val viewModel =
-                    BackupStorageViewModel(context, get(), get(), get(), get(), get(), get(), get())
+                val viewModel = BackupStorageViewModel(
+                    app = context,
+                    backupManager = get(),
+                    backupRequester = get(),
+                    backupInitializer = get(),
+                    storageBackup = get(),
+                    safHandler = get(),
+                    webDavHandler = get(),
+                    settingsManager = get(),
+                    backendManager = get(),
+                )
                 currentBackupStorageViewModel = spyk(viewModel)
                 currentBackupStorageViewModel!!
             }

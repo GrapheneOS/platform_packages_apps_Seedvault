@@ -12,6 +12,7 @@ import android.app.Application
 import android.app.backup.BackupManager
 import android.app.backup.BackupManager.PACKAGE_MANAGER_SENTINEL
 import android.app.backup.IBackupManager
+import android.app.job.JobScheduler
 import android.content.Context
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.os.Build
@@ -20,10 +21,9 @@ import android.os.StrictMode
 import android.os.UserHandle
 import android.os.UserManager
 import android.util.Log
-import androidx.work.ExistingPeriodicWorkPolicy.UPDATE
+import androidx.work.ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE
 import androidx.work.WorkManager
 import com.google.android.material.color.DynamicColors
-import org.calyxos.seedvault.core.MemoryLogger.getMemStr
 import com.stevesoltys.seedvault.backend.BackendManager
 import com.stevesoltys.seedvault.backend.saf.storagePluginModuleSaf
 import com.stevesoltys.seedvault.backend.webdav.storagePluginModuleWebDav
@@ -44,8 +44,10 @@ import com.stevesoltys.seedvault.ui.notification.BackupNotificationManager
 import com.stevesoltys.seedvault.ui.recoverycode.RecoveryCodeViewModel
 import com.stevesoltys.seedvault.ui.storage.BackupStorageViewModel
 import com.stevesoltys.seedvault.ui.storage.RestoreStorageViewModel
-import com.stevesoltys.seedvault.worker.AppBackupWorker
+import com.stevesoltys.seedvault.worker.BackupRequester
+import com.stevesoltys.seedvault.worker.FileBackupWorker
 import com.stevesoltys.seedvault.worker.workerModule
+import org.calyxos.seedvault.core.MemoryLogger.getMemStr
 import org.calyxos.seedvault.core.backends.BackendFactory
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
@@ -82,6 +84,7 @@ open class App : Application() {
                 appListRetriever = get(),
                 storageBackup = get(),
                 backupManager = get(),
+                backupRequester = get(),
                 backupStateManager = get(),
                 checker = get(),
             )
@@ -98,6 +101,7 @@ open class App : Application() {
                 safHandler = get(),
                 webDavHandler = get(),
                 settingsManager = get(),
+                backupRequester = get(),
                 backendManager = get(),
             )
         }
@@ -108,7 +112,10 @@ open class App : Application() {
         super.onCreate()
         DynamicColors.applyToActivitiesIfAvailable(this)
         startKoin()
-        if (!isTest) migrateToOwnScheduling()
+        if (!isTest) {
+            migrateToOwnScheduling()
+            migrateToUnifiedScheduling()
+        }
         if (isDebugBuild()) {
             StrictMode.setThreadPolicy(
                 StrictMode.ThreadPolicy.Builder()
@@ -152,6 +159,7 @@ open class App : Application() {
     private val backupManager: IBackupManager by inject()
     private val backendManager: BackendManager by inject()
     private val backupStateManager: BackupStateManager by inject()
+    private val backupRequester: BackupRequester by inject()
 
     override fun onTrimMemory(level: Int) {
         Log.w("Seedvault", "onTrimMemory($level) ${getMemStr()}")
@@ -166,20 +174,33 @@ open class App : Application() {
      * Disables the framework scheduling in favor of our own.
      * Introduced in the first half of 2024 and can be removed after a suitable migration period.
      */
-    protected open fun migrateToOwnScheduling() {
+    private fun migrateToOwnScheduling() {
         if (!backupStateManager.isFrameworkSchedulingEnabled) { // already on own scheduling
-            // fix things for removable drive users who had a job scheduled here before
-            if (backendManager.isOnRemovableDrive) AppBackupWorker.unschedule(applicationContext)
             return
         }
-
         if (backupManager.currentTransport == TRANSPORT_ID) {
             backupManager.setFrameworkSchedulingEnabledForUser(UserHandle.myUserId(), false)
-            if (backupManager.isBackupEnabled && !backendManager.isOnRemovableDrive) {
-                AppBackupWorker.schedule(applicationContext, settingsManager, UPDATE)
+        }
+    }
+
+    /**
+     * Cancels all old jobs and works and if needed, schedules new worker.
+     * Introduced in the first half of 2025 and can be removed after a suitable migration period.
+     */
+    private fun migrateToUnifiedScheduling() {
+        settingsManager.migrateToUnifiedScheduling {
+            Log.i("Seedvault", "Applying migration to unified scheduling...")
+            val jobScheduler = applicationContext.getSystemService(JobScheduler::class.java)
+            jobScheduler?.cancelAll()
+            val workManager = WorkManager.getInstance(applicationContext)
+            workManager.cancelAllWork()
+            // only schedule, if backup is enabled and not removable drive,
+            // also we need to be the selected transport
+            if (backupRequester.isBackupEnabled && !backendManager.isOnRemovableDrive &&
+                backupManager.currentTransport == TRANSPORT_ID
+            ) {
+                FileBackupWorker.schedule(applicationContext, settingsManager, CANCEL_AND_REENQUEUE)
             }
-            // cancel old D2D worker
-            WorkManager.getInstance(this).cancelUniqueWork("APP_BACKUP")
         }
     }
 

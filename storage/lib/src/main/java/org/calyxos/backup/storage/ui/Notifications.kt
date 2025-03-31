@@ -32,11 +32,10 @@ private const val CHANNEL_ID_BACKUP = "seedvault.storage.backup"
 private const val CHANNEL_ID_RESTORE = "seedvault.storage.restore"
 private const val CHANNEL_ID_CHECK = "seedvault.storage.check"
 internal const val NOTIFICATION_ID_BACKUP = 1000
-internal const val NOTIFICATION_ID_PRUNE = 1001
-internal const val NOTIFICATION_ID_RESTORE = 1002
-internal const val NOTIFICATION_ID_RESTORE_COMPLETE = 1003
-internal const val NOTIFICATION_ID_CHECK = 1004
-internal const val NOTIFICATION_ID_CHECK_COMPLETE = 1005
+internal const val NOTIFICATION_ID_RESTORE = 1001
+internal const val NOTIFICATION_ID_RESTORE_COMPLETE = 1002
+internal const val NOTIFICATION_ID_CHECK = 1003
+internal const val NOTIFICATION_ID_CHECK_COMPLETE = 1004
 
 internal class Notifications(private val context: Context) {
 
@@ -99,6 +98,11 @@ internal class Notifications(private val context: Context) {
         nm.cancel(NOTIFICATION_ID_BACKUP)
     }
 
+    internal fun showPruneNotification() {
+        val notification = getPruneNotification(R.string.notification_prune)
+        nm.notify(NOTIFICATION_ID_BACKUP, notification)
+    }
+
     internal fun getPruneNotification(
         @StringRes textRes: Int,
         transferred: Int = 0,
@@ -118,11 +122,11 @@ internal class Notifications(private val context: Context) {
         expected: Int = 0,
     ) {
         val notification = getPruneNotification(textRes, transferred, expected)
-        nm.notify(NOTIFICATION_ID_PRUNE, notification)
+        nm.notify(NOTIFICATION_ID_BACKUP, notification)
     }
 
     internal fun cancelPruneNotification() {
-        nm.cancel(NOTIFICATION_ID_PRUNE)
+        nm.cancel(NOTIFICATION_ID_BACKUP)
     }
 
     internal fun getRestoreNotification(restored: Int = 0, expected: Int = 0): Notification {

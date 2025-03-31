@@ -7,7 +7,6 @@ package com.stevesoltys.seedvault.ui.storage
 
 import android.app.Application
 import android.app.backup.IBackupManager
-import android.app.job.JobInfo
 import android.os.UserHandle
 import android.util.Log
 import androidx.annotation.UiThread
@@ -18,26 +17,25 @@ import com.stevesoltys.seedvault.backend.BackendManager
 import com.stevesoltys.seedvault.backend.saf.SafHandler
 import com.stevesoltys.seedvault.backend.webdav.WebDavHandler
 import com.stevesoltys.seedvault.settings.SettingsManager
-import com.stevesoltys.seedvault.storage.StorageBackupJobService
 import com.stevesoltys.seedvault.transport.backup.BackupInitializer
-import com.stevesoltys.seedvault.worker.AppBackupWorker
+import com.stevesoltys.seedvault.worker.BackupRequester
 import com.stevesoltys.seedvault.worker.BackupRequester.Companion.requestFilesAndAppBackup
+import com.stevesoltys.seedvault.worker.FileBackupWorker
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.calyxos.backup.storage.api.StorageBackup
-import org.calyxos.backup.storage.backup.BackupJobService
 import org.calyxos.seedvault.core.backends.Backend
 import org.calyxos.seedvault.core.backends.saf.SafProperties
 import org.calyxos.seedvault.core.backends.webdav.WebDavProperties
 import java.io.IOException
-import java.util.concurrent.TimeUnit
 
 private val TAG = BackupStorageViewModel::class.java.simpleName
 
 internal class BackupStorageViewModel(
     private val app: Application,
     private val backupManager: IBackupManager,
+    private val backupRequester: BackupRequester,
     private val backupInitializer: BackupInitializer,
     private val storageBackup: StorageBackup,
     safHandler: SafHandler,
@@ -120,26 +118,14 @@ internal class BackupStorageViewModel(
         // disable framework scheduling, because another transport may have enabled it
         backupManager.setFrameworkSchedulingEnabledForUser(UserHandle.myUserId(), false)
         if (!backendProperties.isUsb) {
-            if (backupManager.isBackupEnabled) {
-                AppBackupWorker.schedule(app, settingsManager, CANCEL_AND_REENQUEUE)
+            if (backupRequester.isBackupEnabled) {
+                FileBackupWorker.schedule(app, settingsManager, CANCEL_AND_REENQUEUE)
             }
-            // FIXME this runs a backup right away (if constraints fulfilled)
-            //  and JobScheduler doesn't offer initial delay
-            if (settingsManager.isStorageBackupEnabled()) BackupJobService.scheduleJob(
-                context = app,
-                jobServiceClass = StorageBackupJobService::class.java,
-                periodMillis = TimeUnit.HOURS.toMillis(24),
-                networkType = if (backendProperties.requiresNetwork) JobInfo.NETWORK_TYPE_UNMETERED
-                else JobInfo.NETWORK_TYPE_NONE,
-                deviceIdle = false,
-                charging = true
-            )
         }
     }
 
     private fun cancelBackupWorkers() {
-        AppBackupWorker.unschedule(app)
-        BackupJobService.cancelJob(app)
+        FileBackupWorker.unschedule(app)
     }
 
     private fun onInitializationError() {

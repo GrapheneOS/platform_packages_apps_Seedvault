@@ -7,8 +7,6 @@ package com.stevesoltys.seedvault.settings
 
 import android.app.Application
 import android.app.backup.IBackupManager
-import android.app.job.JobInfo.NETWORK_TYPE_NONE
-import android.app.job.JobInfo.NETWORK_TYPE_UNMETERED
 import android.database.ContentObserver
 import android.net.ConnectivityManager
 import android.net.Network
@@ -31,6 +29,8 @@ import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.DiffUtil.calculateDiff
 import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE
+import androidx.work.ExistingPeriodicWorkPolicy.UPDATE
 import androidx.work.WorkManager
 import com.stevesoltys.seedvault.BackupStateManager
 import com.stevesoltys.seedvault.R
@@ -40,27 +40,26 @@ import com.stevesoltys.seedvault.permitDiskReads
 import com.stevesoltys.seedvault.repo.Checker
 import com.stevesoltys.seedvault.settings.BackupPermission.BackupAllowed
 import com.stevesoltys.seedvault.settings.BackupPermission.BackupRestricted
-import com.stevesoltys.seedvault.storage.StorageBackupJobService
 import com.stevesoltys.seedvault.ui.LiveEvent
 import com.stevesoltys.seedvault.ui.MutableLiveEvent
 import com.stevesoltys.seedvault.ui.RequireProvisioningViewModel
-import com.stevesoltys.seedvault.worker.AppBackupWorker
-import com.stevesoltys.seedvault.worker.AppBackupWorker.Companion.UNIQUE_WORK_NAME
 import com.stevesoltys.seedvault.worker.AppCheckerWorker
+import com.stevesoltys.seedvault.worker.BackupRequester
 import com.stevesoltys.seedvault.worker.BackupRequester.Companion.requestFilesAndAppBackup
+import com.stevesoltys.seedvault.worker.FileBackupWorker
+import com.stevesoltys.seedvault.worker.FileBackupWorker.Companion.UNIQUE_WORK_NAME
 import com.stevesoltys.seedvault.worker.FileCheckerWorker
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.calyxos.backup.storage.api.StorageBackup
-import org.calyxos.backup.storage.backup.BackupJobService
 import org.calyxos.seedvault.core.backends.saf.SafProperties
 import java.io.IOException
 import java.lang.Runtime.getRuntime
-import java.util.concurrent.TimeUnit.HOURS
 
 private const val TAG = "SettingsViewModel"
 private const val USER_FULL_DATA_BACKUP_AWARE = "user_full_data_backup_aware"
@@ -78,6 +77,7 @@ internal class SettingsViewModel(
     private val appListRetriever: AppListRetriever,
     private val storageBackup: StorageBackup,
     private val backupManager: IBackupManager,
+    private val backupRequester: BackupRequester,
     private val checker: Checker,
     backupStateManager: BackupStateManager,
 ) : RequireProvisioningViewModel(app, settingsManager, keyManager, backendManager) {
@@ -101,7 +101,7 @@ internal class SettingsViewModel(
     val filesBackupSize: LiveData<Long> = mFilesBackupSize
 
     internal val lastBackupTime = settingsManager.lastBackupTime
-    internal val appBackupWorkInfo =
+    internal val backupWorkInfo =
         workManager.getWorkInfosForUniqueWorkLiveData(UNIQUE_WORK_NAME).map {
             it.getOrNull(0)
         }
@@ -271,10 +271,11 @@ internal class SettingsViewModel(
 
     fun onBackupEnabled(enabled: Boolean) {
         if (enabled) {
+            scheduleBackups()
             // enable call log backups for existing installs (added end of 2020)
             enableCallLogBackup()
         } else {
-            cancelAppBackup()
+            unscheduleAppBackup()
         }
     }
 
@@ -296,37 +297,44 @@ internal class SettingsViewModel(
         return keyManager.hasMainKey()
     }
 
-    fun scheduleAppBackup(existingWorkPolicy: ExistingPeriodicWorkPolicy) {
+    fun scheduleBackups(existingWorkPolicy: ExistingPeriodicWorkPolicy) {
         // disable framework scheduling, because another transport may have enabled it
         backupManager.setFrameworkSchedulingEnabledForUser(UserHandle.myUserId(), false)
-        if (!backendManager.isOnRemovableDrive && backupManager.isBackupEnabled) {
-            AppBackupWorker.schedule(app, settingsManager, existingWorkPolicy)
+        if (!backendManager.isOnRemovableDrive && backupRequester.isBackupEnabled) {
+            FileBackupWorker.schedule(app, settingsManager, existingWorkPolicy)
         }
     }
 
-    fun scheduleFilesBackup() {
-        if (!backendManager.isOnRemovableDrive && settingsManager.isStorageBackupEnabled()) {
-            val requiresNetwork = backendManager.backendProperties?.requiresNetwork == true
-            // FIXME this runs a backup right away (if constraints fulfilled)
-            //  and JobScheduler doesn't offer initial delay
-            BackupJobService.scheduleJob(
-                context = app,
-                jobServiceClass = StorageBackupJobService::class.java,
-                periodMillis = HOURS.toMillis(24),
-                networkType = if (requiresNetwork) NETWORK_TYPE_UNMETERED
-                else NETWORK_TYPE_NONE,
-                deviceIdle = false,
-                charging = true
-            )
+    /**
+     * Call only when app or file backup is actually enabled.
+     */
+    fun scheduleBackups() {
+        if (backendManager.isOnRemovableDrive) {
+            Log.i(TAG, "Not scheduling files backup, because using removable drive")
+            return
+        } else {
+            Log.i(TAG, "Scheduling file backup...")
+        }
+        val workManager = WorkManager.getInstance(app)
+        backupManager.setFrameworkSchedulingEnabledForUser(UserHandle.myUserId(), false)
+        viewModelScope.launch {
+            val workInfos = workManager.getWorkInfosForUniqueWorkFlow(UNIQUE_WORK_NAME).first()
+            val workInfo = workInfos.getOrNull(0)
+            Log.i(TAG, "Existing workInfo: $workInfo")
+            if (workInfo == null) {
+                FileBackupWorker.schedule(app, settingsManager, CANCEL_AND_REENQUEUE)
+            } else {
+                FileBackupWorker.schedule(app, settingsManager, UPDATE)
+            }
         }
     }
 
-    private fun cancelAppBackup() {
-        AppBackupWorker.unschedule(app)
+    private fun unscheduleAppBackup() {
+        if (!backupRequester.isFileBackupEnabled) FileBackupWorker.unschedule(app)
     }
 
-    fun cancelFilesBackup() {
-        BackupJobService.cancelJob(app)
+    fun unscheduleFileBackup() {
+        if (!backupRequester.isAppBackupEnabled) FileBackupWorker.unschedule(app)
     }
 
     fun loadBackupSize() {
