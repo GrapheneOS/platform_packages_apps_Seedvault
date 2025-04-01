@@ -196,6 +196,7 @@
 
     <string name="notification_pruning_channel_title">Removing old backups notification</string>
     <string name="notification_pruning_title">Removing old backups…</string>
+    <string name="notification_pruning_blobs_title">Removing old backup data…</string>
 
     <string name="notification_checking_channel_title">App backup integrity check</string>
     <string name="notification_checking_title">Checking app backups…</string>

@@ -16,6 +16,10 @@ import java.time.LocalDate
 import java.time.temporal.ChronoField
 import java.time.temporal.TemporalAdjuster
 
+fun interface PrunerListener {
+    fun onUnusedBlobPruned(blobsPruned: Int, totalBlobs: Int)
+}
+
 /**
  * Cleans up old backups data that we do not need to retain.
  */
@@ -34,7 +38,7 @@ internal class Pruner(
      * Then removes all blobs from the backend
      * that are not referenced anymore by remaining snapshots.
      */
-    suspend fun removeOldSnapshotsAndPruneUnusedBlobs() {
+    suspend fun removeOldSnapshotsAndPruneUnusedBlobs(listener: PrunerListener?) {
         // get snapshots currently available on backend
         val snapshotHandles = mutableListOf<AppBackupFileType.Snapshot>()
         backendManager.backend.list(folder, AppBackupFileType.Snapshot::class) { fileInfo ->
@@ -65,10 +69,10 @@ internal class Pruner(
         }
         // prune unused blobs
         val keptSnapshots = snapshots.filter { it.token in toKeep }
-        pruneUnusedBlobs(keptSnapshots)
+        pruneUnusedBlobs(keptSnapshots, listener)
     }
 
-    private suspend fun pruneUnusedBlobs(snapshots: List<Snapshot>) {
+    private suspend fun pruneUnusedBlobs(snapshots: List<Snapshot>, listener: PrunerListener?) {
         val blobHandles = mutableListOf<AppBackupFileType.Blob>()
         backendManager.backend.list(folder, AppBackupFileType.Blob::class) { fileInfo ->
             blobHandles.add(fileInfo.fileHandle as AppBackupFileType.Blob)
@@ -79,12 +83,14 @@ internal class Pruner(
             }
         }.toSet()
         val removedBlobs = mutableSetOf<String>()
+        val totalBlobsToRemove = blobHandles.size - usedBlobIds.size
         try {
             blobHandles.forEach { blobHandle ->
                 if (blobHandle.name !in usedBlobIds) {
                     log.info { "Removing blob ${blobHandle.name}" }
                     backendManager.backend.remove(blobHandle)
                     removedBlobs.add(blobHandle.name)
+                    listener?.onUnusedBlobPruned(removedBlobs.size, totalBlobsToRemove)
                 }
             }
         } finally {
