@@ -16,6 +16,7 @@ import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk
+import io.mockk.verify
 import kotlinx.coroutines.runBlocking
 import org.calyxos.seedvault.core.backends.AppBackupFileType
 import org.calyxos.seedvault.core.backends.Backend
@@ -35,6 +36,7 @@ internal class PrunerTest : TransportTest() {
     private val snapshotManager: SnapshotManager = mockk()
     private val blobCache: BlobCache = mockk()
     private val backend: Backend = mockk()
+    private val listener: PrunerListener = mockk()
 
     private val pruner = Pruner(crypto, backendManager, snapshotManager, blobCache)
     private val folder = TopLevelFolder(repoId)
@@ -60,7 +62,7 @@ internal class PrunerTest : TransportTest() {
         // we only find blobs that are in snapshots
         expectLoadingBlobs(snapshot.blobsMap.values.map { it.id.hexFromProto() })
 
-        pruner.removeOldSnapshotsAndPruneUnusedBlobs()
+        pruner.removeOldSnapshotsAndPruneUnusedBlobs(listener)
     }
 
     @Test
@@ -86,8 +88,15 @@ internal class PrunerTest : TransportTest() {
             coEvery { backend.remove(AppBackupFileType.Blob(repoId, it)) } just Runs
         }
         every { blobCache.onBlobsRemoved(blobIds.toSet()) } just Runs
+        every { listener.onUnusedBlobPruned(1, 2) } just Runs
+        every { listener.onUnusedBlobPruned(2, 2) } just Runs
 
-        pruner.removeOldSnapshotsAndPruneUnusedBlobs()
+        pruner.removeOldSnapshotsAndPruneUnusedBlobs(listener)
+
+        verify {
+            listener.onUnusedBlobPruned(1, 2)
+            listener.onUnusedBlobPruned(2, 2)
+        }
     }
 
     @Test
@@ -102,7 +111,7 @@ internal class PrunerTest : TransportTest() {
         // we only find blobs that are in snapshots
         expectLoadingBlobs(snapshot.blobsMap.values.map { it.id.hexFromProto() })
 
-        pruner.removeOldSnapshotsAndPruneUnusedBlobs()
+        pruner.removeOldSnapshotsAndPruneUnusedBlobs(listener)
     }
 
     @Test
@@ -121,7 +130,7 @@ internal class PrunerTest : TransportTest() {
 
         coEvery { snapshotManager.removeSnapshot(snapshotHandle4) } just Runs
 
-        pruner.removeOldSnapshotsAndPruneUnusedBlobs()
+        pruner.removeOldSnapshotsAndPruneUnusedBlobs(listener)
 
         coVerify { snapshotManager.removeSnapshot(snapshotHandle4) }
     }
@@ -146,13 +155,19 @@ internal class PrunerTest : TransportTest() {
         coEvery { backend.remove(AppBackupFileType.Blob(repoId, blob1)) } just Runs
         coEvery { backend.remove(AppBackupFileType.Blob(repoId, blob2)) } just Runs
         every { blobCache.onBlobsRemoved(setOf(blob1, blob2)) } just Runs
+        every { listener.onUnusedBlobPruned(1, 2) } just Runs
+        every { listener.onUnusedBlobPruned(2, 2) } just Runs
 
-        pruner.removeOldSnapshotsAndPruneUnusedBlobs()
+        pruner.removeOldSnapshotsAndPruneUnusedBlobs(listener)
 
         coVerify {
             backend.remove(AppBackupFileType.Blob(repoId, blob1))
             backend.remove(AppBackupFileType.Blob(repoId, blob2))
             blobCache.onBlobsRemoved(setOf(blob1, blob2))
+        }
+        verify {
+            listener.onUnusedBlobPruned(1, 2)
+            listener.onUnusedBlobPruned(2, 2)
         }
     }
 
@@ -167,7 +182,7 @@ internal class PrunerTest : TransportTest() {
         expectLoadingSnapshots(snapshotMap)
         expectLoadingBlobs(emptyList())
 
-        pruner.removeOldSnapshotsAndPruneUnusedBlobs()
+        pruner.removeOldSnapshotsAndPruneUnusedBlobs(listener)
     }
 
     @Test
@@ -194,7 +209,7 @@ internal class PrunerTest : TransportTest() {
 
         coEvery { snapshotManager.removeSnapshot(snapshotHandle5) } just Runs
 
-        pruner.removeOldSnapshotsAndPruneUnusedBlobs()
+        pruner.removeOldSnapshotsAndPruneUnusedBlobs(listener)
 
         coVerify {
             snapshotManager.removeSnapshot(snapshotHandle5)
@@ -225,7 +240,7 @@ internal class PrunerTest : TransportTest() {
 
         coEvery { snapshotManager.removeSnapshot(snapshotHandle4) } just Runs
 
-        pruner.removeOldSnapshotsAndPruneUnusedBlobs()
+        pruner.removeOldSnapshotsAndPruneUnusedBlobs(listener)
 
         coVerify {
             snapshotManager.removeSnapshot(snapshotHandle4)
@@ -257,7 +272,7 @@ internal class PrunerTest : TransportTest() {
         coEvery { snapshotManager.removeSnapshot(snapshotHandle2) } just Runs
         coEvery { snapshotManager.removeSnapshot(snapshotHandle5) } just Runs
 
-        pruner.removeOldSnapshotsAndPruneUnusedBlobs()
+        pruner.removeOldSnapshotsAndPruneUnusedBlobs(listener)
 
         coVerify {
             snapshotManager.removeSnapshot(snapshotHandle2)
@@ -290,7 +305,7 @@ internal class PrunerTest : TransportTest() {
         coEvery { snapshotManager.removeSnapshot(snapshotHandle1) } just Runs
         coEvery { snapshotManager.removeSnapshot(snapshotHandle2) } just Runs
 
-        pruner.removeOldSnapshotsAndPruneUnusedBlobs()
+        pruner.removeOldSnapshotsAndPruneUnusedBlobs(listener)
 
         coVerify {
             snapshotManager.removeSnapshot(snapshotHandle1)
@@ -298,7 +313,7 @@ internal class PrunerTest : TransportTest() {
         }
     }
 
-    private suspend fun expectLoadingSnapshots(
+    private fun expectLoadingSnapshots(
         snapshots: Map<AppBackupFileType.Snapshot, Snapshot>,
     ) {
         every { crypto.repoId } returns repoId
@@ -316,7 +331,7 @@ internal class PrunerTest : TransportTest() {
         }
     }
 
-    private suspend fun expectLoadingBlobs(blobIds: List<String>) {
+    private fun expectLoadingBlobs(blobIds: List<String>) {
         coEvery {
             backend.list(folder, AppBackupFileType.Blob::class, callback = captureLambda())
         } answers {

@@ -56,7 +56,7 @@ class AppBackupPruneWorker(
             log.error(e) { "Error while running setForeground: " }
         }
         return try {
-            pruner.removeOldSnapshotsAndPruneUnusedBlobs()
+            pruner.removeOldSnapshotsAndPruneUnusedBlobs(nm::updatePruningNotification)
             Result.success()
         } catch (e: Exception) {
             log.error(e) { "Error while pruning: " }
