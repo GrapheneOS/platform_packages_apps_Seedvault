@@ -185,7 +185,9 @@ internal class RestoreViewModel(
 
     internal suspend fun restartRestore() = withContext(ioDispatcher) {
         keyManager.removeBackupKey()
+        Log.d(TAG, "Removed backup key.")
         backendManager.removePlugins()
+        Log.d(TAG, "Removed backend.")
     }
 
     @UiThread

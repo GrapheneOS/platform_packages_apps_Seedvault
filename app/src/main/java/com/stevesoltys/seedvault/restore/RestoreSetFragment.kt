@@ -7,6 +7,7 @@ package com.stevesoltys.seedvault.restore
 
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.INVISIBLE
@@ -23,6 +24,9 @@ import com.stevesoltys.seedvault.R
 import com.stevesoltys.seedvault.transport.restore.RestorableBackup
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
+import kotlin.system.exitProcess
+
+private val TAG = RestoreSetFragment::class.simpleName
 
 class RestoreSetFragment : Fragment() {
 
@@ -113,7 +117,10 @@ class RestoreSetFragment : Fragment() {
     private fun restart() {
         lifecycleScope.launch {
             viewModel.restartRestore()
-            requireActivity().recreate()
+            // we'll need to kill our process to not have references to the old key around
+            // trying to re-set all those references is complicated, so exiting the app is easier.
+            Log.w(TAG, "Shutting down app...")
+            exitProcess(0)
         }
     }
 
