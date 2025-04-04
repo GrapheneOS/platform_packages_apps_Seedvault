@@ -21,6 +21,7 @@ import com.stevesoltys.seedvault.header.VERSION
 import com.stevesoltys.seedvault.metadata.BackupType
 import com.stevesoltys.seedvault.metadata.MetadataReader
 import com.stevesoltys.seedvault.metadata.PackageMetadata
+import com.stevesoltys.seedvault.proto.Snapshot
 import com.stevesoltys.seedvault.proto.copy
 import com.stevesoltys.seedvault.repo.SnapshotManager
 import com.stevesoltys.seedvault.transport.TransportTest
@@ -35,6 +36,7 @@ import io.mockk.verify
 import kotlinx.coroutines.runBlocking
 import org.calyxos.seedvault.core.backends.AppBackupFileType
 import org.calyxos.seedvault.core.backends.Backend
+import org.calyxos.seedvault.core.backends.FileBackupFileType
 import org.calyxos.seedvault.core.backends.FileInfo
 import org.calyxos.seedvault.core.backends.LegacyAppBackupFile
 import org.calyxos.seedvault.core.backends.saf.SafProperties
@@ -96,16 +98,22 @@ internal class RestoreCoordinatorTest : TransportTest() {
     fun `getAvailableRestoreSets() builds set from plugin response`() = runBlocking {
         val handle1 = LegacyAppBackupFile.Metadata(token)
         val handle2 = LegacyAppBackupFile.Metadata(token + 1)
+        val handle3 = AppBackupFileType.Snapshot("foo", "bar")
+        // last handle should get ignored
+        val handle4 = FileBackupFileType.Snapshot("foodi", token + 2)
 
-        coEvery { backend.getAvailableBackupFileHandles() } returns listOf(handle1, handle2)
+        coEvery {
+            backend.getAvailableBackupFileHandles()
+        } returns listOf(handle1, handle2, handle3, handle4)
         coEvery { backend.load(handle1) } returns inputStream
         coEvery { backend.load(handle2) } returns inputStream
+        coEvery { snapshotManager.loadSnapshot(handle3) } returns mockk<Snapshot>(relaxed = true)
         every { metadataReader.readMetadata(inputStream, token) } returns metadata
         every { metadataReader.readMetadata(inputStream, token + 1) } returns metadata
         every { inputStream.close() } just Runs
 
         val sets = restore.getAvailableRestoreSets() ?: fail()
-        assertEquals(2, sets.size)
+        assertEquals(3, sets.size) // file backup snapshot handle4 is ignored
         assertEquals(metadata.deviceName, sets[0].device)
         assertEquals(metadata.deviceName, sets[0].name)
         assertEquals(metadata.token, sets[0].token)
@@ -114,7 +122,7 @@ internal class RestoreCoordinatorTest : TransportTest() {
         every { metadataReader.readMetadata(inputStream, token + 1) } returns d2dMetadata
 
         val d2dSets = restore.getAvailableRestoreSets() ?: fail()
-        assertEquals(2, d2dSets.size)
+        assertEquals(3, d2dSets.size)
         assertEquals(D2D_DEVICE_NAME, d2dSets[0].device)
         assertEquals(metadata.deviceName, d2dSets[0].name)
         assertEquals(metadata.token, d2dSets[0].token)

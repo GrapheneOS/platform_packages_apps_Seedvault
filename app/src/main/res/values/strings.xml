@@ -254,8 +254,11 @@
     <string name="restore_skip_apps">Skip restoring apps</string>
     <string name="restore_invalid_location_title">No backups found</string>
     <string name="restore_invalid_location_message">We could not find any backups at this location.\n\nPlease choose another location that contains a %s folder.</string>
-    <string name="restore_set_error">An error occurred while loading the backups.</string>
+    <string name="restore_set_error">An error occurred while loading the backups:</string>
     <string name="restore_set_empty_result">No suitable backups found at given location.\n\nThis is most likely due to a wrong recovery code or a storage error.</string>
+    <string name="restore_set_bad_decrypt">Could not decrypt backups.\n\nThe current recovery code is most likely not the one that was used to make the backup.</string>
+    <string name="restore_set_button_try_again">Try again</string>
+    <string name="restore_set_button_restart">Start from beginning</string>
     <string name="restore_select_packages">Select apps to restore</string>
     <string name="restore_select_packages_all">All of the following apps</string>
     <string name="restore_recycle_backup_title">Reuse this backup?</string>

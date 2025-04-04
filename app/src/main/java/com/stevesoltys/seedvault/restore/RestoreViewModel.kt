@@ -48,6 +48,7 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.calyxos.backup.storage.api.SnapshotItem
 import org.calyxos.backup.storage.api.StorageBackup
 import org.calyxos.backup.storage.api.StoredSnapshot
@@ -116,6 +117,8 @@ internal class RestoreViewModel(
             is ErrorResult -> {
                 val msg = if (backups.e == null) {
                     app.getString(R.string.restore_set_empty_result)
+                } else if (backups.e.message?.contains("BAD_DECRYPT") == true) {
+                    app.getString(R.string.restore_set_bad_decrypt)
                 } else {
                     app.getString(R.string.restore_set_error) + "\n\n${backups.e}"
                 }
@@ -178,6 +181,13 @@ internal class RestoreViewModel(
         super.onCleared()
         @OptIn(DelicateCoroutinesApi::class)
         GlobalScope.launch(ioDispatcher) { iconManager.removeIcons() }
+    }
+
+    internal suspend fun restartRestore() = withContext(ioDispatcher) {
+        keyManager.removeBackupKey()
+        Log.d(TAG, "Removed backup key.")
+        backendManager.removePlugins()
+        Log.d(TAG, "Removed backend.")
     }
 
     @UiThread

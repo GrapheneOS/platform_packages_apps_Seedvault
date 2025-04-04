@@ -57,6 +57,11 @@ interface KeyManager : org.calyxos.seedvault.core.crypto.KeyManager {
      * because the key can not leave the [KeyStore]'s hardware security module.
      */
     fun getBackupKey(): SecretKey
+
+    /**
+     * Removes the backup key from the [KeyStore]. Use with care!
+     */
+    fun removeBackupKey()
 }
 
 internal class KeyManagerImpl(
@@ -84,6 +89,10 @@ internal class KeyManagerImpl(
     override fun getBackupKey(): SecretKey {
         val ksEntry = keyStore.getEntry(KEY_ALIAS_BACKUP, null) as SecretKeyEntry
         return ksEntry.secretKey
+    }
+
+    override fun removeBackupKey() {
+        keyStore.deleteEntry(KEY_ALIAS_BACKUP)
     }
 
     override fun getMainKey(): SecretKey {

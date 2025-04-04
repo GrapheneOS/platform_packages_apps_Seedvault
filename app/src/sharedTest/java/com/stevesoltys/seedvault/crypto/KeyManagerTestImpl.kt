@@ -36,6 +36,10 @@ class KeyManagerTestImpl(private val customKey: SecretKey? = null) : KeyManager 
 
     override fun getBackupKey(): SecretKey = key
 
+    override fun removeBackupKey() {
+        throw NotImplementedError("not implemented")
+    }
+
     override fun getMainKey(): SecretKey = key
 
 }

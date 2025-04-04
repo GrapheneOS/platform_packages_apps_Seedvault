@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -66,9 +65,6 @@ class RestoreProgressFragment : Fragment() {
             viewModel.onFinishClickedAfterRestoringAppData()
         }
 
-        // decryption will fail when the device is locked, so keep the screen on to prevent locking
-        requireActivity().window.addFlags(FLAG_KEEP_SCREEN_ON)
-
         viewModel.chosenRestorableBackup.observe(viewLifecycleOwner) { restorableBackup ->
             backupNameView.text = restorableBackup.name
             progressBar.max = restorableBackup.packageMetadataMap.size
@@ -91,7 +87,6 @@ class RestoreProgressFragment : Fragment() {
                 backupNameView.text = getString(R.string.restore_finished_success)
                 onRestoreFinished()
             }
-            activity?.window?.clearFlags(FLAG_KEEP_SCREEN_ON)
         }
     }
 

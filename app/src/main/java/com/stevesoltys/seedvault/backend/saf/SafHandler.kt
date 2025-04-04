@@ -53,12 +53,12 @@ internal class SafHandler(
     }
 
     /**
-     * Searches if there's really an app backup available in the given storage location.
+     * Searches if there's really an backup available in the given storage location.
      * Returns true if at least one was found and false otherwise.
      */
     @WorkerThread
     @Throws(IOException::class)
-    suspend fun hasAppBackup(safProperties: SafProperties): Boolean {
+    suspend fun hasBackup(safProperties: SafProperties): Boolean {
         val context = context.getStorageContext { safProperties.isUsb }
         val backend = backendFactory.createSafBackend(context, safProperties)
         return backend.getAvailableBackupFileHandles().isNotEmpty()
