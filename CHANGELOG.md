@@ -1,3 +1,11 @@
+## 15-5.5 - 2025-04-04
+* Unify scheduling of app and file backup, now they always run one after the other
+* Add progress bar to app backup pruning notification
+* Fix bug where we didn't find any backups, if user had only file backups
+* Allow user to restart restore process during setup wizard (e.g. when wrong code was entered)
+* Launch foreground service when finalizing backup to prevent system from freezing us
+* Auto-retry more WebDAV connection errors
+ 
 ## 15-5.4 - 2025-03-13
 * Added support and updated dependencies for 15 QPR2
 
