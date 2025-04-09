@@ -38,10 +38,10 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkStatic
 import io.mockk.slot
-import org.calyxos.seedvault.core.backends.AppBackupFileType
-import org.calyxos.seedvault.core.backends.FileInfo
-import org.calyxos.seedvault.core.backends.LegacyAppBackupFile
-import org.calyxos.seedvault.core.toHexString
+import app.grapheneos.seedvault.core.backends.AppBackupFileType
+import app.grapheneos.seedvault.core.backends.FileInfo
+import app.grapheneos.seedvault.core.backends.LegacyAppBackupFile
+import app.grapheneos.seedvault.core.toHexString
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_METHOD
 import kotlin.random.Random

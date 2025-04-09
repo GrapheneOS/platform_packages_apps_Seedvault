@@ -16,16 +16,16 @@ android_app {
         "com.android.vcard",
     ],
     required: [
-        "default-permissions_org.calyxos.backup.contacts",
+        "default-permissions_app.grapheneos.backup.contacts",
     ],
     product_specific: true,
     sdk_version: "current",
 }
 
 prebuilt_etc {
-    name: "default-permissions_org.calyxos.backup.contacts",
+    name: "default-permissions_app.grapheneos.backup.contacts",
     product_specific: true,
     sub_dir: "default-permissions",
-    src: "default-permissions_org.calyxos.backup.contacts.xml",
+    src: "default-permissions_app.grapheneos.backup.contacts.xml",
     filename_from_src: true,
 }
