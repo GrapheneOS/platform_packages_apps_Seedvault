@@ -44,6 +44,7 @@ internal class Pruner(
         val duration = measure {
             val storedSnapshots = backend.getCurrentBackupSnapshots(androidId)
             val toDelete = retentionManager.getSnapshotsToDelete(storedSnapshots)
+            Log.i(TAG, "Found ${storedSnapshots.size} snapshots. Deleting ${toDelete.size}...")
             backupObserver?.onPruneStart(toDelete.map { it.timestamp })
             for (snapshot in toDelete) {
                 try {
@@ -80,7 +81,9 @@ internal class Pruner(
             size += it.size
             it.id
         }
-        backupObserver?.onPruneSnapshot(storedSnapshot.timestamp, chunkIdsToDelete.size, size)
+        val timestamp = storedSnapshot.timestamp
+        backupObserver?.onPruneSnapshot(timestamp, chunkIdsToDelete.size, size)
+        Log.d(TAG, "Removed $timestamp, now deleting ${chunkIdsToDelete.size} chunks...")
         chunkIdsToDelete.forEach { chunkId ->
             backend.remove(FileBackupFileType.Blob(androidId, chunkId))
         }
