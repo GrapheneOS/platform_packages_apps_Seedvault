@@ -16,7 +16,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.calyxos.backup.storage.api.BackupContentType
 import org.calyxos.backup.storage.api.EXTERNAL_STORAGE_PROVIDER_AUTHORITY
-import org.calyxos.backup.storage.api.SnapshotRetention
 import org.calyxos.backup.storage.api.StorageBackup
 import org.calyxos.backup.storage.api.mediaItems
 
@@ -59,7 +58,6 @@ public abstract class BackupContentViewModel(app: Application) : AndroidViewMode
             }
         }
         _content.postValue(items)
-        storageBackup.setSnapshotRetention(SnapshotRetention(15, 10, 5, 2))
     }
 
 }

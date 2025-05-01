@@ -6,6 +6,9 @@
 package org.calyxos.backup.storage.prune
 
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.util.Log
+import androidx.core.content.edit
 import org.calyxos.backup.storage.api.SnapshotRetention
 import org.calyxos.backup.storage.api.StoredSnapshot
 import java.io.IOException
@@ -34,22 +37,21 @@ internal class RetentionManager(private val context: Context) {
             retention.monthly == 0 &&
             retention.yearly == 0
         ) throw IllegalArgumentException("Not all values can be 0")
-        context.getSharedPreferences(PREFS, 0)
-            .edit()
-            .putInt(PREF_DAILY, retention.daily)
-            .putInt(PREF_WEEKLY, retention.weekly)
-            .putInt(PREF_MONTHLY, retention.monthly)
-            .putInt(PREF_YEARLY, retention.yearly)
-            .apply()
+        context.getSharedPreferences(PREFS, MODE_PRIVATE).edit {
+            putInt(PREF_DAILY, retention.daily)
+            putInt(PREF_WEEKLY, retention.weekly)
+            putInt(PREF_MONTHLY, retention.monthly)
+            putInt(PREF_YEARLY, retention.yearly)
+        }
     }
 
     fun getSnapshotRetention(): SnapshotRetention {
-        val prefs = context.getSharedPreferences(PREFS, 0)
+        val prefs = context.getSharedPreferences(PREFS, MODE_PRIVATE)
         return SnapshotRetention(
-            daily = prefs.getInt(PREF_DAILY, 3),
-            weekly = prefs.getInt(PREF_WEEKLY, 1),
-            monthly = prefs.getInt(PREF_MONTHLY, 1),
-            yearly = prefs.getInt(PREF_YEARLY, 1),
+            daily = prefs.getInt(PREF_DAILY, PREF_DEFAULT_DAILY),
+            weekly = prefs.getInt(PREF_WEEKLY, PREF_DEFAULT_WEEKLY),
+            monthly = prefs.getInt(PREF_MONTHLY, PREF_DEFAULT_MONTHLY),
+            yearly = prefs.getInt(PREF_YEARLY, PREF_DEFAULT_YEARLY),
         )
     }
 
@@ -60,6 +62,7 @@ internal class RetentionManager(private val context: Context) {
     @Throws(IOException::class)
     fun getSnapshotsToDelete(storedSnapshots: List<StoredSnapshot>): List<StoredSnapshot> {
         val retention = getSnapshotRetention()
+        Log.i("RetentionManager", "Using $retention")
         val datePairs = storedSnapshots.sortedByDescending { it.timestamp }.map { s ->
             Pair(s, LocalDate.ofEpochDay(s.timestamp / 1000 / 60 / 60 / 24))
         }

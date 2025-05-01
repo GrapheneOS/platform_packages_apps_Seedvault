@@ -12,6 +12,7 @@ import io.mockk.mockk
 import org.calyxos.backup.storage.api.SnapshotRetention
 import org.calyxos.backup.storage.api.StoredSnapshot
 import org.calyxos.backup.storage.getRandomString
+import org.calyxos.backup.storage.mockLog
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.time.LocalDateTime
@@ -25,6 +26,10 @@ internal class RetentionManagerTest {
     private val retention = RetentionManager(context)
 
     private val userId = getRandomString()
+
+    init {
+        mockLog()
+    }
 
     @Test
     fun testDailyRetention() {
