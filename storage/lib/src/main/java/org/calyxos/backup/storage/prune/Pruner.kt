@@ -52,6 +52,12 @@ internal class Pruner(
                 } catch (e: Exception) {
                     Log.e(TAG, "Error pruning $snapshot", e)
                     backupObserver?.onPruneError(snapshot.timestamp, e)
+                    if (e.message?.contains("BAD_DECRYPT") == true) try {
+                        Log.i(TAG, "Removing $snapshot because can't decrypt it")
+                        backend.remove(snapshot.snapshotHandle)
+                    } catch (ex: Exception) {
+                        Log.e(TAG, "Error deleting $snapshot", ex)
+                    }
                 }
             }
         }
