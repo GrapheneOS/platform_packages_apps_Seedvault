@@ -270,10 +270,10 @@ internal class SettingsViewModel(
         }
         // set our own retention here to fix a historic bug with huge retention:
         val retention = SnapshotRetention(
-            daily = 3,
-            weekly = 2,
-            monthly = 2,
-            yearly = 1,
+            daily = 7,
+            weekly = 4,
+            monthly = 3,
+            yearly = 2,
         )
         storageBackup.setSnapshotRetention(retention)
     }
