@@ -56,6 +56,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.calyxos.backup.storage.api.SnapshotRetention
 import org.calyxos.backup.storage.api.StorageBackup
 import org.calyxos.seedvault.core.backends.saf.SafProperties
 import java.io.IOException
@@ -267,6 +268,14 @@ internal class SettingsViewModel(
         mFilesSummary.value = uriSummary.ifEmpty {
             app.getString(R.string.settings_backup_files_summary)
         }
+        // set our own retention here to fix a historic bug with huge retention:
+        val retention = SnapshotRetention(
+            daily = 7,
+            weekly = 4,
+            monthly = 3,
+            yearly = 2,
+        )
+        storageBackup.setSnapshotRetention(retention)
     }
 
     fun onBackupEnabled(enabled: Boolean) {
