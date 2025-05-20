@@ -1,3 +1,10 @@
+## 15-5.6 - 2025-05-20
+* Change storage backup retention policy
+* 7 daily backups, 4 weekly, 3 monthly, 2 yearly
+* Remove file backup snapshots we can't decrypt
+* Reduce huge file backup retention
+* Catch more exceptions to handle errors better
+
 ## 15-5.5 - 2025-04-04
 * Unify scheduling of app and file backup, now they always run one after the other
 * Add progress bar to app backup pruning notification
