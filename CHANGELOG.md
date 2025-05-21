@@ -1,8 +1,7 @@
 ## 15-5.6 - 2025-05-20
-* Change storage backup retention policy
-* 7 daily backups, 4 weekly, 3 monthly, 2 yearly
+* Reduce storage backup retention policy
+* 7 daily, 4 weekly, 3 monthly, and 2 yearly storage backups are retained now
 * Remove file backup snapshots we can't decrypt
-* Reduce huge file backup retention
 * Catch more exceptions to handle errors better
 
 ## 15-5.5 - 2025-04-04
