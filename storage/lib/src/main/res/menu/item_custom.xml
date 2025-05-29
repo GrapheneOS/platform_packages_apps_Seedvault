@@ -7,6 +7,6 @@
 
     <item
         android:id="@+id/delete"
-        android:title="Remove" />
+        android:title="@string/content_remove" />
 
 </menu>
