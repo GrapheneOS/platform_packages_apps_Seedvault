@@ -9,6 +9,7 @@
     <string name="content_downloads">Downloads</string>
     <string name="content_options">Options</string>
     <string name="content_add">Add</string>
+    <string name="content_remove">Remove</string>
 
     <string name="notification_backup_title">File backup</string>
     <string name="notification_backup_scanning">Scanning files…</string>
