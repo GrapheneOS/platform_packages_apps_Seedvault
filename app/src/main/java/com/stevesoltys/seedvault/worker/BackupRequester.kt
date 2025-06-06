@@ -12,7 +12,10 @@ import android.os.RemoteException
 import android.util.Log
 import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
+import androidx.work.WorkInfo.State.RUNNING
+import androidx.work.WorkManager
 import com.stevesoltys.seedvault.settings.SettingsManager
+import com.stevesoltys.seedvault.transport.ConfigurableBackupTransportService
 import com.stevesoltys.seedvault.transport.backup.BackupTransportMonitor
 import com.stevesoltys.seedvault.transport.backup.PackageService
 import com.stevesoltys.seedvault.ui.notification.BackupNotificationManager
@@ -47,6 +50,12 @@ internal class BackupRequester(
             backupManager: IBackupManager,
             reschedule: Boolean = false,
         ) {
+            // Extra protection against running more than one backup at a time.
+            // This may happen for example when entering a flash drive multiple times.
+            if (isBackupRunning(context)) {
+                Log.e(TAG, "Backup already running, not requesting again.")
+                return
+            }
             if (settingsManager.isFileBackupEnabled()) {
                 // This launches file backup first,
                 // because the app backup worker only kicks off the backup and finishes early.
@@ -57,6 +66,29 @@ internal class BackupRequester(
                 AppBackupWorker.scheduleNow(context)
             } else {
                 Log.d(TAG, "Neither files nor app backup enabled, do nothing.")
+            }
+        }
+
+        fun isBackupRunning(context: Context): Boolean {
+            val workManager = WorkManager.getInstance(context)
+            val appBackupRunning = ConfigurableBackupTransportService.isRunning.value
+            return try {
+                val appBackupState = workManager
+                    .getWorkInfosForUniqueWork(AppBackupWorker.UNIQUE_WORK_NAME).get()
+                    .getOrNull(0)?.state
+                val fileBackupState = workManager
+                    .getWorkInfosForUniqueWork(AppBackupWorker.UNIQUE_WORK_NAME).get()
+                    .getOrNull(0)?.state
+                Log.i(
+                    TAG, "appBackupRunning: $appBackupRunning, " +
+                        "filesBackupRunning: ${fileBackupState?.name}, " +
+                        "appBackupWorker: ${appBackupState?.name}"
+                )
+                appBackupRunning || fileBackupState == RUNNING || appBackupState == RUNNING
+            } catch (e: Exception) {
+                Log.e(TAG, "Error determining current backup state: ", e)
+                // not much we can do here, let's just assume no backup is running
+                false
             }
         }
     }
