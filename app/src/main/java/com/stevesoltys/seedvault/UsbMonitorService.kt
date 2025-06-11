@@ -20,6 +20,7 @@ import com.stevesoltys.seedvault.ui.notification.BackupNotificationManager
 import com.stevesoltys.seedvault.ui.notification.NOTIFICATION_ID_USB_MONITOR
 import com.stevesoltys.seedvault.worker.BackupRequester.Companion.requestFilesAndAppBackup
 import org.koin.android.ext.android.inject
+import java.util.concurrent.atomic.AtomicBoolean
 
 private const val TAG = "UsbMonitorService"
 
@@ -39,12 +40,18 @@ class UsbMonitorService : Service() {
         val rootsUri = intent.data ?: error("No URI in start intent.")
         val contentResolver = contentResolver
         val handler = Handler(Looper.myLooper() ?: error("no looper"))
+        val hasRequestedBackup = AtomicBoolean(false)
         val observer = object : ContentObserver(handler) {
             override fun onChange(selfChange: Boolean, uri: Uri?) {
                 super.onChange(selfChange, uri)
                 Log.i(TAG, "onChange() requesting backup now!")
                 contentResolver.unregisterContentObserver(this)
-                requestFilesAndAppBackup(applicationContext, settingsManager, backupManager)
+                // The [ContentObserver] may notify us here more than once,
+                // so we check if we have already requested the backup.
+                // [getAndSet] returns the old value, so we check if that is still false
+                if (!hasRequestedBackup.getAndSet(true)) {
+                    requestFilesAndAppBackup(applicationContext, settingsManager, backupManager)
+                }
                 Log.i(TAG, "stopSelf($startId)")
                 stopSelf(startId)
             }
