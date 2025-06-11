@@ -55,6 +55,7 @@ android {
     }
 }
 
+// out/soong/.intermediates/frameworks/opt/vcard/com.android.vcard/android_common/javac/com.android.vcard.jar
 val aospDeps = fileTree(mapOf("include" to listOf("com.android.vcard.jar"), "dir" to "libs"))
 
 dependencies {
