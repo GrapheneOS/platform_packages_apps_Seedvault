@@ -41,7 +41,7 @@ import kotlin.random.Random
 
 @RunWith(AndroidJUnit4::class)
 @Config(
-    sdk = [34], // TODO: Drop once robolectric supports 35
+    sdk = [35], // TODO: Drop once robolectric supports 36
     application = TestApp::class
 )
 internal class SnapshotCreatorTest : TransportTest() {
@@ -249,7 +249,7 @@ internal class SnapshotCreatorTest : TransportTest() {
         assertEquals("robolectric robolectric", s.name)
         assertEquals("", s.user) // no perm
         assertEquals("", s.androidId) // not mocked
-        assertEquals(34, s.sdkInt) // as per config above, needs bump once possible
+        assertEquals(35, s.sdkInt) // as per config above, needs bump once possible
         assertEquals("unknown", s.androidIncremental)
         assertTrue(s.d2D)
         assertEquals(1, s.appsCount)

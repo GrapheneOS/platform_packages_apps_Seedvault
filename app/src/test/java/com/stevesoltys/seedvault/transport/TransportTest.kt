@@ -11,6 +11,8 @@ import android.content.pm.ApplicationInfo.FLAG_ALLOW_BACKUP
 import android.content.pm.ApplicationInfo.FLAG_INSTALLED
 import android.content.pm.PackageInfo
 import android.content.pm.SigningInfo
+import android.internal.modules.utils.build.SdkLevel
+import android.system.Os
 import android.util.Log
 import com.google.protobuf.ByteString
 import com.google.protobuf.ByteString.copyFromUtf8
@@ -168,6 +170,12 @@ internal abstract class TransportTest {
             logExSlot.captured.printStackTrace()
             0
         }
+
+        // needed to mock Android internals (for mocking PackageManager)
+        mockkStatic(Os::class)
+        every { Os.getuid() } returns 1337
+        mockkStatic(SdkLevel::class)
+        every { SdkLevel.isAtLeastV() } returns true
     }
 
 }

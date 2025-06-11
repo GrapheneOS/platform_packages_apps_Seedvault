@@ -5,6 +5,7 @@
 
 import com.google.protobuf.gradle.id
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.kotlin.dsl.implementation
 import java.io.ByteArrayOutputStream
 
 plugins {
@@ -171,12 +172,12 @@ dependencies {
     implementation(fileTree("${rootProject.rootDir}/libs/koin-android").include("*.aar"))
 
     implementation(
-        fileTree("${rootProject.rootDir}/libs").include("protobuf-kotlin-lite-3.21.12.jar")
+        fileTree("${rootProject.rootDir}/libs").include("protobuf-kotlin-lite-*.jar")
     )
-    implementation(fileTree("${rootProject.rootDir}/libs").include("seedvault-chunker-0.1.jar"))
-    implementation(fileTree("${rootProject.rootDir}/libs").include("zstd-jni-1.5.6-5.aar"))
-    implementation(fileTree("${rootProject.rootDir}/libs").include("kotlin-bip39-jvm-1.0.8.jar"))
-    implementation(fileTree("${rootProject.rootDir}/libs").include("logback-android-3.0.0.aar"))
+    implementation(fileTree("${rootProject.rootDir}/libs").include("seedvault-chunker-*.jar"))
+    implementation(fileTree("${rootProject.rootDir}/libs").include("zstd-jni-*.aar"))
+    implementation(fileTree("${rootProject.rootDir}/libs").include("kotlin-bip39-jvm-*.jar"))
+    implementation(fileTree("${rootProject.rootDir}/libs").include("logback-android-*.aar"))
 
     /**
      * Test Dependencies (do not concern the AOSP build)

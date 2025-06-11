@@ -42,7 +42,7 @@ import kotlin.random.Random
 @RunWith(AndroidJUnit4::class)
 @OptIn(ExperimentalCoroutinesApi::class)
 @Config(
-    sdk = [34] // TODO: Drop once robolectric supports 35
+    sdk = [35] // TODO: Drop once robolectric supports 36
 )
 internal class AppSelectionManagerTest : TransportTest() {
 

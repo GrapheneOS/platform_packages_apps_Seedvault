@@ -25,7 +25,7 @@ import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
 @Config(
-    sdk = [34], // TODO: Drop once robolectric supports 35
+    sdk = [35], // TODO: Drop once robolectric supports 36
     application = TestApp::class
 )
 internal class DocumentFileTest {

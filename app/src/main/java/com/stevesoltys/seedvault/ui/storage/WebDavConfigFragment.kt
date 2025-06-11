@@ -25,7 +25,7 @@ import com.stevesoltys.seedvault.R
 import com.stevesoltys.seedvault.backend.webdav.WebDavConfigState
 import com.stevesoltys.seedvault.ui.INTENT_EXTRA_IS_RESTORE
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
+import org.koin.androidx.viewmodel.ext.android.getActivityViewModel
 
 class WebDavConfigFragment : Fragment(), View.OnClickListener {
 
@@ -66,9 +66,9 @@ class WebDavConfigFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = if (requireArguments().getBoolean(INTENT_EXTRA_IS_RESTORE)) {
-            getSharedViewModel<RestoreStorageViewModel>()
+            getActivityViewModel<RestoreStorageViewModel>()
         } else {
-            getSharedViewModel<BackupStorageViewModel>()
+            getActivityViewModel<BackupStorageViewModel>()
         }
         lifecycleScope.launch {
             viewModel.webdavConfigState.flowWithLifecycle(lifecycle, STARTED).collect {

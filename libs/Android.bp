@@ -5,7 +5,7 @@
 
 android_library_import {
     name: "seedvault-lib-zstd-jni",
-    aars: ["zstd-jni-1.5.6-5.aar"],
+    aars: ["zstd-jni-1.5.7-3.aar"],
     sdk_version: "current",
     extract_jni: true,
 }
@@ -24,7 +24,7 @@ java_import {
 
 java_import {
     name: "seedvault-lib-kotlin-bip39",
-    jars: ["kotlin-bip39-jvm-1.0.8.jar"],
+    jars: ["kotlin-bip39-jvm-1.0.9.jar"],
     sdk_version: "current",
 }
 

@@ -65,7 +65,7 @@ public class WebDavBackend(
     private val authHandler = BasicDigestAuthHandler(
         domain = null, // Optional, to only authenticate against hosts with this domain.
         username = webDavConfig.username,
-        password = webDavConfig.password,
+        password = webDavConfig.password.toCharArray(),
     )
     private val okHttpClient = OkHttpClient.Builder()
         .followRedirects(false)
