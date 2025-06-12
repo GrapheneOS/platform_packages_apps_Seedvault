@@ -177,5 +177,4 @@ internal abstract class TransportTest {
         mockkStatic(SdkLevel::class)
         every { SdkLevel.isAtLeastV() } returns true
     }
-
 }

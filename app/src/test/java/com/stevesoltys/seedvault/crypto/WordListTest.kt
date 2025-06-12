@@ -2166,8 +2166,9 @@ class WordListTest {
         assertEquals(
             "65986351CD054822B40E417855AC2B5651C5F87892F17ED2A984F6B59DD5FB4E" +
                 "6A4568ABF7E06D93CBCC69BB68F2625E3E8AF2751106380922D49C0D0D0B456B",
+            @Suppress("ktlint:standard:max-line-length")
             Mnemonics.MnemonicCode(
-                "unhappy welcome pizza inflict inherit village minimum orient cheap swear grunt giraffe" // ktlint-disable max-line-length
+                "unhappy welcome pizza inflict inherit village minimum orient cheap swear grunt giraffe"
             ).toSeed().toHexString("")
         )
         assertEquals(
@@ -2187,8 +2188,9 @@ class WordListTest {
         assertEquals(
             "14084AAF9CFCAC386D4CE5B9140BEADBF727B1B09786A67A574B668A1A4AE0A3" +
                 "21B8D4E7BC005980B088A160B6EC08A1CB892C2090C58D95A7C6AAD16C14EE1E",
+            @Suppress("ktlint:standard:max-line-length")
             Mnemonics.MnemonicCode(
-                "parrot burden release bronze section fantasy ridge blood direct physical spoil asthma" // ktlint-disable max-line-length
+                "parrot burden release bronze section fantasy ridge blood direct physical spoil asthma"
             ).toSeed().toHexString("")
         )
         assertEquals(
@@ -2201,8 +2203,9 @@ class WordListTest {
         assertEquals(
             "02652896F67695C03F379A354685A8A0B92D0F303F77461476E80BB594EAD84B" +
                 "D00B2943C2229ED843C65F6C53A376005871FF74F834E6B6E3B57FFD83D3FB12",
+            @Suppress("ktlint:standard:max-line-length")
             Mnemonics.MnemonicCode(
-                "exercise curtain initial model travel client twist neutral peace unfold start shell" // ktlint-disable max-line-length
+                "exercise curtain initial model travel client twist neutral peace unfold start shell"
             ).toSeed().toHexString("")
         )
     }
@@ -2229,8 +2232,9 @@ class WordListTest {
         )
         assertEquals(
             "AA 27 4B D8 7B 0D 18 EB 5D 08 BD 11 73 36 C1 06",
+            @Suppress("ktlint:standard:max-line-length")
             Mnemonics.MnemonicCode(
-                "pretty demise voyage voyage spice interest injury bless badge often raccoon artefact" // ktlint-disable max-line-length
+                "pretty demise voyage voyage spice interest injury bless badge often raccoon artefact"
             ).toEntropy().toHexString()
         )
         assertEquals(
@@ -2263,5 +2267,4 @@ class WordListTest {
             ).toEntropy().toHexString()
         )
     }
-
 }
