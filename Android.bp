@@ -49,6 +49,7 @@ android_app {
         "seedvault-lib-storage",
         // koin
         "seedvault-lib-koin-core-jvm", // did not manage to add this as transitive dependency
+        "seedvault-lib-koin-core-viewmodel-jvm",
         "seedvault-lib-koin-android",
         // bip39
         "seedvault-lib-kotlin-bip39",

@@ -14,3 +14,9 @@ java_import {
     jars: ["koin-core-jvm-4.0.4.jar"],
     sdk_version: "current",
 }
+
+java_import {
+    name: "seedvault-lib-koin-core-viewmodel-jvm",
+    jars: ["koin-core-viewmodel-jvm-4.0.4.jar"],
+    sdk_version: "current",
+}
