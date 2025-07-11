@@ -72,6 +72,8 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":storage:lib"))
 
+    implementation(fileTree("${rootProject.rootDir}/libs").include("logback-android-*.aar"))
+
     implementation(libs.bundles.kotlin)
 
     implementation(libs.androidx.core)

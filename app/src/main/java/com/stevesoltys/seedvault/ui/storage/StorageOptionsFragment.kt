@@ -29,7 +29,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.stevesoltys.seedvault.R
 import com.stevesoltys.seedvault.ui.INTENT_EXTRA_IS_RESTORE
 import com.stevesoltys.seedvault.ui.storage.StorageOption.SafOption
-import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
+import org.koin.androidx.viewmodel.ext.android.getActivityViewModel
 
 internal class StorageOptionsFragment : Fragment(), StorageOptionClickedListener {
 
@@ -71,9 +71,9 @@ internal class StorageOptionsFragment : Fragment(), StorageOptionClickedListener
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = if (requireArguments().getBoolean(INTENT_EXTRA_IS_RESTORE)) {
-            getSharedViewModel<RestoreStorageViewModel>()
+            getActivityViewModel<RestoreStorageViewModel>()
         } else {
-            getSharedViewModel<BackupStorageViewModel>()
+            getActivityViewModel<BackupStorageViewModel>()
         }
 
         if (viewModel.isRestoreOperation) {
@@ -126,7 +126,6 @@ internal class StorageOptionsFragment : Fragment(), StorageOptionClickedListener
             }
         }
     }
-
 }
 
 internal interface StorageOptionClickedListener {

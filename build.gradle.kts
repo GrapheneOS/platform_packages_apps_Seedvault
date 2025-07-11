@@ -35,11 +35,10 @@ subprojects {
         apply(plugin = "org.jlleitschuh.gradle.ktlint")
 
         configure<KtlintExtension> {
-            version.set("0.42.1")
+            version.set("1.6.0")
             android.set(true)
             enableExperimentalRules.set(false)
             verbose.set(true)
-            disabledRules.set(listOf("import-ordering", "no-blank-line-before-rbrace", "indent"))
         }
     }
 }

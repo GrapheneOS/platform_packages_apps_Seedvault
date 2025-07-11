@@ -10,7 +10,7 @@ android_app {
         "app/src/main/java/**/*.java",
         "app/src/main/proto/*.proto",
         // as of Android 15, there is no way to pass --kotlin_out to aprotoc compiler
-        "app/build/generated/source/proto/debug/kotlin/com/stevesoltys/seedvault/proto/*.kt",
+        "app/build/generated/sources/proto/debug/kotlin/com/stevesoltys/seedvault/proto/*.kt",
     ],
     resource_dirs: [
         "app/src/main/res",
@@ -49,6 +49,7 @@ android_app {
         "seedvault-lib-storage",
         // koin
         "seedvault-lib-koin-core-jvm", // did not manage to add this as transitive dependency
+        "seedvault-lib-koin-core-viewmodel-jvm",
         "seedvault-lib-koin-android",
         // bip39
         "seedvault-lib-kotlin-bip39",
