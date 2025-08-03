@@ -40,7 +40,7 @@
     <string name="restore_set_empty_result">Na danom mieste neboli nájdené žiadne vhodné zálohy.
 \n
 \nPríčinou je pravdepodobne nesprávny kód obnovy alebo chyba úložiska.</string>
-    <string name="restore_set_error">Pri načítavaní záloh sa vyskytla chyba.</string>
+    <string name="restore_set_error">Pri načítavaní záloh sa vyskytla chyba:</string>
     <string name="restore_invalid_location_message">Na tomto mieste sme nenašli žiadne zálohy.
 \n
 \nVyberte iné umiestnenie, ktoré obsahuje priečinok %s.</string>

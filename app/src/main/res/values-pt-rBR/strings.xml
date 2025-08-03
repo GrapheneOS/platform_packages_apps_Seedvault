@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="notification_restore_error_text">Conecte seu %1$s antes de instalar o app para restaurar seus dados do backup.</string>
+    <string name="notification_restore_error_text">Conecte seu \"%1$s\" antes de instalar o app para restaurar seus dados do backup.</string>
     <string name="notification_restore_error_title">Não foi possível restaurar os dados de %1$s</string>
     <string name="notification_restore_error_channel_title">Erro de restauração automática com armazenamento USB</string>
     <string name="notification_error_action">Resolver</string>
@@ -34,10 +34,10 @@
     <string name="recovery_code_12_word_intro">Você precisa do seu código de recuperação de 12 palavras para restaurar os dados do backup.</string>
     <string name="recovery_code_title">Código de recuperação</string>
     <string name="storage_check_fragment_error_button">Voltar</string>
-    <string name="storage_check_fragment_permission_error">Não conseguimos permissão para gravar dados no local de backup.</string>
-    <string name="storage_check_fragment_backup_error">Ocorreu um erro ao acessar o local de backup.</string>
+    <string name="storage_check_fragment_permission_error">Não conseguimos permissão para gravar dados no local do backup.</string>
+    <string name="storage_check_fragment_backup_error">Ocorreu um erro ao acessar o local do backup.</string>
     <string name="storage_check_fragment_restore_title">Buscando backups…</string>
-    <string name="storage_check_fragment_backup_title">Inicializando local de backup…</string>
+    <string name="storage_check_fragment_backup_title">Inicializando o local do backup…</string>
     <string name="storage_fake_nextcloud_summary_installed">Toque para configurar conta</string>
     <string name="storage_fake_nextcloud_summary">Toque para instalar</string>
     <string name="storage_available_bytes"><xliff:g example="1 GB" id="size">%1$s</xliff:g> livres</string>
@@ -91,10 +91,10 @@
     <string name="restore_next">Avançar</string>
     <string name="restore_installing_packages">Reinstalando apps</string>
     <string name="restore_set_empty_result">Nenhum backup utilizável encontrado no local informado.\n\nIsso provavelmente se deve a um código de recuperação errado ou a um erro de armazenamento.</string>
-    <string name="notification_success_text">%1$d de %2$d apps com backups feitos (%3$s). Toque para saber mais.</string>
+    <string name="notification_success_text">Foi feito o backup de %1$d apps dos %2$d (%3$s). Toque para saber mais.</string>
     <string name="notification_backup_already_running">Backup já em andamento</string>
-    <string name="restore_app_was_stopped">O backup não foi feito pois não tinha sido utilizado recentemente</string>
-    <string name="restore_app_not_yet_backed_up">O backup não foi feito ainda</string>
+    <string name="restore_app_was_stopped">Não há um backup pois não foi usado até então</string>
+    <string name="restore_app_not_yet_backed_up">O backup não foi feito até então</string>
     <string name="storage_fake_nextcloud_summary_unavailable">Conta indisponível. Configure uma (ou desative a senha).</string>
     <string name="current_destination_string">Configurações e estado de backup</string>
     <string name="data_management_label">Backup Seedvault</string>
@@ -105,11 +105,11 @@
     <string name="backup_section_user">Apps</string>
     <string name="backup_sms">Mensagens de texto SMS</string>
     <string name="backup_section_system">Dados do sistema</string>
-    <string name="settings_backup_status_title">Estado de backup</string>
+    <string name="settings_backup_status_title">Estado do backup</string>
     <string name="about_version">Versão: %s</string>
-    <string name="restore_restoring_error_message">Você pode reinstalar esses apps manualmente e a \"Restauração automática\" tentará restaurar seus dados (se ativada).</string>
+    <string name="restore_restoring_error_message">Você pode reinstalar esses apps manualmente e a \"Restauração automática\" tentará restaurar seus dados (quando ativada).</string>
     <string name="backup_app_quota_exceeded">Cota de backup excedida</string>
-    <string name="backup_app_was_stopped">O backup não foi feito pois não foi usado recentemente</string>
+    <string name="backup_app_was_stopped">Não foi feito o backup pois não foi usado recentemente</string>
     <string name="backup_app_not_yet_backed_up">Aguardando backup…</string>
     <string name="backup_contacts">Contatos locais</string>
     <string name="backup_call_log">Histórico de chamadas</string>
@@ -121,7 +121,7 @@
     <string name="recovery_code_verification_try_again">Tente novamente</string>
     <string name="recovery_code_verification_error_message">Você inseriu um código de recuperação inválido. Tente novamente!\n\nSe você perdeu seu código, toque em \'Gerar um novo código\' abaixo.</string>
     <string name="recovery_code_verification_error_title">Código de recuperação incorreto</string>
-    <string name="recovery_code_verification_ok_message">Seu código está correto e funcionará quando restaurar seu backup.</string>
+    <string name="recovery_code_verification_ok_message">Seu código está correto e funcionará ao restaurar seu backup.</string>
     <string name="recovery_code_verification_ok_title">Código de recuperação verificado</string>
     <string name="settings_backup_recovery_code_summary">Verifique o código existente ou gere um novo</string>
     <string name="settings_backup_recovery_code">Código de recuperação</string>
@@ -131,7 +131,7 @@
     <string name="settings_expert_title">Configurações de especialistas</string>
     <string name="storage_fake_nextcloud_summary_unavailable_market">Não instalado</string>
     <string name="restore_skip_apps">Pular apps</string>
-    <string name="settings_backup_files_title">Pastas e arquivos incluídos</string>
+    <string name="settings_backup_files_title">Pastas e arquivos inclusos</string>
     <string name="storage_check_fragment_patience">Isso pode levar algum tempo…</string>
     <string name="recovery_code_auth_description">Digite as credenciais do seu dispositivo para continuar</string>
     <string name="settings_backup_storage_dialog_message">O backup de arquivos está em beta e pode não funcionar. Não dependa dele para dados importantes.</string>
@@ -167,7 +167,7 @@
     <string name="settings_expert_logcat_title">Salvar registros do app</string>
     <string name="storage_not_recommended"><xliff:g example="Skynet">%1$s</xliff:g> (Não é recomendado)</string>
     <string name="settings_expert_logcat_summary">Os desenvolvedores podem diagnosticar bugs com esses registros.\n\nAtenção: Os registros podem conter informações de identificação pessoal. Verifique-os e os apague após compartilha-los!</string>
-    <string name="settings_backup_dialog_message">Quando você ativar o backup novamente, o processo pode demorar mais do que normal e utilizará mais espaço de armazenamento.</string>
+    <string name="settings_backup_dialog_message">Ao ativar o backup novamente, o processo pode demorar mais do que normal e utilizará mais espaço de armazenamento.</string>
     <string name="settings_backup_dialog_title">Você realmente deseja desativar o backup de apps?</string>
     <string name="settings_expert_logcat_error">Erro: Não foi possível salvar os registros do app</string>
     <string name="storage_user_selected_location_title">Local escolhido pelo usuário</string>
@@ -178,9 +178,9 @@
     <string name="notification_success_channel_title">Notificação de sucesso</string>
     <string name="settings_backup_status_next_backup">Próximo backup: %1$s</string>
     <string name="settings_backup_status_next_backup_estimate">Próximo backup (previsão): %1$s</string>
-    <string name="settings_backup_scheduling_title">Agendamento de backup</string>
-    <string name="settings_backup_status_next_backup_past">quando as condições forem cumpridas</string>
-    <string name="settings_scheduling_frequency_title">Frequência de backup</string>
+    <string name="settings_backup_scheduling_title">Cronograma do backup</string>
+    <string name="settings_backup_status_next_backup_past">ao cumprir as condições</string>
+    <string name="settings_scheduling_frequency_title">Frequência do backup</string>
     <string name="settings_scheduling_frequency_12_hours">A cada 12 horas</string>
     <string name="settings_scheduling_frequency_daily">Diariamente</string>
     <string name="settings_scheduling_frequency_3_days">A cada 3 dias</string>
@@ -190,7 +190,7 @@
     <string name="notification_apk_text">Fazendo backup do APK de %s</string>
     <string name="settings_scheduling_metered_title">Fazer backup nos dados móveis</string>
     <string name="notification_apk_not_backed_up">Salvando uma lista dos apps que não conseguimos fazer backup.</string>
-    <string name="settings_backup_status_next_backup_usb">Backups serão feitos automaticamente quando você conectar seu armazenamento USB</string>
+    <string name="settings_backup_status_next_backup_usb">Backups serão feitos automaticamente ao conectar seu armazenamento USB</string>
     <string name="storage_webdav_option_summary">Acesso direto ao WebDAV</string>
     <string name="storage_webdav_config_user">Nome de usuário</string>
     <string name="storage_webdav_config_pass">Senha</string>
@@ -200,18 +200,18 @@
     <string name="storage_webdav_option_title">Nuvem WebDAV (beta)</string>
     <string name="storage_webdav_config_url">URL do WebDAV</string>
     <string name="storage_webdav_config_url_helper">Certifique-se de digitar a URL inteira aqui. Ex: para o Nextcloud, ela tem a forma de https://seuservidor.com/remote.php/webdav</string>
-    <string name="notification_space_error_title">Espaço para backup insuficiente</string>
-    <string name="notification_space_error_text">O seu local de backup está quase sem espaço. Libere mais espaço, para que os backups possam ser feitos.</string>
+    <string name="notification_space_error_title">Espaço de backup insuficiente</string>
+    <string name="notification_space_error_text">O local do seu backup está quase sem espaço. Libere mais espaço, para que os backups possam ser feitos.</string>
     <string name="backup_system_apps">Apps do sistema</string>
     <string name="restore_select_packages">Selecione apps para restaurar</string>
-    <string name="restore_select_packages_all">Todos os apps</string>
+    <string name="restore_select_packages_all">Todos os seguintes apps</string>
     <string name="restore_storage_selection_description">Os arquivos selecionados serão restaurados. Toque em pastas para ver os arquivos nelas.</string>
     <string name="first_start_text">Você deseja restaurar um backup existente ou iniciar um novo?</string>
     <string name="setup_button">Iniciar um</string>
     <string name="notification_restore_channel_title">Notificação de restauração</string>
     <string name="notification_restore_title">Restauração em execução</string>
     <string name="settings_backup_app_check_title">Verificar integridade</string>
-    <string name="settings_app_check_text2">Aqui você pode executar uma verificação do seu backup de apps. Selecione quanto dos dados dos apps devem serem baixados para a verificação. Quanto mais você selecionar, mais demorará, mas também mais segura a verificação será. Isto executará em segundo plano e uma notificação será enviada quando a verificação for concluída.</string>
+    <string name="settings_app_check_text2">Aqui você pode executar uma verificação do seu backup de apps. Selecione quanto dos dados devem serem descarregados para a verificação. Quanto mais você selecionar, mais demorará, mas também mais confiável a verificação será. A verificação executará em segundo plano e uma notificação será enviada ao ser concluída.</string>
     <string name="notification_pruning_title">Removendo backups antigos…</string>
     <string name="notification_checking_title">Verificando o backup de apps…</string>
     <string name="notification_failed_text">Um erro ocorreu ao executar o backup.</string>
@@ -229,18 +229,18 @@
     <string name="restore_restore_set_apps_no_size">Tem dados de usuário para <xliff:g example="42" id="apps">%1$d</xliff:g> apps</string>
     <string name="restore_restore_set_apks_no_size">Contém <xliff:g example="42" id="apps">%1$d</xliff:g> apps</string>
     <string name="settings_backup_app_check_summary">Certifique que o backup está funcionando para a restauração</string>
-    <string name="settings_app_check_warning">Alerta: Baixar grandes quantidades de dados pode demorar bastante tempo.</string>
-    <string name="notification_init_text">Preparando os dados de backup existentes para a reutilização…</string>
+    <string name="settings_app_check_warning">Alerta: Descarregar grandes quantidades de dados pode demorar bastante tempo.</string>
+    <string name="notification_init_text">Preparando os dados existentes do backup para a reutilização…</string>
     <string name="restore_restore_set_can_not_get_restored">Este backup tem alguns erros. Você talvez consiga restaurá-lo parcialmente.</string>
     <string name="restore_recycle_backup_title">Reutilizar este backup?</string>
     <string name="restore_recycle_backup_text">Você pode reutilizar o backup \'%s\' que você acabou de restaurar neste dispositivo. Isto fará com que novos backups sejam mais rápidos e usem menos dados.\n\nPorém, seu dispositivo antigo perderá acesso a este backup. Se você gostaria de manter o acesso ao seu dispositivo antigo, você também pode criar um novo backup. Isso usará mais dados do que reutilizar o backup existente.</string>
     <string name="restore_recycle_backup_button_yes">Reutilizar backup</string>
     <string name="settings_app_check_title">Verificar integridade do backup de apps</string>
-    <string name="notification_checking_error_title">Erros de backup encontrados</string>
+    <string name="notification_checking_error_title">Encontrados erros no backup</string>
     <string name="notification_checking_channel_title">Verificação de integridade do backup de apps</string>
     <string name="notification_checking_finished_text">%1$s foram verificados com sucesso, em uma velocidade média de %2$s.</string>
     <string name="backup_app_check_error_no_snapshots">Não encontramos nenhum backup. Execute um backup bem-sucedido primeiro e tente novamente.</string>
-    <string name="settings_app_check_text">Cada processo de backup automaticamente verificará a integridade do backup. Porém, para economizar tempo, os dados dos apps não serão baixados e verificados.</string>
+    <string name="settings_app_check_text">Cada processo de backup automaticamente verificará a integridade do backup. Porém, para economizar tempo, os dados dos apps não serão descarregados e verificados.</string>
     <string name="settings_app_check_button">Verificar backup</string>
     <string name="backup_app_check_success_disclaimer">Observação: não conseguimos verificar se apps individuais incluem todos os dados do usuário no backup.</string>
     <string name="restore_recycle_backup_button_no">Criar novo backup</string>
@@ -248,16 +248,16 @@
     <string name="settings_backup_file_check_title">Verificar integridade do backup</string>
     <string name="settings_backup_file_check_summary">Certifique que meu backup está funcionando para restaurar arquivos</string>
     <string name="settings_backup_metered_title">O backup parou</string>
-    <string name="settings_backup_metered_text">O backup não irá continuar por que seu dispositivo está usando dados móveis.\n\nVocê pode ativar os backups nos dados móveis em \"Agendamento de backup\".</string>
+    <string name="settings_backup_metered_text">O backup não irá continuar porque seu dispositivo está usando dados móveis.\n\nVocê pode ativar os backups nos dados móveis em \"Cronograma do backup\".</string>
     <string name="settings_file_check_title">Verificar integridade do backup de arquivos</string>
     <string name="settings_file_check_text">Aqui você pode executar uma verificação do seu backup de arquivos.</string>
     <string name="notification_failed_metered_text">O backup foi abortado. Você está usando dados móveis? Conecte-se ao Wi-Fi para continuar.</string>
     <string name="notification_usb_monitor_title">Esperando pelo armazenamento USB…</string>
-    <string name="notification_usb_monitor_text">Quando seu armazenamento USB estiver disponível, iniciaremos um backup.</string>
-    <string name="settings_file_check_text2">Selecione quanto dos dados dos arquivos você quer que sejam baixados para a verificação. Quanto mais selecionar, mais demorará, mas também mais segura a verificação será.\n\nA verificação executará em segundo plano e enviará a você uma notificação quando for concluída.</string>
+    <string name="notification_usb_monitor_text">No momento que o seu armazenamento USB se tornar disponível, iniciaremos um backup.</string>
+    <string name="settings_file_check_text2">Selecione quanto dos dados você quer que sejam descarregados para a verificação. Quanto mais selecionar, mais demorará, mas também mais confiável a verificação será.\n\nA verificação executará em segundo plano e enviará uma notificação ao ser concluída.</string>
     <string name="storage_round_sync_summary_prefix">Remoto do RoundSync:</string>
     <string name="notification_finalizing_text">Finalizando o backup…</string>
-    <string name="notification_pruning_blobs_title">Removendo os dados dos backup antigos…</string>
+    <string name="notification_pruning_blobs_title">Removendo dados antigos do backup…</string>
     <string name="restore_set_bad_decrypt">Não foi possível descriptografar os backups.\n\nO código de recuperação atual provavelmente não é mesmo do que o que foi usado para criar o backup.</string>
     <string name="restore_set_button_try_again">Tentar novamente</string>
     <string name="restore_set_button_restart">Iniciar do começo</string>

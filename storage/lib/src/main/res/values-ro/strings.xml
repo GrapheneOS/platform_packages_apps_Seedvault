@@ -39,4 +39,5 @@
     <string name="check_files_title">Fișierele din această copie de rezervă</string>
     <string name="check_files_text">„%s” include următoarele fișiere:</string>
     <string name="check_files_error">Datele din copia de rezervă sunt deteriorate. Fișierul nu se va restabili pe deplin.</string>
+    <string name="content_remove">Elimină</string>
 </resources>

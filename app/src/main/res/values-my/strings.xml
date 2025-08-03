@@ -15,7 +15,7 @@
     <string name="recovery_code_input_hint_10">စကားလုံးတစ်ဆယ်လုံး</string>
     <string name="recovery_code_input_hint_9">စကားလုံးကိုးလုံး</string>
     <string name="recovery_code_input_hint_8">စကားလုံးရှစ်လုံ: .</string>
-    <string name="recovery_code_input_hint_7">စကားလုံးခုနှစ်လုံ:</string>
+    <string name="recovery_code_input_hint_7">စကားလုံးခုနှစ်လုံ</string>
     <string name="recovery_code_input_hint_6">စကားလုံး၆လုံး</string>
     <string name="recovery_code_input_hint_5">စကားလုံးငါးလုံး</string>
     <string name="recovery_code_input_hint_4">စကားလုံးလေးလုံး</string>
@@ -32,8 +32,8 @@
     <string name="storage_check_fragment_error_button">အနောက်</string>
     <string name="storage_check_fragment_permission_error">အရန်သိုလှောင်ထားသောနေရာကိုဝင်ရောက်၍မရပါ .</string>
     <string name="storage_check_fragment_backup_error">အရန်ကူးထားသောနေရာကိုဝင်ရောက်စဉ်အမှားတစ်ခုဖြစ်ပွားခဲ့သည် ။</string>
-    <string name="storage_check_fragment_restore_title">အရန်သိုလှောင်ရန်ရှာဖွေခြင်း</string>
-    <string name="storage_check_fragment_backup_title">အရန်သိုလှောင်သည့်တည်နေရာတပ်ဆင်ခြင်း.</string>
+    <string name="storage_check_fragment_restore_title">အရန်သိုလှောင်ရန်ရှာဖွေခြင်း…</string>
+    <string name="storage_check_fragment_backup_title">အရန်သိုလှောင်သည့်တည်နေရာတပ်ဆင်ခြင်း…</string>
     <string name="storage_fake_nextcloud_summary_unavailable">အကောင့်မရနိုင်ပါ အသစ်ထပ်မှံပြုလုပ်ပါ .</string>
     <string name="storage_fake_nextcloud_summary_installed">အကောင့်ပြုလုပ်ရန်နှိပ်ပါ ။</string>
     <string name="storage_fake_nextcloud_summary">ထည့်သွင်းရန်နှိပ်ပါ</string>

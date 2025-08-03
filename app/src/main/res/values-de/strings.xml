@@ -276,4 +276,7 @@
     <string name="storage_round_sync_summary_prefix">RoundSync Remote:</string>
     <string name="notification_finalizing_text">Abschluss der Sicherung…</string>
     <string name="notification_pruning_channel_title">Benachrichtigung über alte Sicherungen entfernen</string>
+    <string name="backup_app_check_success_intro">%1$d Datensicherungen wurden gefunden und %2$d%% ihrer Daten (%3$s) erfolgreich überprüft:</string>
+    <string name="backup_app_check_error_only_broken_snapshots">Wir haben %1$d Datensicherungen gefunden. Sie waren jedoch alle beschädigt. Bitte führe eine Sicherung erfolgreich durch und versuche dann erneut, die Überprüfung durchzuführen.</string>
+    <string name="backup_app_check_error_has_snapshots">Wir haben %1$d Datensicherungen gefunden, einige von ihnen sind beschädigt oder haben Fehler. Im Folgenden sind die Sicherungen aufgeführt, die wiederhergestellt werden können.</string>
 </resources>

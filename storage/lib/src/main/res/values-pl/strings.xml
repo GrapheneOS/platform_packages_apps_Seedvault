@@ -40,4 +40,5 @@
     <string name="check_files_title">Pliki w tej kopii zapasowej</string>
     <string name="check_files_text">„%s” zawiera następujące pliki:</string>
     <string name="check_files_error">Dane kopii zapasowej są uszkodzone. Plik nie zostanie w pełni przywrócony.</string>
+    <string name="content_remove">Usuń</string>
 </resources>

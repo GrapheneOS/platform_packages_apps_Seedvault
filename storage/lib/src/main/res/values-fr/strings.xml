@@ -39,4 +39,5 @@
     <string name="check_error_no_snapshots">Nous n\'avons trouvé aucune sauvegarde. Veuillez d\'abord exécuter une sauvegarde avec succès, puis essayez de vérifier à nouveau.</string>
     <string name="check_files_error">Les données de la sauvegarde sont corrompues. Le fichier ne pourra pas être complètement restaurée.</string>
     <string name="check_files_text">\"%s\" inclut les fichiers suivants :</string>
+    <string name="content_remove">Supprimer</string>
 </resources>

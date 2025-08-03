@@ -12,10 +12,10 @@
     <string name="settings_category_apps">App backup</string>
     <string name="setup_button">Start new</string>
     <string name="settings_backup_status_title">Backup status</string>
-    <string name="settings_backup_apk_dialog_disable">Disable app backup</string>
+    <string name="settings_backup_apk_dialog_disable">Disable APK backups</string>
     <string name="notification_restore_channel_title">Restore notification</string>
     <string name="notification_restore_title">Restore running</string>
-    <string name="settings_backup_apk_dialog_message">Disabled app backup will still back up app data. However, it will not get restored automatically. \n \nYou will need to install all your apps manually while having \"Automatic Restore\" switched on.</string>
+    <string name="settings_backup_apk_dialog_message">After disabling APK backups, app data will still be backed up. However, it will not get restored automatically.\n\nYou will need to install all your apps manually while having \"Automatic Restore\" switched on.</string>
     <string name="settings_backup_status_summary">Last backup: %1$s</string>
     <string name="settings_backup_last_backup_never">Never</string>
     <string name="settings_backup_dialog_title">Really turn off app backups?</string>
@@ -26,9 +26,9 @@
     <string name="settings_auto_restore_summary">When reinstalling an app, restore backed up settings and data.</string>
     <string name="settings_auto_restore_summary_usb">Note: Your %1$s needs to be plugged in for this to work.</string>
     <string name="settings_category_app_data_backup">App data backup</string>
-    <string name="settings_backup_apk_title">App backup</string>
-    <string name="settings_backup_apk_summary">Back up the apps themselves. Otherwise, only app data would get backed up.</string>
-    <string name="settings_backup_apk_dialog_title">Really disable app backup?</string>
+    <string name="settings_backup_apk_title">APK backups</string>
+    <string name="settings_backup_apk_summary">Backs up the apps themselves. Otherwise, only app data will get backed up.</string>
+    <string name="settings_backup_apk_dialog_title">Really disable APK backups?</string>
     <string name="settings_backup_apk_dialog_cancel">Cancel</string>
     <string name="settings_backup_exclude_apps">Exclude apps</string>
     <string name="about_summary">A backup application using Android\'s internal backup API. It is Free Software, released under Apache 2 licence.\n\nLike all software, Seedvault may contain bugs or vulnerabilities.</string>
@@ -111,7 +111,7 @@
     <string name="settings_backup_status_next_backup_usb">Backups will happen automatically when you plug in your USB drive</string>
     <string name="settings_backup_files_summary">None</string>
     <string name="settings_backup_now">Backup now</string>
-    <string name="settings_category_storage">Storage backup (beta)</string>
+    <string name="settings_category_storage">File backup (beta)</string>
     <string name="settings_backup_storage_battery_optimization">Warning: No automatic backups, because battery optimisation is active.</string>
     <string name="settings_scheduling_frequency_title">Backup frequency</string>
     <string name="settings_scheduling_frequency_3_days">Every 3 days</string>
@@ -151,7 +151,7 @@
     <string name="restore_invalid_location_message">We could not find any backups at this location.
 \n
 \nPlease choose another location that contains a %s folder.</string>
-    <string name="restore_set_error">An error occurred while loading the backups.</string>
+    <string name="restore_set_error">An error occurred while loading the backups:</string>
     <string name="restore_select_packages">Select apps to restore</string>
     <string name="restore_restoring_error_message">You can re-install these apps manually and Automatic restore will attempt to restore their data (when enabled).</string>
     <string name="restore_finished_success">Restore complete</string>
@@ -274,4 +274,8 @@
     <string name="settings_backup_metered_text">The backup won\'t proceed because your device is using mobile data.\n\nYou can enable backups on mobile data under \"Backup scheduling\".</string>
     <string name="notification_failed_metered_text">The backup has been aborted. Are you using mobile data? Connect to Wi-Fi to continue.</string>
     <string name="notification_finalizing_text">Finalising backup…</string>
+    <string name="notification_pruning_blobs_title">Removing old backup data…</string>
+    <string name="restore_set_bad_decrypt">Could not decrypt backups.\n\nThe current recovery code is most likely not the one that was used to make the backup.</string>
+    <string name="restore_set_button_restart">Start from beginning</string>
+    <string name="restore_set_button_try_again">Try again</string>
 </resources>
