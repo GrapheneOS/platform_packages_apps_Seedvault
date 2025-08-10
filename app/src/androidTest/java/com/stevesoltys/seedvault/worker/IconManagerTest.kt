@@ -28,8 +28,8 @@ import io.mockk.mockk
 import io.mockk.slot
 import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.runBlocking
-import org.calyxos.seedvault.core.backends.AppBackupFileType
-import org.calyxos.seedvault.core.toHexString
+import app.grapheneos.seedvault.core.backends.AppBackupFileType
+import app.grapheneos.seedvault.core.toHexString
 import org.junit.Assert.assertArrayEquals
 import org.junit.Test
 import org.junit.runner.RunWith

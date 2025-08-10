@@ -301,7 +301,7 @@ internal class BackupNotificationManager(private val context: Context) {
         val intent = Intent(context, RestoreActivity::class.java)
         val pendingIntent = getActivity(context, 0, intent, FLAG_IMMUTABLE)
         setContentIntent(pendingIntent)
-        setSmallIcon(org.calyxos.backup.storage.R.drawable.ic_cloud_restore)
+        setSmallIcon(app.grapheneos.backup.storage.R.drawable.ic_cloud_restore)
         setContentTitle(context.getString(R.string.notification_restore_title))
         setOngoing(true)
         setShowWhen(false)
@@ -347,7 +347,7 @@ internal class BackupNotificationManager(private val context: Context) {
 
     fun getPruningNotification(): Notification {
         return Builder(context, CHANNEL_ID_PRUNING).apply {
-            setSmallIcon(org.calyxos.backup.storage.R.drawable.ic_auto_delete)
+            setSmallIcon(app.grapheneos.backup.storage.R.drawable.ic_auto_delete)
             setContentTitle(context.getString(R.string.notification_pruning_title))
             setOngoing(true)
             setShowWhen(false)
@@ -360,7 +360,7 @@ internal class BackupNotificationManager(private val context: Context) {
     fun updatePruningNotification(blobsPruned: Int, totalBlobs: Int) {
         Log.d(TAG, "pruning $blobsPruned/$totalBlobs")
         val n = Builder(context, CHANNEL_ID_PRUNING).apply {
-            setSmallIcon(org.calyxos.backup.storage.R.drawable.ic_auto_delete)
+            setSmallIcon(app.grapheneos.backup.storage.R.drawable.ic_auto_delete)
             setContentTitle(context.getString(R.string.notification_pruning_blobs_title))
             setOngoing(true)
             setShowWhen(false)

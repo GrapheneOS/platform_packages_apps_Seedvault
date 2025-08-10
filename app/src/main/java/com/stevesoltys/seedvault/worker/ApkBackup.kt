@@ -25,13 +25,13 @@ import com.stevesoltys.seedvault.repo.hexFromProto
 import com.stevesoltys.seedvault.settings.SettingsManager
 import com.stevesoltys.seedvault.transport.backup.isNotUpdatedSystemApp
 import com.stevesoltys.seedvault.transport.backup.isTestOnly
-import org.calyxos.seedvault.core.toHexString
+import app.grapheneos.seedvault.core.toHexString
 import java.io.File
 import java.io.FileInputStream
 import java.io.IOException
 
 private val TAG = ApkBackup::class.java.simpleName
-internal const val BASE_SPLIT = "org.calyxos.seedvault.BASE_SPLIT"
+internal const val BASE_SPLIT = "app.grapheneos.seedvault.BASE_SPLIT"
 
 internal class ApkBackup(
     private val pm: PackageManager,

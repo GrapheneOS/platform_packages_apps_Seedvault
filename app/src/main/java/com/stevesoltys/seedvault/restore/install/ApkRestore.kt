@@ -37,8 +37,8 @@ import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import org.calyxos.seedvault.core.backends.Backend
-import org.calyxos.seedvault.core.backends.LegacyAppBackupFile
+import app.grapheneos.seedvault.core.backends.Backend
+import app.grapheneos.seedvault.core.backends.LegacyAppBackupFile
 import java.io.File
 import java.io.IOException
 import java.io.InputStream
