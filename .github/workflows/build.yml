@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Android build cache
         uses: actions/cache@v4
@@ -28,7 +28,7 @@ jobs:
           restore-keys: ${{ runner.os }}-android
 
       - name: Set up JDK 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5.7.0
         with:
           distribution: 'corretto'
           java-version: 21
@@ -45,7 +45,7 @@ jobs:
         run: ./gradlew compileDebugAndroidTestSources check assemble ktlintCheck
 
       - name: Upload APKs
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: seedvault-${{ github.sha }}-apks
           path: |
@@ -54,7 +54,7 @@ jobs:
             storage/demo/build/outputs/apk/debug/demo-debug.apk
 
       - name: Publish Test Report
-        uses: mikepenz/action-junit-report@v5
+        uses: mikepenz/action-junit-report@d9f48fc87bc235f7e214acf696ca5abc0a986f16
         if: success() || failure()
         with:
           report_paths: '**/build/test-results/**/TEST-*.xml'
