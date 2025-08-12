@@ -4,7 +4,7 @@
     <string name="restore_set_empty_result">Ingen passende sikkerhetskopier funnet der.
 \n
 \nDette er antagelig fordi feil gjenopprettingskode har blitt angitt, eller en lagringsfeil.</string>
-    <string name="restore_set_error">Kunne ikke laste inn sikkerhetskopiene.</string>
+    <string name="restore_set_error">Kunne ikke laste inn sikkerhetskopiene:</string>
     <string name="restore_invalid_location_message">Fant ikke noen sikkerhetskopier på denne plasseringen.
 \n
 \nVelg et annet sted som inneholder ei %s-mappe.</string>

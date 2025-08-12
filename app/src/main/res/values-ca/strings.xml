@@ -139,7 +139,7 @@
     <string name="restore_invalid_location_message">No hem pogut trobar cap còpia de seguretat en aquesta ubicació.
 \n
 \nTria una altra ubicació que contingui una carpeta %s.</string>
-    <string name="restore_set_error">S\'ha produït un error en carregar les còpies de seguretat.</string>
+    <string name="restore_set_error">S\'ha produït un error en carregar les còpies de seguretat:</string>
     <string name="restore_set_empty_result">No s\'ha trobat cap còpia de seguretat adequada a la ubicació indicada.
 \n
 \nAixò segurament es deu a un codi de recuperació incorrecte o a un error d\'emmagatzematge.</string>

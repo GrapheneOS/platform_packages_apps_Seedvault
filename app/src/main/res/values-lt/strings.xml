@@ -27,7 +27,7 @@
     <string name="restore_set_empty_result">Nerasta tinkamų atsarginių kopijų nurodytoje vietoje.
 \n
 \nTaip greičiausiai atsitiko dėl neteisingo atkūrimo kodo arba saugojimo klaidos.</string>
-    <string name="restore_set_error">Įkeliant atsargines kopijas įvyko klaida.</string>
+    <string name="restore_set_error">Įkeliant atsargines kopijas įvyko klaida:</string>
     <string name="restore_invalid_location_message">Šioje vietoje nepavyko rasti jokių atsarginių kopijų.
 \n
 \nPasirinkite kitą vietą, kurioje yra %s aplankas.</string>

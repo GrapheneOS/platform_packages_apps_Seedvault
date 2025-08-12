@@ -45,11 +45,11 @@
     <string name="settings_backup_now">Sauvegarder maintenant</string>
     <string name="settings_backup_exclude_apps">Exclure des applications</string>
     <string name="settings_backup_status_summary">Dernière sauvegarde : %1$s</string>
-    <string name="settings_backup_apk_dialog_disable">Désactiver la sauvegarde des applications</string>
+    <string name="settings_backup_apk_dialog_disable">Désactiver la sauvegarde des APK</string>
     <string name="settings_backup_apk_dialog_cancel">Annuler</string>
-    <string name="settings_backup_apk_title">Sauvegarde des applications</string>
+    <string name="settings_backup_apk_title">Sauvegarde des APK</string>
     <string name="settings_category_app_data_backup">Sauvegarde des données de l’application</string>
-    <string name="settings_auto_restore_summary_usb">Remarque : votre %1$s doit être branchée pour que ceci fonctionne.</string>
+    <string name="settings_auto_restore_summary_usb">Remarque : votre %1$s doit être branché pour que ceci fonctionne.</string>
     <string name="settings_auto_restore_summary">Lors de la réinstallation d’une application, restaurer les paramètres et les données sauvegardés.</string>
     <string name="settings_auto_restore_title">Restaurer automatiquement</string>
     <string name="settings_info">Toutes les sauvegardes sont stockées sur votre téléphone et chiffrées. Pour restaurer une sauvegarde, vous aurez besoin de votre code de récupération constitué de 12 mots.</string>
@@ -73,7 +73,7 @@
     <string name="restore_set_empty_result">Aucune sauvegarde appropriée trouvée à l’emplacement donné.
 \n
 \nCeci est probablement dû à un code de récupération erroné ou à une erreur de stockage.</string>
-    <string name="restore_set_error">Une erreur s\'est produite lors du chargement des sauvegardes.</string>
+    <string name="restore_set_error">Une erreur s\'est produite lors du chargement des sauvegardes :</string>
     <string name="restore_invalid_location_message">Nous n\'avons trouvé aucune sauvegarde à cet emplacement.
 \n
 \nVeuillez choisir un autre emplacement contenant un dossier %s.</string>
@@ -92,9 +92,9 @@
     <string name="notification_title">Sauvegarde en cours</string>
     <string name="recovery_code_input_intro">Entrez votre code de récupération de 12 mots que vous avez écrit lors de la configuration des sauvegardes.</string>
     <string name="storage_check_fragment_permission_error">Impossible d\'obtenir la permission d\'écrire dans l\'emplacement de sauvegarde.</string>
-    <string name="settings_backup_apk_dialog_message">La sauvegarde d\'une application désactivée entraînera bien la sauvegarde des données de cette application. Celles-ci ne seront toutefois pas restaurées automatiquement. \n \nVous devrez alors installer toutes vos applications manuellement avec le paramètre « Restaurer automatiquement » activé.</string>
-    <string name="settings_backup_apk_dialog_title">Êtes-vous sûr(e) de vouloir désactiver la sauvegarde des applications ?</string>
-    <string name="settings_backup_apk_summary">Sauvegarde les applications elles-mêmes. Sinon, seules les données des applications seront sauvegardées.</string>
+    <string name="settings_backup_apk_dialog_message">Les données de cette application seront toujours sauvegardées maigres la désactivation des sauvegardes de l\'APK. Celles-ci ne seront toutefois pas restaurées automatiquement.\n\nVous devrez alors installer toutes vos applications manuellement avec le paramètre « Restaurer automatiquement » activé.</string>
+    <string name="settings_backup_apk_dialog_title">Êtes-vous sûr(e) de vouloir désactiver la sauvegarde des APK ?</string>
+    <string name="settings_backup_apk_summary">Sauvegarder les applications elles-mêmes. Sinon, seules les données des applications seront sauvegardées.</string>
     <string name="restore_app_was_stopped">N\'a pas été sauvegardé car n\'a pas été utilisé récemment</string>
     <string name="restore_app_not_yet_backed_up">Pas encore sauvegardé</string>
     <string name="notification_success_text">%1$d des applications %2$d sauvegardées (%3$s). Appuyez pour en savoir plus.</string>
@@ -271,6 +271,6 @@
     <string name="notification_finalizing_text">Finalisation de la sauvegarde…</string>
     <string name="notification_pruning_blobs_title">Suppression des anciennes données de sauvegarde…</string>
     <string name="restore_set_button_try_again">Réessayer</string>
-    <string name="restore_set_button_restart">Reprendre au début</string>
+    <string name="restore_set_button_restart">Reprendre depuis le début</string>
     <string name="restore_set_bad_decrypt">Impossible de décrypter les sauvegardes.\n\nLe code de récupération actuel n\'est probablement pas celui qui a été utilisé pour effectuer la sauvegarde.</string>
 </resources>

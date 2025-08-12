@@ -170,7 +170,7 @@
     <string name="restore_app_was_stopped">Nem került mentésre, mert az utóbbi időben nem volt használva</string>
     <string name="restore_title">Mentésből visszatöltés</string>
     <string name="restore_invalid_location_message">Nem található mentés a megadott helyen.\n\nKérem válasszon egy olyan helyet, ahol található %s mappa.</string>
-    <string name="restore_set_error">Hiba lépett fel a biztonsági mentés visszatöltésénél.</string>
+    <string name="restore_set_error">Hiba lépett fel a biztonsági mentés visszatöltésénél:</string>
     <string name="restore_installing_packages">Appok újratelepítése</string>
     <string name="restore_app_status_installing">Újratelepítés</string>
     <string name="restore_app_status_installed">Újratelepítve</string>

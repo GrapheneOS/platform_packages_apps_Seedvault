@@ -51,7 +51,7 @@
     <string name="restore_set_empty_result">No se han encontrado copias de seguridad adecuadas en la ubicación determinada.
 \n
 \nEsto es más probable debido a un código de recuperación incorrecto o un error de almacenamiento.</string>
-    <string name="restore_set_error">Se produjo un error al cargar las copias de seguridad.</string>
+    <string name="restore_set_error">Se produjo un error al cargar las copias de seguridad:</string>
     <string name="restore_invalid_location_message">No pudimos encontrar ninguna copia de seguridad en esta ubicación.
 \n
 \nPor favor, elija otra ubicación que contenga una carpeta %s.</string>
@@ -85,11 +85,11 @@
     <string name="settings_backup_now">Copia de seguridad ahora</string>
     <string name="settings_backup_exclude_apps">Excluir aplicaciones</string>
     <string name="settings_backup_status_summary">Última copia de seguridad: %1$s</string>
-    <string name="settings_backup_apk_dialog_disable">Deshabilitar la copia de seguridad de la aplicación</string>
-    <string name="settings_backup_apk_dialog_message">Si se desactiva la copia de seguridad de la aplicación, se seguirán guardando los datos de la misma. Sin embargo, no se restaurará automáticamente. \n \nDeberá instalar todas sus aplicaciones manualmente mientras tenga activada la \"Restauración automática\".</string>
-    <string name="settings_backup_apk_dialog_title">¿Desactivar realmente la copia de seguridad de la aplicación?</string>
+    <string name="settings_backup_apk_dialog_disable">Deshabilitar la copia de seguridad de la APK</string>
+    <string name="settings_backup_apk_dialog_message">Si se desactiva la copia de seguridad de la APK, se seguirán guardando los datos de la misma. Sin embargo, no se restaurará automáticamente. \n \nDeberá instalar todas sus aplicaciones manualmente mientras tenga activada la \"Restauración automática\".</string>
+    <string name="settings_backup_apk_dialog_title">¿Desactivar realmente la copia de seguridad de la APK?</string>
     <string name="settings_backup_apk_summary">Realiza una copia de seguridad de las aplicaciones. De lo contrario, solo se realizarían copias de seguridad de los datos de la aplicación.</string>
-    <string name="settings_backup_apk_title">Copia de seguridad de la aplicación</string>
+    <string name="settings_backup_apk_title">Copia de seguridad de la APK</string>
     <string name="settings_category_app_data_backup">Copia de seguridad de los datos de la aplicación</string>
     <string name="settings_auto_restore_summary">Al reinstalar una aplicación, restaura la configuración y los datos de la copia de seguridad.</string>
     <string name="settings_info">Todas las copias de seguridad están encriptadas en su teléfono. Para restaurar desde la copia de seguridad, necesitará su código de recuperación de 12 palabras.</string>
@@ -149,12 +149,12 @@
     <string name="restore_storage_got_it">Listo</string>
     <string name="settings_backup_files_title">Archivos y carpetas incluidos</string>
     <string name="settings_category_apps">Copia de seguridad de la app</string>
-    <string name="settings_category_storage">Copia de seguridad del almacenamiento (fase beta)</string>
+    <string name="settings_category_storage">Copia de seguridad del almacenamiento (beta)</string>
     <string name="settings_backup_storage_dialog_title">Característica en fase beta</string>
     <string name="settings_backup_storage_dialog_message">La copia de seguridad de los archivos es todavía en fase beta y podría no funcionar. No confíe en ella para los datos importantes.</string>
     <string name="storage_fake_nextcloud_summary_unavailable_market">No instalada</string>
     <string name="restore_skip_apps">No restaurar aplicaciones</string>
-    <string name="restore_storage_choose_snapshot">Elija una copia de seguridad de almacenamiento para restaurar (fase beta)</string>
+    <string name="restore_storage_choose_snapshot">Elije un archivo de copia de seguridad para restaurar (beta)</string>
     <string name="restore_storage_in_progress_info">Sus archivos se están restaurando en segundo plano. Puede empezar a usar su teléfono mientras se está ejecutando.
 \n
 \nAlgunas aplicaciones (por ejemplo, Signal o WhatsApp) pueden requerir que los archivos estén completamente restaurados para importar una copia de seguridad. Intente evitar iniciar esas aplicaciones antes de que la restauración de los archivos se haya completado.</string>
@@ -169,7 +169,7 @@
     <string name="error_no_store">Error: No hay ninguna tienda de aplicaciones instalada</string>
     <string name="storage_fake_davx5_summary_installed">Toque para configurar un montaje WebDAV</string>
     <string name="storage_fake_davx5_summary_unavailable">El montaje de WebDAV no está disponible. Configure uno.</string>
-    <string name="notification_backup_disabled">Copia de seguridad no activada</string>
+    <string name="notification_backup_disabled">Copia de seguridad no habilitada</string>
     <string name="backup_app_in_progress">Copia de seguridad en progreso</string>
     <string name="backup_app_success">Datos guardados</string>
     <string name="restore_app_status_failed">La restauración ha fallado</string>
@@ -189,7 +189,7 @@
     <string name="settings_backup_dialog_disable">Apagar de todos modos</string>
     <string name="storage_not_recommended"><xliff:g example="Skynet">%1$s</xliff:g> (No recomendado)</string>
     <string name="about_contributing_organizations_title">Organizaciones colaboradoras</string>
-    <string name="about_contributing_organizations_content"><a href="https://www.calyxinstitute.org"> Calyx Institute</a>para su uso en<a href="https://calyxos.org">CalyxOS</a><a href="https://nlnet.nl/project/Seedvault/">Fondo PET NGI0 de NLnet</a><a href="https://nlnet.nl/project/SeedVault-Integrity/">Fondo fiduciario NGI0 de NLnet </a></string>
+    <string name="about_contributing_organizations_content"><a href="https://www.calyxinstitute.org"> Calyx Institute</a>para su uso en<a href="https://calyxos.org">CalyxOS</a>\n<a href="https://nlnet.nl/project/Seedvault/">Fondo PET NGI0 de NLnet</a>\n<a href="https://nlnet.nl/project/SeedVault-Integrity/">Fondo fiduciario NGI0 de NLnet </a></string>
     <string name="about_contributor_headline">Colaboradores</string>
     <string name="about_contributor_content">En GitHub encontrará una <a href="https://github.com/seedvault-app/seedvault/graphs/contributors">lista de colaboradores</a>.</string>
     <string name="storage_user_selected_location_title">Ubicación elegida por el usuario</string>
@@ -264,4 +264,20 @@
     <string name="backup_app_check_error_title">\@string/notification_checking_error_title</string>
     <string name="backup_app_check_error_has_snapshots">Hemos encontrado %1$d instantáneas de copia de seguridad, algunas de ellas están corruptas o tienen errores. A continuación se muestran las copias de seguridad que se han podido restaurar.</string>
     <string name="backup_app_stopped_no_intent">No se puede iniciar la aplicación</string>
+    <string name="settings_backup_file_check_title">Comprobar la integridad de la copia de seguridad</string>
+    <string name="settings_backup_file_check_summary">Asegúrate de que mi copia de seguridad funciona para restaurar archivos</string>
+    <string name="settings_backup_metered_title">Copia de seguridad detenida</string>
+    <string name="settings_backup_metered_text">La copia de seguridad no se realizará porque el dispositivo está utilizando datos móviles.\n\nPuedes activar las copias de seguridad en datos móviles en «Programación de copias de seguridad».</string>
+    <string name="settings_file_check_title">Verificar la integridad del archivo de copia de seguridad</string>
+    <string name="settings_file_check_text">Aquí puedes ejecutar una comprobación puntual para verificar tu copia de seguridad de archivos.</string>
+    <string name="settings_file_check_text2">Seleccione la cantidad de datos de archivo que deben descargarse para la comprobación. Cuanto más seleccione, más tardará, pero más fiable será la comprobación.\n\nLa comprobación se ejecutará en segundo plano y te enviará una notificación una vez finalizada.</string>
+    <string name="storage_round_sync_summary_prefix">RoundSync remoto:</string>
+    <string name="notification_finalizing_text">Finalizando copia de seguridad…</string>
+    <string name="notification_failed_metered_text">La copia de seguridad se ha cancelado. ¿Estás usando datos móviles? Conéctate a una red Wi-Fi para continuar.</string>
+    <string name="notification_pruning_blobs_title">Eliminando datos de copia de seguridad antiguos…</string>
+    <string name="notification_usb_monitor_title">Esperando la unidad USB…</string>
+    <string name="notification_usb_monitor_text">Una vez que tu unidad USB esté disponible, iniciaremos una copia de seguridad.</string>
+    <string name="restore_set_bad_decrypt">No se han podido descifrar las copias de seguridad.\n\nLo más probable es que el código de recuperación actual no sea el que se utilizó para hacer la copia de seguridad.</string>
+    <string name="restore_set_button_try_again">Intentar de nuevo</string>
+    <string name="restore_set_button_restart">Empezar desde el principio</string>
 </resources>

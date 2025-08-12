@@ -15,17 +15,17 @@
     <string name="data_management_label">Seedvault Backup</string>
     <string name="settings_backup_location">Backup location</string>
     <string name="settings_category_apps">App backup</string>
-    <string name="settings_backup_apk_summary">Back up the apps themselves. Otherwise, only app data would get backed up.</string>
+    <string name="settings_backup_apk_summary">Backs up the apps themselves. Otherwise, only app data will get backed up.</string>
     <string name="settings_backup_apk_dialog_cancel">Cancel</string>
-    <string name="settings_backup_apk_dialog_title">Really disable app backup?</string>
-    <string name="settings_backup_apk_dialog_disable">Disable app backup</string>
+    <string name="settings_backup_apk_dialog_title">Really disable APK backups?</string>
+    <string name="settings_backup_apk_dialog_disable">Disable APK backups</string>
     <string name="settings_backup_status_summary">Last backup: %1$s</string>
     <string name="settings_backup_exclude_apps">Exclude apps</string>
     <string name="settings_backup_now">Backup now</string>
     <string name="storage_fragment_backup_title">Choose where to store backups</string>
     <string name="notification_error_title">Backup error</string>
     <string name="notification_error_text">A device backup failed to run.</string>
-    <string name="backup_section_system">System apps</string>
+    <string name="backup_section_system">System data</string>
     <string name="backup_sms">SMS text messages</string>
     <string name="restore_app_not_yet_backed_up">Was not yet backed up</string>
     <string name="storage_fake_nextcloud_summary">Tap to install</string>
@@ -35,16 +35,16 @@
     <string name="restore_app_not_installed">App not installed</string>
     <string name="restore_restoring">Restoring backup</string>
     <string name="storage_internal_warning_choose_other">Choose other</string>
-    <string name="about_summary">A backup application using Android\'s internal backup API.</string>
+    <string name="about_summary">A backup application using Android\'s internal backup API. It is Free Software, released under Apache 2 license.\n\nLike all software, Seedvault may contain bugs or vulnerabilities.</string>
     <string name="storage_internal_warning_title">Warning</string>
-    <string name="settings_backup_apk_title">App backup</string>
+    <string name="settings_backup_apk_title">APK backups</string>
     <string name="restore_app_not_allowed">App didn\'t allow backup</string>
     <string name="settings_backup_status_title">Backup status</string>
     <string name="storage_fake_nextcloud_summary_unavailable_market">Not installed</string>
     <string name="storage_check_fragment_restore_title">Looking for backups…</string>
     <string name="recovery_code_input_hint_5">Word 5</string>
     <string name="recovery_code_verification_ok_title">Recovery code verified</string>
-    <string name="settings_backup_apk_dialog_message">Disabled app backup will still back up app data. However, it will not get restored automatically. \n \nYou will need to install all your apps manually while having \"Automatic Restore\" switched on.</string>
+    <string name="settings_backup_apk_dialog_message">After disabling APK backups, app data will still be backed up. However, it will not get restored automatically.\n\nYou will need to install all your apps manually while having \"Automatic Restore\" switched on.</string>
     <string name="storage_check_fragment_backup_title">Initialising backup location…</string>
     <string name="recovery_code_input_hint_4">Word 4</string>
     <string name="settings_expert_logcat_summary">Developers can diagnose bugs with these logs.
@@ -59,7 +59,7 @@
     <string name="recovery_code_verification_error_message">You have entered an invalid recovery code. Please try again!
 \n
 \nIf you have lost your code, tap on \'Generate new code\' below.</string>
-    <string name="recovery_code_recreated">New recovery code has been created successfully</string>
+    <string name="recovery_code_recreated">New recovery code has been created successfully. Exiting…</string>
     <string name="restore_set_empty_result">No suitable backups found at given location.
 \n
 \nThis is most likely due to a wrong recovery code or a storage error.</string>
@@ -77,7 +77,7 @@
     <string name="restore_invalid_location_message">We could not find any backups at this location.
 \n
 \nPlease choose another location that contains a %s folder.</string>
-    <string name="restore_set_error">An error occurred while loading the backups.</string>
+    <string name="restore_set_error">An error occurred while loading the backups:</string>
     <string name="restore_installing_tap_to_install">Tap to install</string>
     <string name="restore_next">Next</string>
     <string name="restore_installing_packages">Re-installing apps</string>
@@ -85,19 +85,19 @@
     <string name="restore_app_status_failed">Restore failed</string>
     <string name="restore_storage_skip">Skip restoring files</string>
     <string name="about_title">About</string>
-    <string name="restore_storage_choose_snapshot">Choose a storage backup to restore (experimental)</string>
+    <string name="restore_storage_choose_snapshot">Choose a file backup to restore (beta)</string>
     <string name="restore_storage_in_progress_title">Files are being restored…</string>
     <string name="restore_storage_got_it">Got it</string>
     <string name="storage_internal_warning_message">You have chosen internal storage for your backup. This will not be available when your phone is lost or broken.</string>
     <string name="about_version">Version: %s</string>
-    <string name="settings_backup_storage_dialog_message">Backing up files is still experimental and might not work. Do not rely on it for important data.</string>
-    <string name="settings_category_storage">Storage backup (experimental)</string>
+    <string name="settings_backup_storage_dialog_message">Backing up files is beta and might not work. Do not rely on it for important data.</string>
+    <string name="settings_category_storage">File backup (beta)</string>
     <string name="settings_backup_storage_title">Backup my files</string>
     <string name="settings_backup_files_title">Included files and folders</string>
     <string name="settings_backup_files_summary">None</string>
     <string name="settings_backup_recovery_code">Recovery code</string>
     <string name="settings_backup_recovery_code_summary">Verify existing code or generate a new one</string>
-    <string name="settings_backup_storage_dialog_title">Experimental feature</string>
+    <string name="settings_backup_storage_dialog_title">Beta feature</string>
     <string name="settings_backup_storage_dialog_ok">Enable anyway</string>
     <string name="settings_expert_title">Expert settings</string>
     <string name="settings_backup_storage_battery_optimization">Warning: No automatic backups, because battery optimization is active.</string>
@@ -162,7 +162,7 @@
     <string name="notification_error_no_main_key_text">Generate a new recovery code to complete upgrade and continue to use backups.</string>
     <string name="backup_call_log">Call history</string>
     <string name="backup_contacts">Local contacts</string>
-    <string name="backup_section_user">Installed apps</string>
+    <string name="backup_section_user">Apps</string>
     <string name="backup_app_in_progress">Backing up</string>
     <string name="backup_app_was_stopped">Not backed up as it wasn\'t used recently</string>
     <string name="backup_app_quota_exceeded">Backup quota exceeded</string>
