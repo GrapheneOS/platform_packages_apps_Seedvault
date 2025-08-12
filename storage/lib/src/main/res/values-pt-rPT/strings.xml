@@ -38,4 +38,5 @@
     <string name="content_downloads">Descargas</string>
     <string name="content_videos">Vídeos</string>
     <string name="snapshots_title">Backups de ficheiros disponíveis</string>
+    <string name="content_remove">Remover</string>
 </resources>

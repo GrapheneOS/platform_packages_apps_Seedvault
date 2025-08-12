@@ -25,7 +25,7 @@
     <string name="restore_set_empty_result">Tietystä sijainnista ei löydy sopivia varmuuskopioita.
 \n
 \nTämä johtuu todennäköisesti väärästä palautuskoodista tai tallennusvirheestä.</string>
-    <string name="restore_set_error">Varmuuskopioiden lataamisessa tapahtui virhe.</string>
+    <string name="restore_set_error">Varmuuskopioiden lataamisessa tapahtui virhe:</string>
     <string name="restore_invalid_location_message">Emme löytäneet varmuuskopioita tästä sijainnista.
 \n
 \nValitse toinen sijainti, joka sisältää %s-kansion.</string>

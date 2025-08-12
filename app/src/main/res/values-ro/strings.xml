@@ -213,7 +213,7 @@
     <string name="storage_webdav_config_url_helper">Asigură-te că introduci adresa URL completă aici. De exemplu. pentru Nextcloud, are forma https://serverultau.com/remote.php/webdav</string>
     <string name="storage_webdav_config_user">Nume de utilizator</string>
     <string name="backup_section_system">Date de sistem</string>
-    <string name="backup_app_was_stopped">Copia de rezervă nu a fost salvată deoarece aplicația nu a fost folosită de mult timp</string>
+    <string name="backup_app_was_stopped">Nu s-a creat copia de rezervă deoarece aplicația nu a fost folosită de mult timp</string>
     <string name="backup_app_no_data">Aplicația a raportat că nu există date pentru a face copii de rezervă</string>
     <string name="storage_fake_nextcloud_summary_unavailable">Contul nu este disponibil. Configurează unul (sau dezactivează parola).</string>
     <string name="notification_space_error_title">Spațiu insuficient</string>

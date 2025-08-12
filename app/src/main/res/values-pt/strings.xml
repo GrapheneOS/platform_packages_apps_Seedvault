@@ -181,8 +181,7 @@
     <string name="settings_expert_logcat_error">Erro: Não foi possível salvar os registros do app</string>
     <string name="storage_user_selected_location_title">Local escolhido pelo utilizador</string>
     <string name="settings_scheduling_metered_title">Fazer backup nos dados móveis</string>
-    <string name="about_contributing_organizations_content"><a href="https://www.calyxinstitute.org">Instituto Calyx</a> para o uso no <a href="https://calyxos.org">CalyxOS</a> 
-\n<a href="https://nlnet.nl/project/Seedvault/">NGI0 PET Fund por NLnet</a></string>
+    <string name="about_contributing_organizations_content"><a href="https://www.calyxinstitute.org">Instituto Calyx</a> para o uso no <a href="https://calyxos.org">CalyxOS</a> \n<a href="https://nlnet.nl/project/Seedvault/">NGI0 PET Fund por NLnet</a>\n<a href="https://nlnet.nl/project/Seedvault/">NGI0 Entrust Fund por NLnet</a></string>
     <string name="storage_fake_davx5_summary_installed">Toque para configurar uma pasta WebDAV</string>
     <string name="about_contributor_headline">Colaboradores</string>
     <string name="about_contributor_content">Veja a <a href="https://github.com/seedvault-app/seedvault/graphs/contributors">lista de colaboradores</a> no GitHub.</string>

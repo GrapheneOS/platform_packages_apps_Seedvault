@@ -153,7 +153,7 @@
     <string name="restore_skip_apps">Hoppa över återställning av appar</string>
     <string name="restore_choose_restore_set">Välj en säkerhetskopia att återställa</string>
     <string name="restore_skip">Återställ inte</string>
-    <string name="restore_set_error">Ett fel uppstod medan säkerhetskopiorna lästes in.</string>
+    <string name="restore_set_error">Ett fel uppstod medan säkerhetskopiorna lästes in:</string>
     <string name="restore_installing_packages">Ominstallerar appar</string>
     <string name="restore_next">Nästa</string>
     <string name="restore_restoring">Återställer säkerhetskopia</string>

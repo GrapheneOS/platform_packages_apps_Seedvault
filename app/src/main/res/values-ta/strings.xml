@@ -27,7 +27,7 @@
     <string name="restore_set_empty_result">கொடுக்கப்பட்ட இடத்தில் பொருத்தமான காப்புப்பிரதிகள் இல்லை.
 \n
 \nஇது பெரும்பாலும் தவறான மீட்பு குறியீடு அல்லது சேமிப்பக பிழை காரணமாக இருக்கலாம்.</string>
-    <string name="restore_set_error">காப்புப்பிரதிகளை ஏற்றும்போது பிழை ஏற்பட்டது.</string>
+    <string name="restore_set_error">காப்புப்பிரதிகளை ஏற்றும்போது பிழை ஏற்பட்டது:</string>
     <string name="restore_invalid_location_title">காப்பு இல்லை</string>
     <string name="restore_skip">மீட்டெடுக்க வேண்டாம்</string>
     <string name="restore_choose_restore_set">மீட்டமைக்க ஒரு காப்புப்பிரதியைத் தேர்வு செய்யவும்</string>
@@ -61,7 +61,7 @@
     <string name="notification_channel_title">காப்புப்பிரதி அறிவிப்பு</string>
     <string name="notification_title">காப்புப்பிரதி இயங்குகிறது</string>
     <string name="notification_backup_already_running">காப்புப்பிரதி ஏற்கனவே செயல்பாட்டில் உள்ளது</string>
-    <string name="recovery_code_recreated">புதிய மீட்பு குறியீடு வெற்றிகரமாக உருவாக்கப்பட்டது</string>
+    <string name="recovery_code_recreated">புதிய மீட்பு குறியீடு வெற்றிகரமாக உருவாக்கப்பட்டுள்ளது. வெளியேறுதல்…</string>
     <string name="recovery_code_verification_new_dialog_message">புதிய குறியீட்டை உருவாக்குவது உங்கள் இருக்கும் காப்புப்பிரதிகளை அணுக முடியாததாக ஆக்கும். முடிந்தால் அவற்றை நீக்க முயற்சிப்போம்.
 \n
 \nநீங்கள் இதை நிச்சயமாக செய்ய விரும்புகிறீர்களா\?</string>
@@ -114,9 +114,9 @@
     <string name="settings_backup_exclude_apps">செயலிகளை விலக்கு</string>
     <string name="settings_backup_status_summary">கடைசி காப்பு: %1$s</string>
     <string name="settings_backup_status_title">காப்பு நிலை</string>
-    <string name="settings_backup_apk_dialog_disable">செயலி காப்புப்பிரதியை முடக்கு</string>
+    <string name="settings_backup_apk_dialog_disable">APK காப்புப்பிரதிகளை முடக்கு</string>
     <string name="settings_backup_apk_dialog_cancel">ரத்து</string>
-    <string name="settings_backup_apk_dialog_message">முடக்கப்பட்ட செயலி காப்புப்பிரதி இன்னும் செயலி தரவை காப்புப் பிரதி எடுக்கும். இருப்பினும், அது தானாகவே மீட்டமைக்கப்படாது. \n \n\"தானியங்கி மீட்பு\" இயக்கப்பட்டிருக்கும் போது உங்கள் எல்லா செயலிகளையும் நீங்களாகவே நிறுவ வேண்டும்.</string>
+    <string name="settings_backup_apk_dialog_message">APK காப்புப்பிரதிகளை முடக்கிய பின், பயன்பாட்டு தரவு இன்னும் காப்புப் பிரதி எடுக்கப்படும். இருப்பினும், அது தானாக மீட்டெடுக்கப்படாது. \n\n\"தானியங்கி மீட்டெடுப்பு\" இயக்கப்பட்டிருக்கும் போது உங்கள் எல்லா பயன்பாடுகளையும் கைமுறையாக நிறுவ வேண்டும்.</string>
     <string name="settings_backup_apk_dialog_title">பயன்பாட்டு காப்புப்பிரதிகளை உண்மையில் முடக்கவா?</string>
     <string name="settings_backup_apk_summary">செயலிகள் தாங்களே காப்புப் பிரதி எடுக்கும். இல்லையெனில், செயலித் தரவு மட்டுமே காப்புப் பிரதி எடுக்கப்படும்.</string>
     <string name="settings_auto_restore_summary_usb">குறிப்பு: இது வேலை செய்ய உங்கள் %1$s செருகப்பட வேண்டும்.</string>
@@ -151,7 +151,7 @@
     <string name="restore_skip_apps">மீட்டெடுக்கும் பயன்பாடுகளைத் தவிர்க்கவும்</string>
     <string name="restore_storage_selection_description">தேர்ந்தெடுக்கப்பட்ட கோப்புகள் மீட்டமைக்கப்படும். கோப்புறைகளை அவற்றில் உள்ள கோப்புகளைக் காண தட்டவும்.</string>
     <string name="restore_storage_got_it">கிடைத்தது</string>
-    <string name="about_contributing_organizations_content"><a href="https://www.calyxinstitute.org"> கலிக்ச் இன்ச்டிடியூட் </a> <a href="https://calyxos.org"> கலிக்சோச் </a> இல் பயன்படுத்த\n <a href="https://nlnet.nl/project/seedvault/"> ngi0 PET FUND by nlnet </a></string>
+    <string name="about_contributing_organizations_content"><a href="https://www.calyxinstitute.org">கலிக்ச் இன்ச்டிடியூட்</a> கலிக்சோச் <a href="https://calyxos.org">இல் பயன்படுத்த</a>\n<a href="https://nlnet.nl/project/Seedvault/">NLnet வழங்கும் NGI0 PET நிதி</a>\n<a href="https://nlnet.nl/project/SeedVault-Integrity/">NLnet மூலம் NGI0 அறக்கட்டளை நிதி</a></string>
     <string name="settings_backup_storage_battery_optimization">எச்சரிக்கை: தானியங்கி காப்புப்பிரதிகள் இல்லை, ஏனெனில் பேட்டரி தேர்வுமுறை செயலில் உள்ளது.</string>
     <string name="settings_backup_new_code_dialog_title">புதிய மீட்பு குறியீடு தேவை</string>
     <string name="storage_fake_drive_title">யூ.எச்.பி ஃப்ளாச் இயக்கி</string>
@@ -205,7 +205,7 @@
     <string name="setup_button">புதியதைத் தொடங்குங்கள்</string>
     <string name="settings_backup_status_next_backup">அடுத்த காப்புப்பிரதி: %1$s</string>
     <string name="settings_backup_scheduling_title">காப்பு திட்டமிடல்</string>
-    <string name="settings_category_storage">சேமிப்பக காப்புப்பிரதி (பீட்டா)</string>
+    <string name="settings_category_storage">கோப்பு காப்புப்பிரதி (பீட்டா)</string>
     <string name="settings_backup_files_summary">எதுவுமில்லை</string>
     <string name="settings_expert_logcat_summary">உருவாக்குபவர்கள் இந்த பதிவுகள் மூலம் பிழைகள் கண்டறிய முடியும்.\n\n எச்சரிக்கை: பதிவு கோப்பில் தனிப்பட்ட முறையில் அடையாளம் காணக்கூடிய தகவல்கள் இருக்கலாம். முன்பு மதிப்பாய்வு செய்து பகிரப்பட்ட பிறகு நீக்கு!</string>
     <string name="storage_fake_nextcloud_summary_unavailable_market">நிறுவப்படவில்லை</string>
@@ -216,8 +216,59 @@
     <string name="restore_select_packages">மீட்டமைக்க பயன்பாடுகளைத் தேர்ந்தெடுக்கவும்</string>
     <string name="restore_select_packages_all">பின்வரும் பயன்பாடுகள் அனைத்தும்</string>
     <string name="error_no_store">பிழை: ஆப் கடை எதுவும் நிறுவப்படவில்லை</string>
-    <string name="restore_storage_choose_snapshot">மீட்டமைக்க சேமிப்பக காப்புப்பிரதியைத் தேர்வுசெய்க (பீட்டா)</string>
+    <string name="restore_storage_choose_snapshot">மீட்டமைக்க (பீட்டா) கோப்பு காப்புப்பிரதியைத் தேர்வுசெய்க</string>
     <string name="settings_expert_logcat_error">பிழை: பயன்பாட்டு பதிவைச் சேமிக்க முடியவில்லை</string>
     <string name="storage_webdav_config_malformed_url">தவறான WebDAV முகவரி</string>
     <string name="storage_webdav_name">Webdav %s</string>
+    <string name="notification_pruning_blobs_title">பழைய காப்பு தரவை நீக்குதல்…</string>
+    <string name="backup_app_stopped_no_intent">பயன்பாட்டைத் தொடங்க முடியாது</string>
+    <string name="restore_set_button_restart">ஆரம்பத்தில் இருந்து தொடங்குங்கள்</string>
+    <string name="restore_set_bad_decrypt">காப்புப்பிரதிகளை மறைகுறியாக்க முடியவில்லை. \n\nதற்போதைய மீட்புக் குறியீடு பெரும்பாலும் காப்புப்பிரதியை உருவாக்க பயன்படுத்தப்பட்ட ஒன்றல்ல.</string>
+    <string name="restore_set_button_try_again">மீண்டும் முயற்சிக்கவும்</string>
+    <string name="restore_recycle_backup_button_yes">காப்புப்பிரதியை மீண்டும் பயன்படுத்தவும்</string>
+    <string name="settings_backup_app_check_title">ஒருமைப்பாட்டை சரிபார்க்கவும்</string>
+    <string name="settings_backup_app_check_summary">மீட்டெடுப்பதற்கு காப்புப்பிரதி செயல்படுகிறது என்பதை உறுதிப்படுத்தவும்</string>
+    <string name="settings_backup_metered_text">உங்கள் சாதனம் மொபைல் தரவைப் பயன்படுத்துவதால் காப்புப்பிரதி தொடராது. \n\n\"காப்பு திட்டமிடல்\" இன் கீழ் மொபைல் தரவுகளில் காப்புப்பிரதிகளை இயக்கலாம்.</string>
+    <string name="settings_app_check_text">ஒவ்வொரு காப்பு செயல்முறையும் தானாகவே காப்பு ஒருமைப்பாட்டை சரிபார்க்கும். இருப்பினும், நேரத்தை மிச்சப்படுத்த, உண்மையான பயன்பாட்டு தரவு பதிவிறக்கம் செய்யப்பட்டு சரிபார்க்கப்படாது.</string>
+    <string name="settings_app_check_text2">உங்கள் பயன்பாட்டு காப்புப்பிரதியை சரிபார்க்க இங்கே நீங்கள் ஒரு முறை காசோலையை இயக்கலாம். காசோலைக்கு எவ்வளவு பயன்பாட்டு தரவு பதிவிறக்கம் செய்யப்பட வேண்டும் என்பதைத் தேர்ந்தெடுக்கவும். நீங்கள் எவ்வளவு அதிகமாகத் தேர்ந்தெடுக்கிறீர்களோ, அவ்வளவு நேரம் எடுக்கும், ஆனால் காசோலை மிகவும் நம்பகமானதாக இருக்கும். இது பின்னணியில் இயங்கும் மற்றும் காசோலை முடிந்ததும் அறிவிப்பைக் காண்பிக்கும்.</string>
+    <string name="settings_app_check_button">காப்புப்பிரதியை சரிபார்க்கவும்</string>
+    <string name="settings_file_check_title">கோப்பு காப்புப்பிரதி ஒருமைப்பாட்டை சரிபார்க்கவும்</string>
+    <string name="settings_file_check_text">உங்கள் கோப்பு காப்புப்பிரதியை சரிபார்க்க இங்கே நீங்கள் ஒரு முறை காசோலையை இயக்கலாம்.</string>
+    <string name="settings_file_check_text2">காசோலைக்கு எவ்வளவு கோப்பு தரவு பதிவிறக்கம் செய்யப்பட வேண்டும் என்பதைத் தேர்ந்தெடுக்கவும். நீங்கள் எவ்வளவு அதிகமாகத் தேர்ந்தெடுக்கிறீர்களோ, அவ்வளவு நேரம் எடுக்கும், ஆனால் காசோலை மிகவும் நம்பகமானதாக இருக்கும். \n\nகாசோலை பின்னணியில் இயங்கும், அது முடிந்ததும் அறிவிப்பை உங்களுக்கு அனுப்பும்.</string>
+    <string name="backup_app_check_success_disclaimer">குறிப்பு: தனிப்பட்ட பயன்பாடுகள் அவற்றின் பயனர் தரவு அனைத்தும் காப்புப்பிரதியில் உள்ளதா என்பதை நாங்கள் சரிபார்க்க முடியாது.</string>
+    <string name="backup_app_check_error_no_snapshots">எங்களால் எந்த காப்புப்பிரதியும் கண்டுபிடிக்க முடியவில்லை. முதலில் வெற்றிகரமான காப்புப்பிரதியை இயக்கவும், பின்னர் மீண்டும் சரிபார்க்க முயற்சிக்கவும்.</string>
+    <string name="backup_app_check_error_only_broken_snapshots">%1$d காப்பு ச்னாப்சாட்களைக் கண்டோம். இருப்பினும், அவை அனைத்தும் சிதைந்தன. தயவுசெய்து ஒரு வெற்றிகரமான காப்புப்பிரதியை இயக்கவும், பின்னர் மீண்டும் சரிபார்க்க முயற்சிக்கவும்.</string>
+    <string name="backup_app_check_error_has_snapshots">நாங்கள் %1$d காப்பு ச்னாப்சாட்களைக் கண்டறிந்தோம், அவற்றில் சில ஊழல் நிறைந்தவை அல்லது பிழைகள் உள்ளன. மீட்டெடுக்கக்கூடிய காப்புப்பிரதிகள் கீழே உள்ளன.</string>
+    <string name="restore_restore_set_apps"><xliff:g example="42" id="apps">%1$d</xliff:g> பயன்பாடுகளுக்கான பயனர் தரவு உள்ளது (<xliff:g example="1 GB" id="size">%2$s</xliff:g>)</string>
+    <string name="backup_app_check_error_no_result">விரிவான முடிவுகளை இழந்தோம். காசோலையை இயக்கியதிலிருந்து நீண்ட நேரம் கடந்துவிட்டதா? மீண்டும் இயங்க முயற்சிக்கவும்.</string>
+    <string name="restore_recycle_backup_text">இந்த சாதனத்தில் நீங்கள் மீட்டெடுத்த \'%s\' காப்புப்பிரதியை மீண்டும் பயன்படுத்தலாம். இது புதிய காப்புப்பிரதிகளை விரைவாக உருவாக்கும் மற்றும் குறைந்த தரவைப் பயன்படுத்தும். \n\nஇருப்பினும், உங்கள் பழைய சாதனம் இந்த காப்புப்பிரதிக்கான அணுகலை இழக்கும். உங்கள் பழைய சாதனத்திற்கான அணுகலை நீங்கள் வைத்திருக்க விரும்பினால், அதற்கு பதிலாக புதிய காப்புப்பிரதியை உருவாக்கலாம். தற்போதுள்ள காப்புப்பிரதியை மீண்டும் பயன்படுத்துவதை விட இது அதிக தரவைப் பயன்படுத்தும்.</string>
+    <string name="restore_recycle_backup_button_no">புதிய காப்புப்பிரதியை உருவாக்கவும்</string>
+    <string name="settings_backup_file_check_title">காப்பு ஒருமைப்பாட்டை சரிபார்க்கவும்</string>
+    <string name="settings_backup_file_check_summary">கோப்புகளை மீட்டெடுப்பதற்காக எனது காப்புப்பிரதி செயல்படுகிறது என்பதை உறுதிப்படுத்திக் கொள்ளுங்கள்</string>
+    <string name="notification_checking_finished_title">பயன்பாட்டு காப்புப்பிரதி ஒருமைப்பாடு சரிபார்க்கப்பட்டது</string>
+    <string name="restore_restore_set_apps_no_size">&lt;Xliff: g எடுத்துக்காட்டு = \"42\" அடையாளம் = \"apps\"&gt;%1$d &lt;/xliff: g&gt; பயன்பாடுகள்</string>
+    <string name="restore_restore_set_apks"><xliff:g example="42" id="apps">%1$d</xliff:g> பயன்பாடுகளைக் கொண்டுள்ளது (<xliff:g example="1 GB" id="size">%2$s</xliff:g>)</string>
+    <string name="restore_restore_set_apks_no_size">&lt;Xliff: g எடுத்துக்காட்டு = \"42\" அடையாளம் = \"பயன்பாடுகள்\"&gt;%1$d &lt;/xliff: g&gt; பயன்பாடுகள் உள்ளன</string>
+    <string name="restore_restore_set_can_not_get_restored">இந்த காப்புப்பிரதியில் சில பிழைகள் உள்ளன. நீங்கள் அதை ஓரளவு மீட்டெடுக்க முடியும்.</string>
+    <string name="restore_recycle_backup_title">இந்த காப்புப்பிரதியை மீண்டும் பயன்படுத்தவா?</string>
+    <string name="settings_backup_metered_title">காப்புப்பிரதி நிறுத்தப்பட்டது</string>
+    <string name="storage_round_sync_summary_prefix">RoundSync ரிமோட்:</string>
+    <string name="notification_init_text">மறுபயன்பாட்டிற்கு ஏற்கனவே உள்ள காப்புப்பிரதி தரவைத் தயாரித்தல்…</string>
+    <string name="notification_checking_title">பயன்பாட்டு காப்புப்பிரதிகளைச் சரிபார்க்கிறது…</string>
+    <string name="notification_checking_finished_text">%2$s வேகத்தில் %1$s ஐ வெற்றிகரமாக சரிபார்க்கவும்.</string>
+    <string name="notification_checking_error_title">காப்பு பிழைகள் காணப்படுகின்றன</string>
+    <string name="backup_app_stopped_button">ஏவுதல்</string>
+    <string name="settings_app_check_title">பயன்பாட்டு காப்புப்பிரதி ஒருமைப்பாட்டை சரிபார்க்கவும்</string>
+    <string name="settings_app_check_warning">எச்சரிக்கை: பெரிய அளவிலான தரவைப் பதிவிறக்குவதற்கு நீண்ட நேரம் ஆகலாம்.</string>
+    <string name="notification_finalizing_text">காப்புப்பிரதியை இறுதி செய்தல்…</string>
+    <string name="notification_failed_text">காப்புப்பிரதியை இயக்கும் போது பிழை ஏற்பட்டது.</string>
+    <string name="notification_failed_metered_text">காப்புப்பிரதி கைவிடப்பட்டுள்ளது. நீங்கள் மொபைல் தரவைப் பயன்படுத்துகிறீர்களா? தொடர வைஃபை இணைக்கவும்.</string>
+    <string name="notification_pruning_channel_title">பழைய காப்புப்பிரதி அறிவிப்பை நீக்குதல்</string>
+    <string name="notification_pruning_title">பழைய காப்புப்பிரதிகளை நீக்குதல்…</string>
+    <string name="notification_checking_channel_title">பயன்பாட்டு காப்புப்பிரதி ஒருமைப்பாடு சோதனை</string>
+    <string name="notification_checking_error_text">விவரங்களுக்கு தட்டவும். %1$s சராசரியாக %2$s வேகத்தில் சோதித்தோம்.</string>
+    <string name="notification_checking_action">விவரங்கள்</string>
+    <string name="notification_usb_monitor_title">யூ.எச்.பி டிரைவிற்காக காத்திருக்கிறது…</string>
+    <string name="notification_usb_monitor_text">உங்கள் யூ.எச்.பி இயக்கி கிடைத்ததும், நாங்கள் காப்புப்பிரதியைத் தொடங்குவோம்.</string>
+    <string name="backup_app_check_success_intro">%1$d ச்னாப்சாட்கள் காணப்பட்டன மற்றும் அவற்றின் தரவின்%2$d %% (%3$s) வெற்றிகரமாக சரிபார்க்கப்பட்டது:</string>
 </resources>

@@ -24,7 +24,7 @@
     <string name="restore_set_empty_result">Không tìm thấy bản sao lưu phù hợp nào tại vị trí được cho.
 \n
 \nĐiều này có khả năng là do mã phục hồi sai hoặc lỗi bộ nhớ.</string>
-    <string name="restore_set_error">Đã xảy ra lỗi khi tải các bản sao lưu.</string>
+    <string name="restore_set_error">Đã xảy ra lỗi khi tải các bản sao lưu:</string>
     <string name="restore_invalid_location_message">Chúng tôi không thể tìm thấy bản sao lưu nào tại vị trí này.
 \n
 \nVui lòng chọn một vị trí khác có chứa thư mục %s.</string>

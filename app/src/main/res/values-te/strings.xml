@@ -111,7 +111,7 @@
     <string name="restore_set_empty_result">ఇక్కడ తగిన బ్యాకప్‌లు కనుగొనబడలేదు.
 \n
 \nఇది తప్పు రికవరీ కోడ్ లేదా నిల్వ లోపం వల్ల కావచ్చు.</string>
-    <string name="restore_set_error">బ్యాకప్‌లను లోడ్ చేస్తున్నప్పుడు లోపం సంభవించింది.</string>
+    <string name="restore_set_error">బ్యాకప్‌లను లోడ్ చేస్తున్నప్పుడు లోపం సంభవించింది:</string>
     <string name="restore_invalid_location_message">మేము ఇక్కడ బ్యాకప్‌లను కనుగొనలేకపోయాము.
 \n
 \nదయచేసి %s ఫోల్డర్ లో ఉన్న మరొక స్థానాన్ని ఎంచుకోండి.</string>

@@ -20,7 +20,7 @@
     <string name="restore_set_empty_result">Engin nothæf afrit fundust í þeirri geymslu sem bent var á.
 \n
 \nÞetta orsakast líklega af röngum endurvakningarkóða eða villu í afritageymslu.</string>
-    <string name="restore_set_error">Villa kom upp þegar reynt var að sækja öryggisafritin.</string>
+    <string name="restore_set_error">Villa kom upp þegar reynt var að sækja öryggisafritin:</string>
     <string name="restore_invalid_location_message">Engin öryggisafrit fundust á þessum geymslustað.
 \n
 \nVinsamlegast veldu annan afritageymslustað sem býður upp á %s möppu.</string>

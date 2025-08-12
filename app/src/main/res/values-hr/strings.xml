@@ -22,7 +22,7 @@
     <string name="restore_set_empty_result">Na zadanom mjestu nema odgovarajućih sigurnosnih kopija.
 \n
 \nNajvjerojatnije zbog pogrešnog koda za obnovu ili greške u spremištu.</string>
-    <string name="restore_set_error">Došlo je do greške pri učitavanju sigurnosnih kopija.</string>
+    <string name="restore_set_error">Došlo je do greške pri učitavanju sigurnosnih kopija:</string>
     <string name="restore_invalid_location_message">Na ovom mjestu nema sigurnosnih kopija.
 \n
 \nOdaberi jedno drugo mjesto koje sadrži %s mapu.</string>
