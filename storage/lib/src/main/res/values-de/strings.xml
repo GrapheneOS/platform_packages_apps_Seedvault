@@ -12,9 +12,9 @@
     <string name="notification_prune">Alte Sicherungen entfernen…</string>
     <string name="notification_restore_title">Stelle Dateien wieder her…</string>
     <string name="notification_restore_info">%1$d/%2$d</string>
-    <string name="snapshots_title">Verfügbare Datensicherungen</string>
-    <string name="snapshots_empty">Keine Datensicherungen gefunden \n \nEs gibt leider nichts, was wiederhergestellt werden kann.</string>
-    <string name="snapshots_error">Fehler beim Laden von Snapshots</string>
+    <string name="snapshots_title">Verfügbare Dateisicherungen</string>
+    <string name="snapshots_empty">Keine Dateisicherungen gefunden \n \nEs gibt leider nichts, was wiederhergestellt werden kann.</string>
+    <string name="snapshots_error">Fehler beim Laden von Datensicherungen</string>
     <string name="notification_restore_channel_title">Dateiwiederherstellung</string>
     <string name="content_options">Optionen</string>
     <string name="notification_restore_complete_errors">%1$d Dateien enthielten Fehler.</string>
@@ -22,7 +22,7 @@
     <string name="select_files_button_restore">Ausgewählte Dateien wiederherstellen</string>
     <string name="notification_restore_complete_dups">%1$d Dateien waren doppelt.</string>
     <string name="select_files_number_of_files">%1$d Datei(en)</string>
-    <string name="check_success_intro">%1$d Datensicherungen gefunden and %2$d deren Daten (%3$s) erfolgreich verifiziert:</string>
+    <string name="check_success_intro">%1$d Datensicherungen gefunden und %2$d ihrer Daten (%3$s) erfolgreich verifiziert:</string>
     <string name="notification_check_title">Überprüfe Dateisicherung…</string>
     <string name="check_error_has_snapshots">Es wurden %1$d Datensicherungen gefunden, manche sind defekt or haben Fehler. Unten sind die Sicherungen, die partiell wiederhergestellt werden können.</string>
     <string name="check_error_no_result">Die Ergebnisdetails sind verschwunden. Wurde die Überprüfung vor langer Zeit ausgeführt? Versuchen Sie sie noch einmal auszuführen.</string>
@@ -39,4 +39,5 @@
     <string name="check_files_title">Dateien in dieser Sicherung</string>
     <string name="check_files_text">\"%s\" enthält die folgenden Dateien:</string>
     <string name="check_files_error">Sicherung defekt. Dateien möglicherweise nicht vollständig wiederherstellbar.</string>
+    <string name="content_remove">Entfernen</string>
 </resources>

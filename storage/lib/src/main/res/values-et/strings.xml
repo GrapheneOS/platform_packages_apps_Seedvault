@@ -1,2 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="notification_check_channel_title">Failide varukoopia terviklikkuse kontroll</string>
+    <string name="notification_backup_title">Failide varundamine</string>
+    <string name="notification_prune">Vanade varukoopiate eemaldamine…</string>
+    <string name="notification_backup_backup_files">Failide varundamine…</string>
+    <string name="notification_restore_channel_title">Failide taastamine</string>
+    <string name="notification_backup_scanning">Failide skannimine…</string>
+    <string name="content_options">Valikud</string>
+    <string name="content_audio">Helifailid</string>
+    <string name="content_add">Lisa</string>
+    <string name="notification_restore_title">Failide taastamine…</string>
+    <string name="notification_check_title">Failide varukoopiate kontrollimine…</string>
+    <string name="notification_restore_complete_dups">%1$d faili olid duplikaadid.</string>
+    <string name="notification_restore_complete_errors">%1$d failis oli vigu.</string>
+    <string name="content_images">Fotod ja pildid</string>
+    <string name="content_videos">Videod</string>
+    <string name="content_downloads">Allalaadimised</string>
+    <string name="notification_restore_complete_title">Taastati %1$d faili %2$d-st</string>
+    <string name="notification_check_text">Saadaolevate varundusandmete hankimine.</string>
+    <string name="notification_check_finished_title">Failide varukoopia terviklikkus on kontrollitud</string>
+    <string name="notification_check_action">Üksikasjad</string>
+</resources>

@@ -84,7 +84,7 @@
     <string name="restore_set_empty_result">Nessun backup adatto e\' stato trovato qui.
 \n
 \nLe ragioni piu\' probabili sono un codice di recupero errato o un errore di archiviazione dati.</string>
-    <string name="restore_set_error">E\' successo un errore mentre si stavano caricando i backup.</string>
+    <string name="restore_set_error">E\' successo un errore mentre si stavano caricando i backup:</string>
     <string name="restore_invalid_location_message">Non e\' stato possibile trovare alcun backup qui.
 \n
 \nSi prega di scegliere un altro punto che contenga una %s cartella.</string>

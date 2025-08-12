@@ -20,7 +20,7 @@
     <string name="restore_set_empty_result">No se encontraron respaldos en la ubicación dada.
 \n
 \nEsto probablemente se deba a un código de recuperación incorrecto o un error de almacenamiento.</string>
-    <string name="restore_set_error">Se produjo un error al cargar los respaldos.</string>
+    <string name="restore_set_error">Se produjo un error al cargar los respaldos:</string>
     <string name="restore_invalid_location_message">No pudimos encontrar ningún respaldo en esta ubicación.
 \n
 \nElija otra ubicación que contenga una carpeta %s.</string>

@@ -47,7 +47,7 @@
     <string name="restore_set_empty_result">לא נמצאו גיבויים מתאימים במיקום הנתון.
 \n
 \nכנראה שמדובר בקוד שחזור שגוי או בשגיאת אחסון.</string>
-    <string name="restore_set_error">אירעה שגיאה בעת טעינת הגיבויים.</string>
+    <string name="restore_set_error">אירעה שגיאה בטעינת הגיבויים:</string>
     <string name="restore_invalid_location_message">לא הצלחנו למצוא גיבויים במיקום הזה.
 \n
 \nנא לבחור במיקום אחר שמכיל תיקיית %s.</string>

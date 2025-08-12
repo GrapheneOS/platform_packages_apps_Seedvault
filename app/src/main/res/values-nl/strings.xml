@@ -116,7 +116,7 @@
     <string name="backup_settings">Apparaatinstellingen</string>
     <string name="backup_call_log">Belgeschiedenis</string>
     <string name="restore_title">Herstel van back-up</string>
-    <string name="restore_set_error">Er is een fout opgetreden tijdens het laden van de back-ups.</string>
+    <string name="restore_set_error">Er is een fout opgetreden tijdens het laden van de back-ups:</string>
     <string name="restore_app_status_installed">Geherinstalleerd</string>
     <string name="backup_app_in_progress">Aan het back-uppen</string>
     <string name="notification_restore_error_channel_title">Automatisch herstel memorystickfout</string>

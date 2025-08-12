@@ -1,3 +1,9 @@
+## 15-5.7 - 2025-08-12
+* Use more reliable detection of flash drive presence
+* Don't request backup more than once when notified about available USB storage
+* Check if one backup is running before requesting a new one
+* Import translations from Weblate
+
 ## 15-5.6 - 2025-05-20
 * Reduce storage backup retention policy
 * 7 daily, 4 weekly, 3 monthly, and 2 yearly storage backups are retained now
