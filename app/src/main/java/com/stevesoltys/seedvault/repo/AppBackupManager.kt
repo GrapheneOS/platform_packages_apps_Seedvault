@@ -11,11 +11,11 @@ import com.stevesoltys.seedvault.crypto.Crypto
 import com.stevesoltys.seedvault.header.VERSION
 import com.stevesoltys.seedvault.settings.SettingsManager
 import io.github.oshai.kotlinlogging.KotlinLogging
-import org.calyxos.seedvault.core.MemoryLogger
-import org.calyxos.seedvault.core.backends.AppBackupFileType.Blob
-import org.calyxos.seedvault.core.backends.AppBackupFileType.Snapshot
-import org.calyxos.seedvault.core.backends.FileInfo
-import org.calyxos.seedvault.core.backends.TopLevelFolder
+import app.grapheneos.seedvault.core.MemoryLogger
+import app.grapheneos.seedvault.core.backends.AppBackupFileType.Blob
+import app.grapheneos.seedvault.core.backends.AppBackupFileType.Snapshot
+import app.grapheneos.seedvault.core.backends.FileInfo
+import app.grapheneos.seedvault.core.backends.TopLevelFolder
 import java.io.IOException
 
 /**

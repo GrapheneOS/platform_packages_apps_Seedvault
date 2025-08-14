@@ -22,8 +22,8 @@ import com.stevesoltys.seedvault.header.getADForFull
 import com.stevesoltys.seedvault.repo.HashMismatchException
 import com.stevesoltys.seedvault.repo.Loader
 import libcore.io.IoUtils.closeQuietly
-import org.calyxos.seedvault.core.backends.AppBackupFileType.Blob
-import org.calyxos.seedvault.core.backends.LegacyAppBackupFile
+import app.grapheneos.seedvault.core.backends.AppBackupFileType.Blob
+import app.grapheneos.seedvault.core.backends.LegacyAppBackupFile
 import java.io.EOFException
 import java.io.IOException
 import java.io.InputStream

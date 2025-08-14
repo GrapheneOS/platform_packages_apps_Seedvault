@@ -10,8 +10,8 @@ import android.text.format.DateUtils
 import android.text.format.Formatter
 import androidx.lifecycle.MutableLiveData
 import de.grobox.storagebackuptester.backup.getSpeed
-import org.calyxos.backup.storage.api.BackupFile
-import org.calyxos.backup.storage.restore.NotificationRestoreObserver
+import app.grapheneos.backup.storage.api.BackupFile
+import app.grapheneos.backup.storage.restore.NotificationRestoreObserver
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 

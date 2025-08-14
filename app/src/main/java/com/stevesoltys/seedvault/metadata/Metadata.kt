@@ -14,7 +14,7 @@ import com.stevesoltys.seedvault.metadata.PackageState.UNKNOWN_ERROR
 import com.stevesoltys.seedvault.proto.Snapshot
 import com.stevesoltys.seedvault.repo.hexFromProto
 import com.stevesoltys.seedvault.worker.BASE_SPLIT
-import org.calyxos.backup.storage.crypto.StreamCrypto.toByteArray
+import app.grapheneos.backup.storage.crypto.StreamCrypto.toByteArray
 import java.nio.ByteBuffer
 
 typealias PackageMetadataMap = HashMap<String, PackageMetadata>
