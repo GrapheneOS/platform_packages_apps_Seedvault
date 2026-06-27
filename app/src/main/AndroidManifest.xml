@@ -23,6 +23,9 @@
     <!-- Used for internal WebDAV plugin -->
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- Needed to enable access to RFC1918 network backup locations -->
+    <uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" />
+
     <!-- This is needed to inform users about backup status and errors -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
