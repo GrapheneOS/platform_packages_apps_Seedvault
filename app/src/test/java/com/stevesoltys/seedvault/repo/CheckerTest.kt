@@ -21,11 +21,11 @@ import io.mockk.just
 import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.coroutines.runBlocking
-import org.calyxos.seedvault.core.backends.AppBackupFileType
-import org.calyxos.seedvault.core.backends.Backend
-import org.calyxos.seedvault.core.backends.FileInfo
-import org.calyxos.seedvault.core.backends.TopLevelFolder
-import org.calyxos.seedvault.core.toHexString
+import app.grapheneos.seedvault.core.backends.AppBackupFileType
+import app.grapheneos.seedvault.core.backends.Backend
+import app.grapheneos.seedvault.core.backends.FileInfo
+import app.grapheneos.seedvault.core.backends.TopLevelFolder
+import app.grapheneos.seedvault.core.toHexString
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertInstanceOf
 import org.junit.jupiter.api.Assertions.assertNull

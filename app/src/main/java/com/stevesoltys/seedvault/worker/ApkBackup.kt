@@ -25,7 +25,7 @@ import com.stevesoltys.seedvault.repo.hexFromProto
 import com.stevesoltys.seedvault.settings.SettingsManager
 import com.stevesoltys.seedvault.transport.backup.isNotUpdatedSystemApp
 import com.stevesoltys.seedvault.transport.backup.isTestOnly
-import org.calyxos.seedvault.core.toHexString
+import app.grapheneos.seedvault.core.toHexString
 import java.io.File
 import java.io.FileInputStream
 import java.io.IOException

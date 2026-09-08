@@ -21,15 +21,15 @@ import de.grobox.storagebackuptester.scanner.scanUri
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.calyxos.backup.storage.api.SnapshotItem
-import org.calyxos.backup.storage.api.SnapshotResult
-import org.calyxos.backup.storage.api.StorageBackup
-import org.calyxos.backup.storage.api.StoredSnapshot
-import org.calyxos.backup.storage.backup.BackupJobService
-import org.calyxos.backup.storage.scanner.DocumentScanner
-import org.calyxos.backup.storage.scanner.MediaScanner
-import org.calyxos.backup.storage.ui.backup.BackupContentViewModel
-import org.calyxos.backup.storage.ui.restore.SnapshotViewModel
+import app.grapheneos.backup.storage.api.SnapshotItem
+import app.grapheneos.backup.storage.api.SnapshotResult
+import app.grapheneos.backup.storage.api.StorageBackup
+import app.grapheneos.backup.storage.api.StoredSnapshot
+import app.grapheneos.backup.storage.backup.BackupJobService
+import app.grapheneos.backup.storage.scanner.DocumentScanner
+import app.grapheneos.backup.storage.scanner.MediaScanner
+import app.grapheneos.backup.storage.ui.backup.BackupContentViewModel
+import app.grapheneos.backup.storage.ui.restore.SnapshotViewModel
 
 private val logEmptyState = """
     Press the button below to simulate a backup. Your files won't be changed and not uploaded anywhere. This is just to test code for a future real backup.

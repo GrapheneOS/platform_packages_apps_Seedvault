@@ -23,7 +23,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
-import org.calyxos.seedvault.core.toHexString
+import app.grapheneos.seedvault.core.toHexString
 import org.koin.core.component.get
 import java.security.DigestOutputStream
 import java.security.MessageDigest

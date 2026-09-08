@@ -19,10 +19,10 @@ import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import com.stevesoltys.seedvault.settings.SettingsManager
 import io.github.oshai.kotlinlogging.KotlinLogging
-import org.calyxos.backup.storage.api.BackupObserver
-import org.calyxos.backup.storage.api.StorageBackup
-import org.calyxos.backup.storage.backup.BackupWorker
-import org.calyxos.backup.storage.backup.NotificationBackupObserver
+import app.grapheneos.backup.storage.api.BackupObserver
+import app.grapheneos.backup.storage.api.StorageBackup
+import app.grapheneos.backup.storage.backup.BackupWorker
+import app.grapheneos.backup.storage.backup.NotificationBackupObserver
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.util.concurrent.TimeUnit.HOURS

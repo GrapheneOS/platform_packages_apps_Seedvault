@@ -28,7 +28,7 @@ import com.stevesoltys.seedvault.MAGIC_PACKAGE_MANAGER
 import com.stevesoltys.seedvault.backend.BackendManager
 import com.stevesoltys.seedvault.settings.SettingsManager
 import com.stevesoltys.seedvault.ui.PACKAGE_NAME_SMS
-import org.calyxos.seedvault.core.backends.Backend
+import app.grapheneos.seedvault.core.backends.Backend
 
 private val TAG = PackageService::class.java.simpleName
 

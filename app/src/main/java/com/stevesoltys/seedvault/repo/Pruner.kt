@@ -9,8 +9,8 @@ import com.stevesoltys.seedvault.backend.BackendManager
 import com.stevesoltys.seedvault.crypto.Crypto
 import com.stevesoltys.seedvault.proto.Snapshot
 import io.github.oshai.kotlinlogging.KotlinLogging
-import org.calyxos.seedvault.core.backends.AppBackupFileType
-import org.calyxos.seedvault.core.backends.TopLevelFolder
+import app.grapheneos.seedvault.core.backends.AppBackupFileType
+import app.grapheneos.seedvault.core.backends.TopLevelFolder
 import java.security.GeneralSecurityException
 import java.time.LocalDate
 import java.time.temporal.ChronoField

@@ -13,8 +13,8 @@ import com.stevesoltys.seedvault.R
 internal const val PACKAGE_NAME_SMS = "com.android.providers.telephony"
 internal const val PACKAGE_NAME_SETTINGS = "com.android.providers.settings"
 internal const val PACKAGE_NAME_CALL_LOG = "com.android.calllogbackup"
-internal const val PACKAGE_NAME_CONTACTS = "org.calyxos.backup.contacts"
-internal const val PACKAGE_NAME_SYSTEM = "@org.calyxos.system@"
+internal const val PACKAGE_NAME_CONTACTS = "app.grapheneos.backup.contacts"
+internal const val PACKAGE_NAME_SYSTEM = "@app.grapheneos.system@"
 
 val systemData = buildMap {
     // SMS/MMS data is stored only for the primary user - android:singleUser="true".

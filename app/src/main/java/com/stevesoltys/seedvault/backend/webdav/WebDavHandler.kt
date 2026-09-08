@@ -13,10 +13,10 @@ import com.stevesoltys.seedvault.backend.BackendManager
 import com.stevesoltys.seedvault.settings.SettingsManager
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import org.calyxos.seedvault.core.backends.Backend
-import org.calyxos.seedvault.core.backends.BackendFactory
-import org.calyxos.seedvault.core.backends.webdav.WebDavConfig
-import org.calyxos.seedvault.core.backends.webdav.WebDavProperties
+import app.grapheneos.seedvault.core.backends.Backend
+import app.grapheneos.seedvault.core.backends.BackendFactory
+import app.grapheneos.seedvault.core.backends.webdav.WebDavConfig
+import app.grapheneos.seedvault.core.backends.webdav.WebDavProperties
 import java.io.IOException
 
 internal sealed interface WebDavConfigState {

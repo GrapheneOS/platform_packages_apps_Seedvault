@@ -5,7 +5,7 @@
 
 package com.stevesoltys.seedvault.repo
 
-import org.calyxos.seedvault.core.toHexString
+import app.grapheneos.seedvault.core.toHexString
 import java.io.FilterInputStream
 import java.io.IOException
 import java.io.InputStream

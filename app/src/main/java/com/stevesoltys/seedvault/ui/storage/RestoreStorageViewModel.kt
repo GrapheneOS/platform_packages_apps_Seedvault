@@ -15,10 +15,10 @@ import com.stevesoltys.seedvault.backend.webdav.WebDavHandler
 import com.stevesoltys.seedvault.settings.SettingsManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.calyxos.seedvault.core.backends.Backend
-import org.calyxos.seedvault.core.backends.Constants.DIRECTORY_ROOT
-import org.calyxos.seedvault.core.backends.saf.SafProperties
-import org.calyxos.seedvault.core.backends.webdav.WebDavProperties
+import app.grapheneos.seedvault.core.backends.Backend
+import app.grapheneos.seedvault.core.backends.Constants.DIRECTORY_ROOT
+import app.grapheneos.seedvault.core.backends.saf.SafProperties
+import app.grapheneos.seedvault.core.backends.webdav.WebDavProperties
 
 private val TAG = RestoreStorageViewModel::class.java.simpleName
 
