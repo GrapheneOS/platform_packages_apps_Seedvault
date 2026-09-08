@@ -31,7 +31,7 @@ import com.stevesoltys.seedvault.repo.AppBackupManager
 import com.stevesoltys.seedvault.settings.SettingsManager
 import com.stevesoltys.seedvault.ui.notification.BackupNotificationManager
 import com.stevesoltys.seedvault.ui.systemData
-import org.calyxos.seedvault.core.backends.isOutOfSpace
+import app.grapheneos.seedvault.core.backends.isOutOfSpace
 import java.io.IOException
 import java.util.concurrent.TimeUnit.DAYS
 import java.util.concurrent.TimeUnit.HOURS

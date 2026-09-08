@@ -8,10 +8,10 @@ package com.stevesoltys.seedvault.repo
 import androidx.annotation.WorkerThread
 import com.stevesoltys.seedvault.crypto.Crypto
 import com.stevesoltys.seedvault.proto.Snapshot.Blob
-import org.calyxos.seedvault.chunker.Chunk
-import org.calyxos.seedvault.chunker.Chunker
-import org.calyxos.seedvault.chunker.GearTableCreator
-import org.calyxos.seedvault.core.toHexString
+import app.grapheneos.seedvault.chunker.Chunk
+import app.grapheneos.seedvault.chunker.Chunker
+import app.grapheneos.seedvault.chunker.GearTableCreator
+import app.grapheneos.seedvault.core.toHexString
 import java.io.IOException
 import java.io.InputStream
 

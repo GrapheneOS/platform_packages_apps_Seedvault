@@ -12,10 +12,10 @@ import de.grobox.storagebackuptester.App
 import de.grobox.storagebackuptester.scanner.MediaScanFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.calyxos.backup.storage.api.EXTERNAL_STORAGE_PROVIDER_AUTHORITY
-import org.calyxos.backup.storage.api.mediaUris
-import org.calyxos.backup.storage.scanner.DocumentScanner
-import org.calyxos.backup.storage.scanner.MediaScanner
+import app.grapheneos.backup.storage.api.EXTERNAL_STORAGE_PROVIDER_AUTHORITY
+import app.grapheneos.backup.storage.api.mediaUris
+import app.grapheneos.backup.storage.scanner.DocumentScanner
+import app.grapheneos.backup.storage.scanner.MediaScanner
 
 class InfoFragment : MediaScanFragment() {
 

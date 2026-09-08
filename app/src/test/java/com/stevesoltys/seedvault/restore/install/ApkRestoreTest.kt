@@ -46,9 +46,9 @@ import io.mockk.mockk
 import io.mockk.mockkStatic
 import io.mockk.verifyOrder
 import kotlinx.coroutines.runBlocking
-import org.calyxos.seedvault.core.backends.AppBackupFileType
-import org.calyxos.seedvault.core.backends.Backend
-import org.calyxos.seedvault.core.toHexString
+import app.grapheneos.seedvault.core.backends.AppBackupFileType
+import app.grapheneos.seedvault.core.backends.Backend
+import app.grapheneos.seedvault.core.toHexString
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse

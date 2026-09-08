@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package org.calyxos.backup.storage.backup;
+package app.grapheneos.backup.storage.backup;
 
 import "backup_media_file.proto";
 import "backup_document_file.proto";

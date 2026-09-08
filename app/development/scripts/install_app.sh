@@ -39,6 +39,6 @@ $ADB shell mkdir -p /system/priv-app/ContactsBackup
 $ADB push "$ROOT_PROJECT_DIR"/contactsbackup/build/outputs/apk/release/contactsbackup-release.apk /system/priv-app/ContactsBackup/ContactsBackup.apk
 
 echo "Installing ContactsBackup permissions..."
-$ADB push "$ROOT_PROJECT_DIR"/contactsbackup/default-permissions_org.calyxos.backup.contacts.xml /system/etc/default-permissions/default-permissions_org.calyxos.backup.contacts.xml
+$ADB push "$ROOT_PROJECT_DIR"/contactsbackup/default-permissions_app.grapheneos.backup.contacts.xml /system/etc/default-permissions/default-permissions_app.grapheneos.backup.contacts.xml
 
 $ADB shell am broadcast -a android.intent.action.BOOT_COMPLETED

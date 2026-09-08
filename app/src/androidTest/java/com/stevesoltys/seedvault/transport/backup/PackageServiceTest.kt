@@ -14,7 +14,7 @@ import com.stevesoltys.seedvault.settings.AppStatus
 import com.stevesoltys.seedvault.settings.SettingsManager
 import io.mockk.every
 import io.mockk.mockk
-import org.calyxos.seedvault.core.backends.Backend
+import app.grapheneos.seedvault.core.backends.Backend
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test

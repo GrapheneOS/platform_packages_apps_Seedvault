@@ -11,7 +11,7 @@ java {
 }
 
 android {
-    namespace = "org.calyxos.seedvault.core"
+    namespace = "app.grapheneos.seedvault.core"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {

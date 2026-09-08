@@ -23,7 +23,7 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class org.calyxos.backup.storage.** {*;}
+-keep class app.grapheneos.backup.storage.** {*;}
 
 # Ignore StringConcatFactory
 -dontwarn java.lang.invoke.StringConcatFactory

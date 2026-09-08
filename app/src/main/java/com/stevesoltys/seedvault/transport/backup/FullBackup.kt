@@ -17,7 +17,7 @@ import com.stevesoltys.seedvault.repo.BackupData
 import com.stevesoltys.seedvault.repo.BackupReceiver
 import com.stevesoltys.seedvault.settings.SettingsManager
 import com.stevesoltys.seedvault.ui.notification.BackupNotificationManager
-import org.calyxos.seedvault.core.backends.isOutOfSpace
+import app.grapheneos.seedvault.core.backends.isOutOfSpace
 import java.io.Closeable
 import java.io.EOFException
 import java.io.IOException

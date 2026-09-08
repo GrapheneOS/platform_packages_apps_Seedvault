@@ -10,12 +10,12 @@ import android.security.keystore.KeyProperties.PURPOSE_ENCRYPT
 import android.security.keystore.KeyProperties.PURPOSE_SIGN
 import android.security.keystore.KeyProperties.PURPOSE_VERIFY
 import android.security.keystore.KeyProtection
-import org.calyxos.seedvault.core.crypto.CoreCrypto.ALGORITHM_HMAC
+import app.grapheneos.seedvault.core.crypto.CoreCrypto.ALGORITHM_HMAC
 import java.security.KeyStore
 import javax.crypto.SecretKey
 import javax.crypto.spec.SecretKeySpec
 
-object KeyManager : org.calyxos.seedvault.core.crypto.KeyManager {
+object KeyManager : app.grapheneos.seedvault.core.crypto.KeyManager {
 
     private const val KEY_SIZE = 256
     private const val KEY_SIZE_BYTES = KEY_SIZE / 8

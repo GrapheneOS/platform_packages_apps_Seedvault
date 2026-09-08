@@ -15,8 +15,8 @@ import io.mockk.just
 import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.coroutines.runBlocking
-import org.calyxos.seedvault.chunker.Chunk
-import org.calyxos.seedvault.chunker.Chunker
+import app.grapheneos.seedvault.chunker.Chunk
+import app.grapheneos.seedvault.chunker.Chunker
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows

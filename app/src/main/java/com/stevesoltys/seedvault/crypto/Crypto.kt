@@ -17,11 +17,11 @@ import com.stevesoltys.seedvault.header.MAX_VERSION_HEADER_SIZE
 import com.stevesoltys.seedvault.header.SegmentHeader
 import com.stevesoltys.seedvault.header.VERSION
 import com.stevesoltys.seedvault.header.VersionHeader
-import org.calyxos.seedvault.core.crypto.CoreCrypto
-import org.calyxos.seedvault.core.crypto.CoreCrypto.ALGORITHM_HMAC
-import org.calyxos.seedvault.core.crypto.CoreCrypto.deriveKey
-import org.calyxos.seedvault.core.toByteArrayFromHex
-import org.calyxos.seedvault.core.toHexString
+import app.grapheneos.seedvault.core.crypto.CoreCrypto
+import app.grapheneos.seedvault.core.crypto.CoreCrypto.ALGORITHM_HMAC
+import app.grapheneos.seedvault.core.crypto.CoreCrypto.deriveKey
+import app.grapheneos.seedvault.core.toByteArrayFromHex
+import app.grapheneos.seedvault.core.toHexString
 import java.io.EOFException
 import java.io.IOException
 import java.io.InputStream

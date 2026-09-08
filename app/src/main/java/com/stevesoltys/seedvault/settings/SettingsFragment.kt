@@ -35,7 +35,7 @@ import com.stevesoltys.seedvault.ui.toRelativeTime
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.calyxos.seedvault.core.backends.BackendProperties
+import app.grapheneos.seedvault.core.backends.BackendProperties
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import java.util.concurrent.TimeUnit

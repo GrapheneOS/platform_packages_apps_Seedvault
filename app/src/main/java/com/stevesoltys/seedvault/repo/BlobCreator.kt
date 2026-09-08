@@ -15,10 +15,10 @@ import com.stevesoltys.seedvault.proto.Snapshot.Blob
 import com.stevesoltys.seedvault.proto.SnapshotKt.blob
 import com.stevesoltys.seedvault.repo.Padding.getPadTo
 import okio.Buffer
-import org.calyxos.seedvault.chunker.Chunk
-import org.calyxos.seedvault.core.MemoryLogger
-import org.calyxos.seedvault.core.backends.AppBackupFileType
-import org.calyxos.seedvault.core.backends.BackendSaver
+import app.grapheneos.seedvault.chunker.Chunk
+import app.grapheneos.seedvault.core.MemoryLogger
+import app.grapheneos.seedvault.core.backends.AppBackupFileType
+import app.grapheneos.seedvault.core.backends.BackendSaver
 import java.io.IOException
 import java.io.OutputStream
 import java.nio.ByteBuffer

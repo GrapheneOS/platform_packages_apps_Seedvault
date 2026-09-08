@@ -10,9 +10,9 @@ import androidx.test.filters.MediumTest
 import androidx.test.platform.app.InstrumentationRegistry
 import com.stevesoltys.seedvault.settings.SettingsManager
 import kotlinx.coroutines.runBlocking
-import org.calyxos.seedvault.core.backends.Backend
-import org.calyxos.seedvault.core.backends.BackendTest
-import org.calyxos.seedvault.core.backends.saf.SafBackend
+import app.grapheneos.seedvault.core.backends.Backend
+import app.grapheneos.seedvault.core.backends.BackendTest
+import app.grapheneos.seedvault.core.backends.saf.SafBackend
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.core.component.KoinComponent

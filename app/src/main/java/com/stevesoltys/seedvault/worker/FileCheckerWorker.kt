@@ -13,8 +13,8 @@ import com.stevesoltys.seedvault.BackupStateManager
 import com.stevesoltys.seedvault.ui.check.FileCheckResultActivity
 import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.coroutines.flow.first
-import org.calyxos.backup.storage.api.StorageBackup
-import org.calyxos.backup.storage.check.CheckerWorker
+import app.grapheneos.backup.storage.api.StorageBackup
+import app.grapheneos.backup.storage.check.CheckerWorker
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
