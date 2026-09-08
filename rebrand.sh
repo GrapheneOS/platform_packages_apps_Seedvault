@@ -21,4 +21,5 @@ for path in ${paths[@]}; do
     git mv $path/org/ $path/app/
 done
 
-find app core contactsbackup storage .cirrus.yml -type f -exec sed -i 's/org.calyxos/app.grapheneos/g' {} +
+{ git grep -lI 'org[./]calyxos' -- ':!rebrand.sh' || true; } \
+    | xargs -r sed -i -e 's#org/calyxos#app/grapheneos#g' -e 's/org\.calyxos/app.grapheneos/g'
