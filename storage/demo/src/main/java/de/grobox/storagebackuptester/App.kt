@@ -13,10 +13,10 @@ import com.google.android.material.color.DynamicColors
 import de.grobox.storagebackuptester.crypto.KeyManager
 import de.grobox.storagebackuptester.plugin.TestSafBackend
 import de.grobox.storagebackuptester.settings.SettingsManager
-import org.calyxos.backup.storage.api.StorageBackup
-import org.calyxos.backup.storage.ui.restore.FileSelectionManager
-import org.calyxos.seedvault.core.backends.Backend
-import org.calyxos.seedvault.core.backends.IBackendManager
+import app.grapheneos.backup.storage.api.StorageBackup
+import app.grapheneos.backup.storage.ui.restore.FileSelectionManager
+import app.grapheneos.seedvault.core.backends.Backend
+import app.grapheneos.seedvault.core.backends.IBackendManager
 
 class App : Application() {
 

@@ -12,10 +12,10 @@ import com.stevesoltys.seedvault.header.UnsupportedVersionException
 import com.stevesoltys.seedvault.header.VERSION
 import com.stevesoltys.seedvault.proto.Snapshot
 import io.github.oshai.kotlinlogging.KotlinLogging
-import org.calyxos.seedvault.core.backends.AppBackupFileType
-import org.calyxos.seedvault.core.backends.BackendSaver
-import org.calyxos.seedvault.core.backends.Constants.appSnapshotRegex
-import org.calyxos.seedvault.core.toHexString
+import app.grapheneos.seedvault.core.backends.AppBackupFileType
+import app.grapheneos.seedvault.core.backends.BackendSaver
+import app.grapheneos.seedvault.core.backends.Constants.appSnapshotRegex
+import app.grapheneos.seedvault.core.toHexString
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException

@@ -22,10 +22,10 @@ import de.grobox.storagebackuptester.R
 import de.grobox.storagebackuptester.restore.DemoSnapshotFragment
 import de.grobox.storagebackuptester.scanner.DocumentScanFragment
 import de.grobox.storagebackuptester.scanner.MediaScanFragment
-import org.calyxos.backup.storage.api.MediaType
-import org.calyxos.backup.storage.ui.backup.BackupContentFragment
-import org.calyxos.backup.storage.ui.backup.BackupContentItem
-import org.calyxos.backup.storage.ui.backup.OpenTree
+import app.grapheneos.backup.storage.api.MediaType
+import app.grapheneos.backup.storage.ui.backup.BackupContentFragment
+import app.grapheneos.backup.storage.ui.backup.BackupContentItem
+import app.grapheneos.backup.storage.ui.backup.OpenTree
 
 class SettingsFragment : BackupContentFragment() {
 

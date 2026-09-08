@@ -47,8 +47,8 @@ import com.stevesoltys.seedvault.ui.storage.RestoreStorageViewModel
 import com.stevesoltys.seedvault.worker.BackupRequester
 import com.stevesoltys.seedvault.worker.FileBackupWorker
 import com.stevesoltys.seedvault.worker.workerModule
-import org.calyxos.seedvault.core.MemoryLogger.getMemStr
-import org.calyxos.seedvault.core.backends.BackendFactory
+import app.grapheneos.seedvault.core.MemoryLogger.getMemStr
+import app.grapheneos.seedvault.core.backends.BackendFactory
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger

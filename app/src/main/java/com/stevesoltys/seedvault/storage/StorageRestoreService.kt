@@ -5,11 +5,11 @@
 
 package com.stevesoltys.seedvault.storage
 
-import org.calyxos.backup.storage.api.RestoreObserver
-import org.calyxos.backup.storage.api.StorageBackup
-import org.calyxos.backup.storage.restore.NotificationRestoreObserver
-import org.calyxos.backup.storage.restore.RestoreService
-import org.calyxos.backup.storage.ui.restore.FileSelectionManager
+import app.grapheneos.backup.storage.api.RestoreObserver
+import app.grapheneos.backup.storage.api.StorageBackup
+import app.grapheneos.backup.storage.restore.NotificationRestoreObserver
+import app.grapheneos.backup.storage.restore.RestoreService
+import app.grapheneos.backup.storage.ui.restore.FileSelectionManager
 import org.koin.android.ext.android.inject
 
 internal class StorageRestoreService : RestoreService() {
