@@ -251,7 +251,7 @@ internal class BackupNotificationManager(private val context: Context) {
         nm.notify(NOTIFICATION_ID_SUCCESS, notification)
     }
 
-    fun onBackupError(meteredNetwork: Boolean = false) {
+    fun onBackupError(backendUnavailable: Boolean = false, removableDrive: Boolean = false) {
         val intent = Intent(context, SettingsActivity::class.java)
         val pendingIntent = getActivity(context, 0, intent, FLAG_IMMUTABLE)
         val actionIntent = Intent(ACTION_TRY_AGAIN).apply { setPackage(context.packageName) }
@@ -259,10 +259,10 @@ internal class BackupNotificationManager(private val context: Context) {
         val actionPendingIntent = getBroadcast(context, REQUEST_CODE_UNINSTALL, actionIntent, flags)
         val actionText = context.getString(R.string.recovery_code_verification_try_again)
         val action = Action(null, actionText, actionPendingIntent)
-        val text = if (meteredNetwork) {
-            context.getString(R.string.notification_failed_metered_text)
-        } else {
-            context.getString(R.string.notification_failed_text)
+        val text = when {
+            !backendUnavailable -> context.getString(R.string.notification_failed_text)
+            removableDrive -> context.getString(R.string.notification_failed_usb_text)
+            else -> context.getString(R.string.notification_failed_metered_text)
         }
         val notification = Builder(context, CHANNEL_ID_ERROR).apply {
             setSmallIcon(R.drawable.ic_seedvault_error)

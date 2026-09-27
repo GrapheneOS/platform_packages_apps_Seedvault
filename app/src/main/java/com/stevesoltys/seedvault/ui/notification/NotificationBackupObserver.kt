@@ -155,7 +155,7 @@ internal class NotificationBackupObserver(
         Log.i(TAG, "Backup finished $numPackages/$requestedPackages. Status: $status")
         if (backupRequester.hasNext && !backendManager.canDoBackupNow()) {
             Log.w(TAG, "Not requesting another backup, likely on metered network. ")
-            nm.onBackupError(true)
+            nm.onBackupError(true, backendManager.isOnRemovableDrive)
         } else if (backupRequester.requestNext()) {
             // FIXME we should consider not requesting backup of more chunks of packages,
             //  if the backup has already failed for this chunk,
