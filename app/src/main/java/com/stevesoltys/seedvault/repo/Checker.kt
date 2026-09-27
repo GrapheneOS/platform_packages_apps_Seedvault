@@ -136,7 +136,7 @@ internal class Checker(
                         lastNotification.set(passedTime)
                         val bandwidth = (newSize / (passedTime.toDouble() / 1000)).roundToLong()
                         val thousandth = ((newSize.toDouble() / sampleSize) * 1000).roundToInt()
-                        log.debug { "$thousandth‰ - $bandwidth KB/sec - $newSize bytes" }
+                        log.debug { "$thousandth‰ - $bandwidth B/sec - $newSize bytes" }
                         nm.showCheckNotification(bandwidth, thousandth)
                         MemoryLogger.log()
                     }
@@ -147,7 +147,7 @@ internal class Checker(
             "Checked ${size.get()} bytes, but expected $sampleSize"
         }
         val passedTime = max(System.currentTimeMillis() - startTime, 1000) // no div by zero
-        val bandwidth = size.get() / (passedTime.toDouble() / 1000).roundToLong()
+        val bandwidth = (size.get() / (passedTime.toDouble() / 1000)).roundToLong()
         checkerResult = if (badChunks.isEmpty() && handleSize == snapshots.size && handleSize > 0) {
             nm.onCheckComplete(size.get(), bandwidth)
             CheckerResult.Success(snapshots, percent, size.get())
