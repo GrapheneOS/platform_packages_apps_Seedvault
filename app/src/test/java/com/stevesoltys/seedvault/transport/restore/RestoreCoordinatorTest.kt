@@ -44,6 +44,7 @@ import app.grapheneos.seedvault.core.toHexString
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertThrows
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Assertions.fail
 import org.junit.jupiter.api.Test
 import java.io.IOException
@@ -374,6 +375,15 @@ internal class RestoreCoordinatorTest : TransportTest() {
         assertEquals(expected, restore.nextRestorePackage())
 
         assertEquals(NO_MORE_PACKAGES, restore.nextRestorePackage())
+    }
+
+    @Test
+    fun `nextRestorePackage() skips app with only an APK in the snapshot`() = runBlocking {
+        restore.beforeStartRestore(RestorableBackup(repoId, snapshot.copy { version = 2 }))
+        restore.startRestore(token, packageInfoArray)
+
+        assertEquals(NO_MORE_PACKAGES, restore.nextRestorePackage())
+        assertTrue(restore.isFailedPackage(packageName))
     }
 
     @Test
