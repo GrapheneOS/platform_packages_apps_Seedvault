@@ -18,6 +18,7 @@ import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+import android.os.SystemClock
 import android.text.format.Formatter.formatShortFileSize
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -37,6 +38,12 @@ internal const val NOTIFICATION_ID_RESTORE_COMPLETE = 1002
 internal const val NOTIFICATION_ID_CHECK = 1003
 internal const val NOTIFICATION_ID_CHECK_COMPLETE = 1004
 
+/**
+ * The system drops progress updates above 5 per second (per notification and per app),
+ * but we get one for each file, so limit to one per this many milliseconds.
+ */
+private const val PROGRESS_UPDATE_INTERVAL_MS = 500L
+
 internal class Notifications(private val context: Context) {
 
     private val nm = context.getSystemService(NotificationManager::class.java).apply {
@@ -44,6 +51,7 @@ internal class Notifications(private val context: Context) {
         createNotificationChannel(createRestoreChannel())
         createNotificationChannel(createCheckChannel())
     }
+    private var lastProgressUpdate = 0L
 
     companion object {
         fun onCheckCompleteNotificationSeen(nm: NotificationManager) {
@@ -90,6 +98,7 @@ internal class Notifications(private val context: Context) {
         transferred: Int = 0,
         expected: Int = 0,
     ) {
+        if (isThrottled(transferred, expected)) return
         val notification = getBackupNotification(textRes, transferred, expected)
         nm.notify(NOTIFICATION_ID_BACKUP, notification)
     }
@@ -121,6 +130,7 @@ internal class Notifications(private val context: Context) {
         transferred: Int = 0,
         expected: Int = 0,
     ) {
+        if (isThrottled(transferred, expected)) return
         val notification = getPruneNotification(textRes, transferred, expected)
         nm.notify(NOTIFICATION_ID_BACKUP, notification)
     }
@@ -144,8 +154,22 @@ internal class Notifications(private val context: Context) {
     }
 
     internal fun updateRestoreNotification(restored: Int, expected: Int) {
+        if (isThrottled(restored, expected)) return
         val notification = getRestoreNotification(restored, expected)
         nm.notify(NOTIFICATION_ID_RESTORE, notification)
+    }
+
+    /**
+     * Returns true if this progress update should be skipped, because we did one too recently.
+     * Start and end of progress are never skipped.
+     */
+    @Synchronized
+    private fun isThrottled(transferred: Int, expected: Int): Boolean {
+        val now = SystemClock.elapsedRealtime()
+        val isStartOrEnd = transferred <= 0 || transferred >= expected
+        if (!isStartOrEnd && now - lastProgressUpdate < PROGRESS_UPDATE_INTERVAL_MS) return true
+        lastProgressUpdate = now
+        return false
     }
 
     internal fun showRestoreCompleteNotification(

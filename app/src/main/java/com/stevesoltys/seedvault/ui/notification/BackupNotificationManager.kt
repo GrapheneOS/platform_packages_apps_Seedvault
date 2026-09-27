@@ -22,6 +22,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.content.pm.PackageManager.NameNotFoundException
+import android.os.SystemClock
 import android.text.format.Formatter.formatShortFileSize
 import android.util.Log
 import androidx.core.app.NotificationCompat.Action
@@ -66,6 +67,12 @@ private const val NOTIFICATION_ID_NO_MAIN_KEY_ERROR = 11
 
 private val TAG = BackupNotificationManager::class.java.simpleName
 
+/**
+ * The system drops progress updates above 5 per second (per notification and per app),
+ * but we get one for each app or blob, so limit to one per this many milliseconds.
+ */
+private const val PROGRESS_UPDATE_INTERVAL_MS = 500L
+
 internal class BackupNotificationManager(private val context: Context) {
 
     private val nm = context.getSystemService(NotificationManager::class.java)!!.apply {
@@ -77,6 +84,7 @@ internal class BackupNotificationManager(private val context: Context) {
         createNotificationChannel(getPruningChannel())
         createNotificationChannel(getCheckingChannel())
     }
+    private var lastProgressUpdate = 0L
 
     private fun getObserverChannel(): NotificationChannel {
         val title = context.getString(R.string.notification_channel_title)
@@ -167,8 +175,22 @@ internal class BackupNotificationManager(private val context: Context) {
         transferred: Int = 0,
         expected: Int = 0,
     ) {
+        if (isThrottled(transferred, expected)) return
         val notification = getBackupNotification(text, transferred, expected)
         nm.notify(NOTIFICATION_ID_OBSERVER, notification)
+    }
+
+    /**
+     * Returns true if this progress update should be skipped, because we did one too recently.
+     * Start and end of progress are never skipped.
+     */
+    @Synchronized
+    private fun isThrottled(transferred: Int, expected: Int): Boolean {
+        val now = SystemClock.elapsedRealtime()
+        val isStartOrEnd = transferred <= 0 || transferred >= expected
+        if (!isStartOrEnd && now - lastProgressUpdate < PROGRESS_UPDATE_INTERVAL_MS) return true
+        lastProgressUpdate = now
+        return false
     }
 
     fun getBackupNotification(text: CharSequence, progress: Int = 0, total: Int = 0): Notification {
@@ -359,6 +381,7 @@ internal class BackupNotificationManager(private val context: Context) {
 
     fun updatePruningNotification(blobsPruned: Int, totalBlobs: Int) {
         Log.d(TAG, "pruning $blobsPruned/$totalBlobs")
+        if (isThrottled(blobsPruned, totalBlobs)) return
         val n = Builder(context, CHANNEL_ID_PRUNING).apply {
             setSmallIcon(R.drawable.ic_seedvault_autodelete)
             setContentTitle(context.getString(R.string.notification_pruning_blobs_title))
