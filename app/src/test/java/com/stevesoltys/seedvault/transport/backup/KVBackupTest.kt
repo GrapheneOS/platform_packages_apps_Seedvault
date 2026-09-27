@@ -13,6 +13,7 @@ import android.app.backup.BackupTransport.TRANSPORT_ERROR
 import android.app.backup.BackupTransport.TRANSPORT_NON_INCREMENTAL_BACKUP_REQUIRED
 import android.app.backup.BackupTransport.TRANSPORT_OK
 import android.content.pm.PackageInfo
+import com.stevesoltys.seedvault.NO_DATA_END_SENTINEL
 import com.stevesoltys.seedvault.repo.BackupReceiver
 import io.mockk.CapturingSlot
 import io.mockk.Runs
@@ -64,6 +65,17 @@ internal class KVBackupTest : BackupTest() {
         assertEquals(packageInfo, backup.currentPackageInfo)
 
         assertEquals(apkBackupData, backup.finishBackup())
+        assertFalse(backup.hasState)
+
+        verify { data.close() }
+    }
+
+    @Test
+    fun `end sentinel gets closed and doesn't start a backup`() = runBlocking {
+        val sentinel = PackageInfo().apply { packageName = NO_DATA_END_SENTINEL }
+        every { data.close() } just Runs
+
+        assertEquals(TRANSPORT_OK, backup.performBackup(sentinel, data, FLAG_DATA_NOT_CHANGED))
         assertFalse(backup.hasState)
 
         verify { data.close() }
