@@ -15,6 +15,18 @@
         <item name="android:statusBarColor">@color/background</item>
         <item name="android:windowLightNavigationBar">@bool/isLight</item>
         <item name="android:navigationBarColor">@color/background</item>
+        <item name="materialAlertDialogTheme">@style/AlertDialogTheme</item>
+    </style>
+
+    <!-- Let long dialog titles wrap instead of cutting them off, e.g. with large fonts -->
+    <style name="AlertDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="materialAlertDialogTitleTextStyle">@style/AlertDialogTitleText</item>
+    </style>
+
+    <style name="AlertDialogTitleText" parent="MaterialAlertDialog.Material3.Title.Text">
+        <item name="android:singleLine">false</item>
+        <!-- AppCompat's base title style sets maxLines=1, restore the TextView default -->
+        <item name="android:maxLines">2147483647</item>
     </style>
 
     <style name="PreferenceTheme" parent="PreferenceThemeOverlay">
