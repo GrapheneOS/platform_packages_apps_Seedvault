@@ -295,6 +295,52 @@ internal class SnapshotManagerTest : TransportTest() {
         coVerify { backend.remove(snapshotHandle) }
     }
 
+    @Test
+    fun `onSnapshotsLoaded removes cached snapshots gone from backend`(
+        @TempDir tmpDir: Path,
+    ) = runBlocking {
+        val snapshotManager = getSnapshotManager(File(tmpDir.toString()))
+        val snapshotHandle1 = AppBackupFileType.Snapshot(repoId, chunkId1)
+        val staleFile = getSnapshotFolder(tmpDir, AppBackupFileType.Snapshot(repoId, chunkId2).name)
+        staleFile.parentFile?.mkdirs()
+        staleFile.writeBytes(Random.nextBytes(8))
+
+        every { crypto.repoId } returns repoId
+        coEvery {
+            loader.loadFile(snapshotHandle1, any())
+        } returns ByteArrayInputStream(snapshot.toByteArray())
+
+        assertEquals(listOf(snapshot), snapshotManager.onSnapshotsLoaded(listOf(snapshotHandle1)))
+        assertFalse(staleFile.exists())
+    }
+
+    @Test
+    fun `snapshots get cached per repo and clearLocalCache removes all`(
+        @TempDir tmpDir: Path,
+    ) = runBlocking {
+        val snapshotManager = getSnapshotManager(File(tmpDir.toString()))
+        val otherRepoId = Random.nextBytes(32).toHexString()
+        val otherHandle = AppBackupFileType.Snapshot(otherRepoId, chunkId1)
+        val snapshotData = snapshot.toByteArray()
+        val cacheFile = slot<File>()
+
+        every { crypto.repoId } returns repoId
+        coEvery { loader.loadFile(otherHandle, capture(cacheFile)) } answers {
+            cacheFile.captured.writeBytes(snapshotData) // like the real Loader does
+            ByteArrayInputStream(snapshotData)
+        }
+
+        assertEquals(snapshot, snapshotManager.loadSnapshot(otherHandle))
+        // cached in folder of its own repo, not in ours
+        val otherRepoFolder = File(tmpDir.toString(), otherRepoId)
+        assertEquals(File(otherRepoFolder, otherHandle.name), cacheFile.captured)
+        assertTrue(cacheFile.captured.isFile)
+        assertEquals(emptyList<Any>(), snapshotManager.loadCachedSnapshots())
+
+        snapshotManager.clearLocalCache()
+        assertFalse(cacheFile.captured.exists())
+    }
+
     private fun getSnapshotManager(tmpFolder: File, loader: Loader = this.loader): SnapshotManager {
         return SnapshotManager(tmpFolder, crypto, loader, backendManager)
     }

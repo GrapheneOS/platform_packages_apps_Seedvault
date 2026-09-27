@@ -11,6 +11,7 @@ import androidx.annotation.WorkerThread
 import com.stevesoltys.seedvault.getStorageContext
 import com.stevesoltys.seedvault.permitDiskReads
 import com.stevesoltys.seedvault.repo.BlobCache
+import com.stevesoltys.seedvault.repo.FOLDER_SNAPSHOTS
 import com.stevesoltys.seedvault.settings.SettingsManager
 import com.stevesoltys.seedvault.settings.StoragePluginType
 import app.grapheneos.seedvault.core.backends.Backend
@@ -18,6 +19,7 @@ import app.grapheneos.seedvault.core.backends.BackendFactory
 import app.grapheneos.seedvault.core.backends.BackendId
 import app.grapheneos.seedvault.core.backends.BackendProperties
 import app.grapheneos.seedvault.core.backends.IBackendManager
+import java.io.File
 
 class BackendManager(
     private val context: Context,
@@ -98,7 +100,7 @@ class BackendManager(
         mBackend = backend
         mBackendProperties = storageProperties
         blobCache.clearLocalCache()
-        // TODO not critical, but nice to have: clear also local snapshot cache
+        clearLocalSnapshotCache()
     }
 
     /**
@@ -114,6 +116,15 @@ class BackendManager(
         mBackend = null
         mBackendProperties = null
         blobCache.clearLocalCache()
+        clearLocalSnapshotCache()
+    }
+
+    /**
+     * Cached snapshots are from the old location and must not be used for (auto) restore.
+     * SnapshotManager depends on us, so we can't use its clearLocalCache().
+     */
+    private fun clearLocalSnapshotCache() {
+        File(context.filesDir, FOLDER_SNAPSHOTS).deleteRecursively()
     }
 
     /**
