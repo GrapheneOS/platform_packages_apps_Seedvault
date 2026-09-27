@@ -149,7 +149,7 @@ internal class Checker(
                         lastNotification.set(passedTime)
                         val bandwidth = (newSize / (passedTime.toDouble() / 1000)).roundToLong()
                         val thousandth = ((newSize.toDouble() / sampleSize) * 1000).roundToInt()
-                        Log.d(TAG, "$thousandth‰ - $bandwidth KB/sec - $newSize bytes")
+                        Log.d(TAG, "$thousandth‰ - $bandwidth B/sec - $newSize bytes")
                         checkObserver?.onCheckUpdate(bandwidth, thousandth)
                     }
                 }
@@ -158,7 +158,7 @@ internal class Checker(
         val s = size.get()
         if (sampleSize != s) Log.e(TAG, "Checked ${size.get()} bytes, but expected $sampleSize")
         val passedTime = max(System.currentTimeMillis() - startTime, 1000) // no div by zero
-        val bandwidth = size.get() / (passedTime.toDouble() / 1000).roundToLong()
+        val bandwidth = (size.get() / (passedTime.toDouble() / 1000)).roundToLong()
         val storedSnapshotSize = snapshotInfo.storedSnapshotSize
         return if (missingChunkIds.isEmpty() &&
             badChunks.isEmpty() &&
