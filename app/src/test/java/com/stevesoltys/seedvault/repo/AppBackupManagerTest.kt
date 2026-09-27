@@ -131,6 +131,7 @@ internal class AppBackupManagerTest : TransportTest() {
     @Test
     fun `removeBackupRepo deletes repo and local cache`() = runBlocking {
         every { blobCache.clearLocalCache() } just Runs
+        every { snapshotManager.clearLocalCache() } just Runs
         every { crypto.repoId } returns repoId
         coEvery { backendManager.backend.remove(TopLevelFolder(repoId)) } just Runs
 
@@ -138,6 +139,7 @@ internal class AppBackupManagerTest : TransportTest() {
 
         coVerify {
             blobCache.clearLocalCache()
+            snapshotManager.clearLocalCache()
             backendManager.backend.remove(TopLevelFolder(repoId))
         }
     }

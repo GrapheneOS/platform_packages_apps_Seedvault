@@ -40,6 +40,13 @@ internal class SnapshotManager(
     private val snapshotFolder: File get() = File(snapshotFolderRoot, crypto.repoId)
 
     /**
+     * Snapshots get cached in a folder for their own repo, not the current [Crypto.repoId],
+     * because we also load snapshots of other repos, e.g. when listing backups for restore.
+     */
+    private val AppBackupFileType.Snapshot.cacheFile: File
+        get() = File(File(snapshotFolderRoot, repoId), name)
+
+    /**
      * The latest [Snapshot]. May be stale if [onSnapshotsLoaded] has not returned
      * or wasn't called since new snapshots have been created.
      */
@@ -48,13 +55,18 @@ internal class SnapshotManager(
         private set
 
     /**
-     * Call this before starting a backup run with the [handles] of snapshots
-     * currently available on the backend.
+     * Call this before starting a backup run with the [handles] of all snapshots
+     * currently available on the backend for our repo.
      */
     suspend fun onSnapshotsLoaded(handles: List<AppBackupFileType.Snapshot>): List<Snapshot> {
         // first reset latest snapshot, otherwise we'd hang on to a stale one
         // e.g. when switching to new storage without any snapshots
         latestSnapshot = null
+        // remove cached snapshots that are gone from the backend, so we don't restore from them
+        val names = handles.map { it.name }.toSet()
+        snapshotFolder.listFiles()?.forEach { file ->
+            if (file.name !in names) file.delete()
+        }
         return handles.mapNotNull { snapshotHandle ->
             val snapshot = try {
                 loadSnapshot(snapshotHandle)
@@ -113,7 +125,7 @@ internal class SnapshotManager(
         // save to local cache while at it
         try {
             if (!snapshotFolder.isDirectory) snapshotFolder.mkdirs()
-            File(snapshotFolder, snapshotHandle.name).outputStream().use { outputStream ->
+            snapshotHandle.cacheFile.outputStream().use { outputStream ->
                 outputStream.write(bytes)
             }
         } catch (e: Exception) { // we'll let this one pass
@@ -129,7 +141,7 @@ internal class SnapshotManager(
     suspend fun removeSnapshot(snapshotHandle: AppBackupFileType.Snapshot) {
         backendManager.backend.remove(snapshotHandle)
         // remove from cache as well
-        File(snapshotFolder, snapshotHandle.name).delete()
+        snapshotHandle.cacheFile.delete()
     }
 
     /**
@@ -138,8 +150,8 @@ internal class SnapshotManager(
      */
     @Throws(GeneralSecurityException::class, UnsupportedVersionException::class, IOException::class)
     suspend fun loadSnapshot(snapshotHandle: AppBackupFileType.Snapshot): Snapshot {
-        val file = File(snapshotFolder, snapshotHandle.name)
-        snapshotFolder.mkdirs()
+        val file = snapshotHandle.cacheFile
+        file.parentFile?.mkdirs()
         val inputStream = if (file.isFile) {
             try {
                 loader.loadFile(file, snapshotHandle.hash)
@@ -165,5 +177,13 @@ internal class SnapshotManager(
                 loader.loadFile(file, match.groupValues[1]).use { Snapshot.parseFrom(it) }
             }
         } ?: throw IOException("Could not access snapshotFolder")
+    }
+
+    /**
+     * Removes all locally cached snapshots.
+     * Needs to be called when snapshots on the backend change without us, e.g. new location.
+     */
+    fun clearLocalCache() {
+        snapshotFolderRoot.deleteRecursively()
     }
 }
