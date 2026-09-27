@@ -163,6 +163,12 @@ internal class AppDataRestoreManager(
     @WorkerThread
     private fun getFailedStatus(packageName: String, backup: RestorableBackup): AppBackupState {
         val metadata = backup.packageMetadataMap[packageName] ?: return FAILED
+        if (backup.version >= 2) {
+            // v2 snapshots don't record why an app's data wasn't backed up, only whether it was
+            return if (metadata.chunkIds.isNullOrEmpty()) NOT_YET_BACKED_UP
+            else if (context.packageManager.isInstalled(packageName)) FAILED
+            else FAILED_NOT_INSTALLED
+        }
         return when (metadata.state) {
             PackageState.NO_DATA -> FAILED_NO_DATA
             PackageState.WAS_STOPPED -> NOT_YET_BACKED_UP
