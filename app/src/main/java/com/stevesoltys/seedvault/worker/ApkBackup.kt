@@ -31,7 +31,7 @@ import java.io.FileInputStream
 import java.io.IOException
 
 private val TAG = ApkBackup::class.java.simpleName
-internal const val BASE_SPLIT = "app.grapheneos.seedvault.BASE_SPLIT"
+internal const val BASE_SPLIT = "org.calyxos.seedvault.BASE_SPLIT"
 
 // Some ROM thought it is a good idea to rename internal string constants
 // and expected things not to break.
@@ -148,7 +148,8 @@ internal class ApkBackup(
         }
         // store base split in builder
         val baseSplit = split {
-            name = BASE_SPLIT
+            // keep writing our own name, so older GrapheneOS releases can still restore the APK
+            name = BASE_SPLIT_GRAPHENE
             chunkIds.addAll(backupData.chunkIds.forProto())
         }
         apkBuilder.addSplits(baseSplit)
