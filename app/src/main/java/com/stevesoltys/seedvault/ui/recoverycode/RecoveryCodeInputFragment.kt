@@ -7,6 +7,7 @@ package com.stevesoltys.seedvault.ui.recoverycode
 
 import android.app.Activity.RESULT_OK
 import android.app.KeyguardManager
+import android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD
 import android.content.Intent
 import android.hardware.biometrics.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import android.hardware.biometrics.BiometricManager.Authenticators.DEVICE_CREDENTIAL
@@ -166,8 +167,16 @@ class RecoveryCodeInputFragment : Fragment() {
                 // if we have a lock-screen secret, we can ask for it before storing the code
                 storeNewCodeAfterAuth(input)
             } else {
-                // don't allow backups unless device is properly secured
-                Toast.makeText(context, R.string.recovery_code_no_auth_error, LENGTH_LONG).show()
+                // don't allow backups unless device is properly secured,
+                // but offer to set a screen lock, e.g. when restoring in setup wizard without one
+                MaterialAlertDialogBuilder(requireContext())
+                    .setIcon(R.drawable.ic_warning)
+                    .setMessage(R.string.recovery_code_no_auth_error)
+                    .setPositiveButton(R.string.recovery_code_no_auth_set_lock) { _, _ ->
+                        setLockRequest.launch(Intent(ACTION_SET_NEW_PASSWORD))
+                    }
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .show()
                 return
             }
         } else {
@@ -235,6 +244,12 @@ class RecoveryCodeInputFragment : Fragment() {
                 }
             }
         }.show()
+    }
+
+    private val setLockRequest = registerForActivityResult(StartActivityForResult()) {
+        // lock screen setup doesn't reliably return RESULT_OK, so check again instead
+        val keyguardManager = requireContext().getSystemService(KeyguardManager::class.java)
+        if (keyguardManager?.isDeviceSecure == true) done()
     }
 
     private val regenRequest = registerForActivityResult(StartActivityForResult()) {
