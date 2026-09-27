@@ -122,7 +122,8 @@ data class PackageMetadata(
     companion object {
         fun fromSnapshot(app: Snapshot.App) = PackageMetadata(
             time = app.time,
-            backupType = app.type.toBackupType(),
+            // apps with only an APK in the snapshot have the proto default type FULL
+            backupType = if (app.chunkIdsCount == 0) null else app.type.toBackupType(),
             size = app.size,
             name = app.name,
             chunkIds = app.chunkIdsList.hexFromProto(),
