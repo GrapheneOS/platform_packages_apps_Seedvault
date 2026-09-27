@@ -274,6 +274,8 @@ public class WebDavBackend(
             }
         } catch (e: NotFoundException) {
             log.warn(e) { "$location not found" }
+            // folder was removed externally, e.g. by another device re-using the app backup repo
+            folders.removeAll { "$it/".startsWith(location.toString()) }
         } catch (e: Exception) {
             if (e is IOException) throw e
             else throw IOException("Error listing $location", e)
