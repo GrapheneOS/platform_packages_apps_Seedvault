@@ -79,7 +79,10 @@ class AppBackupWorker(
             val result = doBackup()
             // show error notification if backup wasn't successful
             if (result != Result.success()) {
-                nm.onBackupError(meteredNetwork = !backendManager.canDoBackupNow())
+                nm.onBackupError(
+                    backendUnavailable = !backendManager.canDoBackupNow(),
+                    removableDrive = backendManager.isOnRemovableDrive,
+                )
             }
             return result
         }
