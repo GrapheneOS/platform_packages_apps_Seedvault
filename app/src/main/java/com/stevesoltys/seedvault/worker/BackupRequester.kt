@@ -77,7 +77,7 @@ internal class BackupRequester(
                     .getWorkInfosForUniqueWork(AppBackupWorker.UNIQUE_WORK_NAME).get()
                     .getOrNull(0)?.state
                 val fileBackupState = workManager
-                    .getWorkInfosForUniqueWork(AppBackupWorker.UNIQUE_WORK_NAME).get()
+                    .getWorkInfosForUniqueWork(FileBackupWorker.UNIQUE_WORK_NAME).get()
                     .getOrNull(0)?.state
                 Log.i(
                     TAG, "appBackupRunning: $appBackupRunning, " +
