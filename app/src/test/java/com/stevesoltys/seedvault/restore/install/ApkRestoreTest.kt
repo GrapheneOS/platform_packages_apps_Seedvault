@@ -475,6 +475,21 @@ internal class ApkRestoreTest : TransportTest() {
         }
 
     @Test
+    fun `base APK is found under the upstream and the GrapheneOS split name`() {
+        listOf(
+            "org.calyxos.seedvault.BASE_SPLIT",
+            "app.grapheneos.seedvault.BASE_SPLIT",
+        ).forEach { baseSplitName ->
+            val app = appNoSplit.copy {
+                apk = apk.copy { splits[0] = baseSplit.copy { name = baseSplitName } }
+            }
+            val metadata = PackageMetadata.fromSnapshot(app)
+            assertEquals(baseSplit.chunkIdsList.hexFromProto(), metadata.baseApkChunkIds)
+            assertNull(metadata.splits)
+        }
+    }
+
+    @Test
     fun `splits get installed along with base APK`(@TempDir tmpDir: Path) = runBlocking {
         // add one APK split to metadata
         val splitChunkId1 = Random.nextBytes(32).toHexString()
