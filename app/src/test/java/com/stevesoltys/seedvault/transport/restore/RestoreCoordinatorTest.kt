@@ -257,6 +257,29 @@ internal class RestoreCoordinatorTest : TransportTest() {
     }
 
     @Test
+    fun `startRestore() auto-restore falls back to backend if not in local cache`() =
+        runBlocking {
+            val handle = AppBackupFileType.Snapshot(repoId, getRandomByteArray(32).toHexString())
+
+            every { backendManager.backendProperties } returns safStorage
+            every { safStorage.isUnavailableUsb(context) } returns false
+            every { crypto.repoId } returns repoId
+            // stale cache, e.g. from before switching backup location
+            every { snapshotManager.loadCachedSnapshots() } returns listOf(
+                snapshot.copy { token = this@RestoreCoordinatorTest.token - 1 }
+            )
+            coEvery { backend.getAvailableBackupFileHandles() } returns listOf(handle)
+            coEvery { snapshotManager.loadSnapshot(handle) } returns snapshot
+
+            assertEquals(TRANSPORT_OK, restore.startRestore(token, pmPackageInfoArray))
+
+            coVerify {
+                snapshotManager.loadCachedSnapshots()
+                snapshotManager.loadSnapshot(handle)
+            }
+        }
+
+    @Test
     fun `startRestore() errors when it can't find snapshots`() = runBlocking {
         val handle = AppBackupFileType.Snapshot(repoId, getRandomByteArray(32).toHexString())
 
