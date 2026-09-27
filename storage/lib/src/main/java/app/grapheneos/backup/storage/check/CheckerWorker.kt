@@ -31,7 +31,8 @@ public abstract class CheckerWorker(
     public companion object {
         private val TAG = CheckerWorker::class.simpleName
         private const val PERCENT = "percent"
-        public const val UNIQUE_WORK_NAME: String = "app.grapheneos.backup.storage.FILE_BACKUP_CHECK"
+        public const val UNIQUE_WORK_NAME: String =
+            "app.grapheneos.backup.storage.FILE_BACKUP_CHECK"
 
         public fun scheduleNow(
             context: Context,
