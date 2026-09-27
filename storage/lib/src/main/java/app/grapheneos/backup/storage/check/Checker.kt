@@ -119,9 +119,9 @@ internal class Checker(
                 // launch a new co-routine for each blob to check
                 launch {
                     // suspend here until we get a permit from the semaphore (there's free workers)
-                    val chunkSize = semaphore.withPermit {
+                    semaphore.withPermit {
                         try {
-                            val (readId, chunkSize) = checkChunk(chunkId)
+                            val readId = checkChunk(chunkId)
                             if (readId != chunkId) {
                                 Log.w(TAG, "Wrong chunkId $readId for $chunkId")
                                 // we could read the chunk,
@@ -131,16 +131,16 @@ internal class Checker(
                             } else {
                                 Log.i(TAG, "Checked chunkId $chunkId")
                             }
-                            chunkSize.toLong()
                         } catch (e: Exception) {
                             Log.e(TAG, "Error checking chunk $chunkId: ", e)
                             // TODO markCorrupted(chunkId) only for permanent exceptions
                             //  to prevent unnecessary re-upload
                             db.getChunksCache().markCorrupted(chunkId)
                             badChunks.add(chunkId)
-                            db.getChunksCache().getEvenIfCorrupted(chunkId)?.size ?: 0L
                         }
                     }
+                    // count stored (ciphertext) size, same as checkBlobSample() and getBackupSize()
+                    val chunkSize = db.getChunksCache().getEvenIfCorrupted(chunkId)?.size ?: 0L
                     // keep track of how much we checked and for how long
                     val newSize = size.addAndGet(chunkSize)
                     val passedTime = System.currentTimeMillis() - startTime
@@ -267,7 +267,10 @@ internal class Checker(
         return Pair(blobSample, currentSize)
     }
 
-    private suspend fun checkChunk(chunkId: String): Pair<String, Int> {
+    /**
+     * Returns the chunk ID computed from the chunk's plaintext.
+     */
+    private suspend fun checkChunk(chunkId: String): String {
         val handle = FileBackupFileType.Blob(androidId, chunkId)
         val cachedChunk = db.getChunksCache().getEvenIfCorrupted(chunkId)
         // if chunk is not in DB, it isn't available on backend, so missing version doesn't matter
@@ -276,8 +279,7 @@ internal class Checker(
             inputStream.readVersion(version.toInt())
             val ad = streamCrypto.getAssociatedDataForChunk(chunkId, version)
             streamCrypto.newDecryptingStream(streamKey, inputStream, ad).use { decryptedStream ->
-                val bytes = decryptedStream.readAllBytes()
-                Pair(mac.doFinal(bytes).toHexString(), bytes.size)
+                mac.doFinal(decryptedStream.readAllBytes()).toHexString()
             }
         }
     }
