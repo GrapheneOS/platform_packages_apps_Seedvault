@@ -164,6 +164,7 @@
     <string name="notification_failed_title">Backup failed</string>
     <string name="notification_failed_text">An error occurred while running the backup.</string>
     <string name="notification_failed_metered_text">The backup has been aborted. Are you using mobile data? Connect to Wi-Fi to continue.</string>
+    <string name="notification_failed_usb_text">The backup has been aborted. Plug in your USB drive and try again.</string>
 
     <string name="notification_error_channel_title">Error notification</string>
     <string name="notification_error_title">Backup error</string>
