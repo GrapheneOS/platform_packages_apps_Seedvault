@@ -94,7 +94,10 @@
                 android:layout_marginStart="40dp"
                 android:text="@string/recovery_code_verification_generate_new"
                 android:visibility="gone"
+                app:layout_constrainedWidth="true"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/doneButton"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:visibility="visible" />
 

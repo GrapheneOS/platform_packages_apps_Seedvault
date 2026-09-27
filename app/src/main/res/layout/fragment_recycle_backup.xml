@@ -51,6 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:text="@string/restore_recycle_backup_button_no"
+            app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/yesButton"
             app:layout_constraintHorizontal_bias="0.0"
