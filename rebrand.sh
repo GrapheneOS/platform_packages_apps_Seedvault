@@ -21,5 +21,7 @@ for path in ${paths[@]}; do
     git mv $path/org/ $path/app/
 done
 
+# the base split name is stored in backups, so keep the upstream one for compatibility
 { git grep -lI 'org[./]calyxos' -- ':!rebrand.sh' || true; } \
-    | xargs -r sed -i -e 's#org/calyxos#app/grapheneos#g' -e 's/org\.calyxos/app.grapheneos/g'
+    | xargs -r sed -i -e '/"org\.calyxos\.seedvault\.BASE_SPLIT"/b' \
+        -e 's#org/calyxos#app/grapheneos#g' -e 's/org\.calyxos/app.grapheneos/g'
