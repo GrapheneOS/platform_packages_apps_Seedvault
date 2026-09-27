@@ -49,8 +49,18 @@ internal class BackupStorageViewModel(
     @UiThread
     override fun onSafUriSet(safProperties: SafProperties) {
         Log.i(TAG, "onSafUriSet(${safProperties.uri})")
-        safHandler.save(safProperties)
         viewModelScope.launch {
+            // check like BackendManager.isValidAppPluginSet() before replacing current location,
+            // so we don't lose it for one we can't use, e.g. when provider is broken
+            val isAccessible = withContext(Dispatchers.IO) {
+                safProperties.isUsb || safProperties.getDocumentFile(app).isDirectory
+            }
+            if (!isAccessible) {
+                Log.w(TAG, "Location not accessible: ${safProperties.uri}")
+                onInitializationError()
+                return@launch
+            }
+            safHandler.save(safProperties)
             withContext(Dispatchers.IO) {
                 safHandler.setPlugin(safProperties)
             }
