@@ -206,6 +206,7 @@ internal class BackupCoordinator(
         state.cancelReason = UNKNOWN_ERROR
         if (!backendManager.canDoBackupNow()) {
             Log.w(TAG, "performIncrementalBackup(): Can't do backup now, rejecting...")
+            data.close() // we must close it when rejecting
             return TRANSPORT_PACKAGE_REJECTED
         }
         return kv.performBackup(packageInfo, data, flags)
@@ -251,6 +252,7 @@ internal class BackupCoordinator(
         state.cancelReason = UNKNOWN_ERROR
         if (!backendManager.canDoBackupNow()) {
             Log.w(TAG, "performFullBackup(): Can't do backup now, rejecting...")
+            fileDescriptor.close() // we must close it when rejecting
             return TRANSPORT_PACKAGE_REJECTED
         }
         return full.performFullBackup(targetPackage, fileDescriptor, flags)

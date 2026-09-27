@@ -251,21 +251,25 @@ internal class BackupCoordinatorTest : BackupTest() {
     @Test
     fun `KV backup gets rejected on metered network`() = runBlocking {
         every { backendManager.canDoBackupNow() } returns false
+        every { fileDescriptor.close() } just Runs
 
         assertEquals(
             TRANSPORT_PACKAGE_REJECTED,
             backup.performIncrementalBackup(packageInfo, fileDescriptor, 0),
         )
+        verify { fileDescriptor.close() }
     }
 
     @Test
     fun `full backup gets rejected on metered network`() = runBlocking {
         every { backendManager.canDoBackupNow() } returns false
+        every { fileDescriptor.close() } just Runs
 
         assertEquals(TRANSPORT_PACKAGE_REJECTED, backup.checkFullBackupSize(23L))
         assertEquals(
             TRANSPORT_PACKAGE_REJECTED,
             backup.performFullBackup(packageInfo, fileDescriptor, 0),
         )
+        verify { fileDescriptor.close() }
     }
 }
