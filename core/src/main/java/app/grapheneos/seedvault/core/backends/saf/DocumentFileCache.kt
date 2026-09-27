@@ -61,42 +61,58 @@ internal class DocumentFileCache(
             }
         }
     } catch (e: IllegalArgumentException) {
-        if (e.message?.contains("Missing file for") == true) {
-            clearAll() // clear cache as files may have been messed with, need re-caching
-            throw SafRetryException(e)
-        } else throw e
+        throw e.toRetryIfMissingFile()
     }
 
-    internal suspend fun getFile(fh: FileHandle): DocumentFile? = when (fh) {
-        is TopLevelFolder -> cache.getOrElse("$root/${fh.relativePath}") {
-            getRootFile().findFileBlocking(context, fh.name)
-        }
+    /**
+     * Like [getOrCreateFile], but returns null instead of creating what doesn't exist.
+     * Folders found are cached, so loading many blobs doesn't re-list their parents each time.
+     */
+    internal suspend fun getFile(fh: FileHandle): DocumentFile? = try {
+        when (fh) {
+            is TopLevelFolder -> getOrPutIfFound("$root/${fh.relativePath}") {
+                getRootFile().findFileBlocking(context, fh.name)
+            }
 
-        is AppBackupFileType.Blob -> {
-            val subFolderName = fh.name.substring(0, 2)
-            cache.getOrElse("$root/${fh.topLevelFolder.name}/$subFolderName") {
-                getFile(fh.topLevelFolder)?.findFileBlocking(context, subFolderName)
-            }?.findFileBlocking(context, fh.name)
-        }
+            is AppBackupFileType.Blob -> {
+                val subFolderName = fh.name.substring(0, 2)
+                getOrPutIfFound("$root/${fh.topLevelFolder.name}/$subFolderName") {
+                    getFile(fh.topLevelFolder)?.findFileBlocking(context, subFolderName)
+                }?.findFileBlocking(context, fh.name)
+            }
 
-        is AppBackupFileType.Snapshot -> {
-            getFile(fh.topLevelFolder)?.findFileBlocking(context, fh.name)
-        }
+            is AppBackupFileType.Snapshot -> {
+                getFile(fh.topLevelFolder)?.findFileBlocking(context, fh.name)
+            }
 
-        is FileBackupFileType.Blob -> {
-            val subFolderName = fh.name.substring(0, 2)
-            cache.getOrElse("$root/${fh.topLevelFolder.name}/$subFolderName") {
-                getFile(fh.topLevelFolder)?.findFileBlocking(context, subFolderName)
-            }?.findFileBlocking(context, fh.name)
-        }
+            is FileBackupFileType.Blob -> {
+                val subFolderName = fh.name.substring(0, 2)
+                getOrPutIfFound("$root/${fh.topLevelFolder.name}/$subFolderName") {
+                    getFile(fh.topLevelFolder)?.findFileBlocking(context, subFolderName)
+                }?.findFileBlocking(context, fh.name)
+            }
 
-        is FileBackupFileType.Snapshot -> {
-            getFile(fh.topLevelFolder)?.findFileBlocking(context, fh.name)
-        }
+            is FileBackupFileType.Snapshot -> {
+                getFile(fh.topLevelFolder)?.findFileBlocking(context, fh.name)
+            }
 
-        is LegacyAppBackupFile -> cache.getOrElse("$root/${fh.relativePath}") {
-            getFile(fh.topLevelFolder)?.findFileBlocking(context, fh.name)
+            is LegacyAppBackupFile -> cache.getOrElse("$root/${fh.relativePath}") {
+                getFile(fh.topLevelFolder)?.findFileBlocking(context, fh.name)
+            }
         }
+    } catch (e: IllegalArgumentException) {
+        throw e.toRetryIfMissingFile()
+    }
+
+    private inline fun getOrPutIfFound(key: String, find: () -> DocumentFile?): DocumentFile? {
+        return cache[key] ?: find()?.also { cache[key] = it }
+    }
+
+    private fun IllegalArgumentException.toRetryIfMissingFile(): Exception {
+        return if (message?.contains("Missing file for") == true) {
+            clearAll() // clear cache as files may have been messed with, need re-caching
+            SafRetryException(this)
+        } else this
     }
 
     internal fun removeFromCache(fh: FileHandle) {

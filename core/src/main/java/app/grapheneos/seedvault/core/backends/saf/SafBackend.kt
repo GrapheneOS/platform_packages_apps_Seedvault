@@ -37,6 +37,7 @@ import app.grapheneos.seedvault.core.backends.FileHandle
 import app.grapheneos.seedvault.core.backends.FileInfo
 import app.grapheneos.seedvault.core.backends.LegacyAppBackupFile
 import app.grapheneos.seedvault.core.backends.TopLevelFolder
+import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.InputStream
 import kotlin.reflect.KClass
@@ -98,7 +99,8 @@ public class SafBackend(
 
     override suspend fun load(handle: FileHandle): InputStream {
         log.debugLog { "load($handle)" }
-        val file = cache.getOrCreateFile(handle)
+        // don't create missing files here, that would leave empty files on the backend
+        val file = cache.getFile(handle) ?: throw FileNotFoundException(handle.relativePath)
         return file.getInputStream(context.contentResolver)
     }
 
