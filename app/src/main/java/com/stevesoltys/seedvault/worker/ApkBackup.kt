@@ -148,7 +148,8 @@ internal class ApkBackup(
         }
         // store base split in builder
         val baseSplit = split {
-            name = BASE_SPLIT
+            // keep writing our own name, so older GrapheneOS releases can still restore the APK
+            name = BASE_SPLIT_GRAPHENE
             chunkIds.addAll(backupData.chunkIds.forProto())
         }
         apkBuilder.addSplits(baseSplit)

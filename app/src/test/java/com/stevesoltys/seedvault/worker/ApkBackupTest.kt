@@ -336,6 +336,7 @@ internal class ApkBackupTest : BackupTest() {
         every {
             snapshotCreator.onApkBackedUp(packageInfo, match<Snapshot.Apk> {
                 it.installer == installer &&
+                    it.getSplits(0).name == "app.grapheneos.seedvault.BASE_SPLIT" &&
                     it.getSplits(1).name == split1Name &&
                     it.getSplits(2).name == split2Name
             }, emptyMap())
