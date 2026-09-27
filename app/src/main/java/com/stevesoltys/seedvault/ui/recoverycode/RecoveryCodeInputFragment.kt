@@ -241,6 +241,7 @@ class RecoveryCodeInputFragment : Fragment() {
                 }
                 setNegativeButton(R.string.recovery_code_verification_generate_new) { dialog, _ ->
                     dialog.dismiss()
+                    generateNewCode()
                 }
             }
         }.show()
