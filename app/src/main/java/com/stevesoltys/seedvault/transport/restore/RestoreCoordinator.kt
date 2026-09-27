@@ -225,22 +225,31 @@ internal class RestoreCoordinator(
             } else {
                 // this is auto-restore, so we use cache and try hard to find a working restore set
                 Log.i(TAG, "No cached backups, loading all and look for $token")
-                val backups = try {
+                val autoRestorePackageName = autoRestorePackageInfo.packageName
+                fun List<RestorableBackup>.findBackup(): RestorableBackup? {
+                    val sortedBackups = sortedByDescending { it.token } // latest first
+                    return sortedBackups.find { it.token == token } ?: sortedBackups.find {
+                        val chunkIds = it.packageMetadataMap[autoRestorePackageName]?.chunkIds
+                        // try a backup where our auto restore package has data
+                        !chunkIds.isNullOrEmpty()
+                    }
+                }
+                val cachedBackups = try {
                     snapshotManager.loadCachedSnapshots().map { snapshot ->
                         RestorableBackup(crypto.repoId, snapshot)
                     }
                 } catch (e: Exception) {
                     Log.e(TAG, "Error loading cached snapshots: ", e)
-                    (getAvailableBackups() as? RestorableBackupResult.SuccessResult)?.backups
-                        ?: return TRANSPORT_ERROR
+                    emptyList()
                 }
-                Log.i(TAG, "Found ${backups.size} snapshots.")
-                val autoRestorePackageName = autoRestorePackageInfo.packageName
-                val sortedBackups = backups.sortedByDescending { it.token } // latest first
-                sortedBackups.find { it.token == token } ?: sortedBackups.find {
-                    val chunkIds = it.packageMetadataMap[autoRestorePackageName]?.chunkIds
-                    // try a backup where our auto restore package has data
-                    !chunkIds.isNullOrEmpty()
+                Log.i(TAG, "Found ${cachedBackups.size} cached snapshots.")
+                // The cache only has snapshots of our own repo that we've seen already.
+                // It can be empty (e.g. new backup location) or the token can be from another repo
+                // (e.g. restored in setup wizard), so fall back to asking the backend.
+                cachedBackups.findBackup() ?: run {
+                    Log.i(TAG, "No suitable cached snapshot, loading from backend...")
+                    (getAvailableBackups() as? RestorableBackupResult.SuccessResult)?.backups
+                        ?.findBackup()
                 } ?: return TRANSPORT_ERROR
             }
         }
