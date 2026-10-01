@@ -63,6 +63,11 @@ internal class RecoveryCodeViewModel(
 
     internal var isRestore: Boolean = false
 
+    /**
+     * The repoId of the main key that a new recovery code is about to replace.
+     */
+    private var oldRepoId: String? = null
+
     @Throws(InvalidWordException::class, ChecksumException::class)
     fun validateCode(input: List<CharSequence>): Mnemonics.MnemonicCode {
         check(input.size == WORD_NUM) { "Got ${input.size} words instead of $WORD_NUM" }
@@ -102,6 +107,14 @@ internal class RecoveryCodeViewModel(
     }
 
     /**
+     * Must be called before generating a new code,
+     * because [Crypto.repoId] can't be derived from the old main key afterwards.
+     */
+    fun onGeneratingNewCode() {
+        if (keyManager.hasMainKey()) oldRepoId = crypto.repoId
+    }
+
+    /**
      * Deletes all storage backups for current user and clears the storage backup cache.
      * Also starts a new app data restore set and initializes it.
      *
@@ -117,7 +130,7 @@ internal class RecoveryCodeViewModel(
         GlobalScope.launch(Dispatchers.IO) {
             // remove old backup repository and clear local blob cache
             try {
-                appBackupManager.removeBackupRepo()
+                appBackupManager.removeBackupRepo(oldRepoId)
             } catch (e: IOException) {
                 Log.e(TAG, "Error removing backup repo: ", e)
             }
