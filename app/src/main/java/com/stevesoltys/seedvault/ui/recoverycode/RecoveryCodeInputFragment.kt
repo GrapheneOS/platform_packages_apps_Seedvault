@@ -269,6 +269,7 @@ class RecoveryCodeInputFragment : Fragment() {
             .setMessage(R.string.recovery_code_verification_new_dialog_message)
             .setPositiveButton(R.string.recovery_code_verification_generate_new) { dialog, _ ->
                 dialog.dismiss()
+                viewModel.onGeneratingNewCode()
                 val i = Intent(requireContext(), RecoveryCodeActivity::class.java)
                 regenRequest.launch(i)
             }

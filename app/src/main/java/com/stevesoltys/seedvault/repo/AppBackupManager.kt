@@ -162,12 +162,13 @@ internal class AppBackupManager(
     /**
      * Careful, this removes the entire backup repository from the backend
      * and clears local blob and snapshot cache.
+     * If [repoId] is null, only the local cache gets cleared.
      */
     @WorkerThread
     @Throws(IOException::class)
-    suspend fun removeBackupRepo() {
+    suspend fun removeBackupRepo(repoId: String?) {
         blobCache.clearLocalCache()
         snapshotManager.clearLocalCache()
-        backendManager.backend.remove(TopLevelFolder(crypto.repoId))
+        if (repoId != null) backendManager.backend.remove(TopLevelFolder(repoId))
     }
 }
