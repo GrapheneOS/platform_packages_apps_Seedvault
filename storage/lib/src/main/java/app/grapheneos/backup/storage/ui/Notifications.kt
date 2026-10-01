@@ -280,6 +280,7 @@ internal class Notifications(private val context: Context) {
         val actionTitle = context.getString(R.string.notification_check_action)
         val action = Action.Builder(null, actionTitle, contentIntent).build()
         return getCheckNotification()
+            .setOngoing(false)
             .setProgress(0, 0, false)
             .setContentIntent(contentIntent)
             .addAction(action)
