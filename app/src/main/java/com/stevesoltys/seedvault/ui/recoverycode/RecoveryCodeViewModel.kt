@@ -131,7 +131,12 @@ internal class RecoveryCodeViewModel(
             }
             try {
                 // initialize the new location
-                if (backupManager.isBackupEnabled) backupInitializer.initialize(exitApp, exitApp)
+                if (backupManager.isBackupEnabled) {
+                    backupInitializer.initialize(exitApp, exitApp)
+                } else {
+                    // file backup alone still holds the old key
+                    exitApp()
+                }
             } catch (e: IOException) {
                 Log.e(TAG, "Error starting new RestoreSet", e)
                 exitApp()
