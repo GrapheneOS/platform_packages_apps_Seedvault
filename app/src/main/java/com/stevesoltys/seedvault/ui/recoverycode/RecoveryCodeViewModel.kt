@@ -8,6 +8,7 @@ package com.stevesoltys.seedvault.ui.recoverycode
 import android.app.backup.IBackupManager
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.SavedStateHandle
 import cash.z.ecc.android.bip39.Mnemonics
 import cash.z.ecc.android.bip39.Mnemonics.ChecksumException
 import cash.z.ecc.android.bip39.Mnemonics.InvalidWordException
@@ -33,6 +34,12 @@ internal const val WORD_NUM = 12
 
 private val TAG = RecoveryCodeViewModel::class.java.simpleName
 
+/**
+ * The repoId of the main key that a new recovery code is about to replace.
+ * Kept in saved state, so it survives process death while the new code is being written down.
+ */
+private const val KEY_OLD_REPO_ID = "oldRepoId"
+
 internal class RecoveryCodeViewModel(
     app: App,
     private val crypto: Crypto,
@@ -42,6 +49,7 @@ internal class RecoveryCodeViewModel(
     private val backupInitializer: BackupInitializer,
     private val notificationManager: BackupNotificationManager,
     private val storageBackup: StorageBackup,
+    private val savedStateHandle: SavedStateHandle,
 ) : AndroidViewModel(app) {
 
     internal val wordList: List<CharArray> by lazy {
@@ -62,11 +70,6 @@ internal class RecoveryCodeViewModel(
     internal val existingCodeChecked: LiveEvent<Boolean> = mExistingCodeChecked
 
     internal var isRestore: Boolean = false
-
-    /**
-     * The repoId of the main key that a new recovery code is about to replace.
-     */
-    private var oldRepoId: String? = null
 
     @Throws(InvalidWordException::class, ChecksumException::class)
     fun validateCode(input: List<CharSequence>): Mnemonics.MnemonicCode {
@@ -111,7 +114,7 @@ internal class RecoveryCodeViewModel(
      * because [Crypto.repoId] can't be derived from the old main key afterwards.
      */
     fun onGeneratingNewCode() {
-        if (keyManager.hasMainKey()) oldRepoId = crypto.repoId
+        if (keyManager.hasMainKey()) savedStateHandle[KEY_OLD_REPO_ID] = crypto.repoId
     }
 
     /**
@@ -130,7 +133,7 @@ internal class RecoveryCodeViewModel(
         GlobalScope.launch(Dispatchers.IO) {
             // remove old backup repository and clear local blob cache
             try {
-                appBackupManager.removeBackupRepo(oldRepoId)
+                appBackupManager.removeBackupRepo(savedStateHandle[KEY_OLD_REPO_ID])
             } catch (e: IOException) {
                 Log.e(TAG, "Error removing backup repo: ", e)
             }
