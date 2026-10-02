@@ -90,7 +90,7 @@ open class App : Application() {
             )
         }
         viewModel {
-            RecoveryCodeViewModel(this@App, get(), get(), get(), get(), get(), get(), get())
+            RecoveryCodeViewModel(this@App, get(), get(), get(), get(), get(), get(), get(), get())
         }
         viewModel {
             BackupStorageViewModel(
