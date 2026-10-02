@@ -10,6 +10,9 @@ import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import java.io.IOException
@@ -62,5 +65,32 @@ internal class RetryBackendTest {
             backend.test()
         }
         coVerify(exactly = 1) { delegate.test() } // no retries
+    }
+
+    @Test
+    fun `test no retry on cancellation`() = runTest {
+        val e = CancellationException()
+        coEvery { delegate.test() } throws e
+        every { delegate.isTransientException(e) } returns true
+
+        assertFailsWith<CancellationException> {
+            backend.test()
+        }
+        coVerify(exactly = 1) { delegate.test() }
+    }
+
+    @Test
+    fun `test no retry after getting cancelled during delay`() = runTest {
+        val e = IOException()
+        coEvery { delegate.test() } throws e
+        every { delegate.isTransientException(e) } returns true
+
+        val job = launch { backend.test() }
+        advanceTimeBy(1000)
+        job.cancel()
+        job.join()
+
+        assertTrue(job.isCancelled)
+        coVerify(exactly = 1) { delegate.test() }
     }
 }

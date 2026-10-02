@@ -8,9 +8,12 @@ package app.grapheneos.seedvault.core.backends
 import androidx.annotation.VisibleForTesting
 import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.coroutines.NonCancellable
+import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.withContext
 import java.io.InputStream
+import kotlin.coroutines.cancellation.CancellationException
 import kotlin.reflect.KClass
 
 @VisibleForTesting
@@ -71,6 +74,7 @@ internal class RetryBackend(private val delegate: Backend) : Backend {
         try {
             return block()
         } catch (e: Exception) {
+            if (e is CancellationException) throw e
             val newRetries = retries + 1
             // We are not using exponential backoff,
             // because the system backup API has some strict timeouts and running into them is bad.
@@ -83,6 +87,8 @@ internal class RetryBackend(private val delegate: Backend) : Backend {
                 // (CompletedContinuation cannot be cast to DispatchedContinuation) that
                 // crashes the whole process instead of throwing CancellationException.
                 withContext(NonCancellable) { delay(newDelayMs) }
+                // but don't retry if we got cancelled while waiting
+                currentCoroutineContext().ensureActive()
                 return retry(newRetries, newDelayMs, block)
             } else {
                 log.warn { "Last retry reached, throwing exception..." }
