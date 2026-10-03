@@ -8,6 +8,8 @@ package com.stevesoltys.seedvault.transport
 import android.app.backup.BackupAgent.FLAG_CLIENT_SIDE_ENCRYPTION_ENABLED
 import android.app.backup.BackupAgent.FLAG_DEVICE_TO_DEVICE_TRANSFER
 import android.app.backup.BackupTransport
+import android.app.backup.BackupTransport.TRANSPORT_ERROR
+import android.app.backup.BackupTransport.TRANSPORT_OK
 import android.app.backup.RestoreDescription
 import android.app.backup.RestoreSet
 import android.content.Context
@@ -151,7 +153,7 @@ class ConfigurableBackupTransport internal constructor(private val context: Cont
         packageInfo: PackageInfo,
         inFd: ParcelFileDescriptor,
         flags: Int,
-    ): Int = runBlocking {
+    ): Int = inFd.use {
         backupCoordinator.performIncrementalBackup(packageInfo, inFd, flags)
     }
 
@@ -179,16 +181,22 @@ class ConfigurableBackupTransport internal constructor(private val context: Cont
         targetPackage: PackageInfo,
         socket: ParcelFileDescriptor,
         flags: Int,
-    ): Int = runBlocking {
-        backupCoordinator.performFullBackup(targetPackage, socket, flags)
+    ): Int {
+        var result = TRANSPORT_ERROR
+        try {
+            result = backupCoordinator.performFullBackup(targetPackage, socket, flags)
+        } finally {
+            if (result != TRANSPORT_OK) socket.close()
+        }
+        return result
     }
 
     override fun performFullBackup(
         targetPackage: PackageInfo,
         fileDescriptor: ParcelFileDescriptor,
-    ): Int = runBlocking {
+    ): Int {
         Log.w(TAG, "Warning: Legacy performFullBackup() method called.")
-        backupCoordinator.performFullBackup(targetPackage, fileDescriptor, 0)
+        return performFullBackup(targetPackage, fileDescriptor, 0)
     }
 
     override fun sendBackupData(numBytes: Int): Int = runBlocking {
